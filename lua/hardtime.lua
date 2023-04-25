@@ -4,12 +4,13 @@ local config = {
    options = {
       max_time = 1000,
       max_count = 2,
+      disable_mouse = true,
       allow_different_key = false,
    },
    resetting_keys = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" },
-   restricted_keys = { "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>", "<CR>" },
+   restricted_keys = { "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
    disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
-   disabled_filetypes = { "NvimTree" }
+   disabled_filetypes = { "NvimTree", "qf" }
 }
 
 local function get_time()
@@ -62,6 +63,10 @@ function hardtime.setup(user_config)
       for key, info in pairs(user_config.options) do
          config.options[key] = info
       end
+   end
+
+   if config.options.disable_mouse then
+      vim.opt.mouse = ""
    end
 
    for _, key in pairs(config.resetting_keys) do
