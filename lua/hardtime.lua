@@ -1,5 +1,9 @@
 local hardtime = {}
 
+local last_time
+local last_count
+local last_key
+
 local config = {
    options = {
       max_time = 1000,
@@ -14,12 +18,8 @@ local config = {
 }
 
 local function get_time()
-   return os.time() * 1000
+   return vim.fn.reltimefloat(vim.fn.reltime()) * 1000
 end
-
-local last_time = get_time()
-local last_count = 0
-local last_key = ""
 
 local function is_disabled()
    local current_filetype = vim.api.nvim_buf_get_option(0, "filetype")
@@ -56,14 +56,26 @@ local function handler(key)
    return ""
 end
 
+local function reset()
+   last_time = get_time()
+   last_count = 0
+   last_key = ""
+end
+
 function hardtime.setup(user_config)
    user_config = user_config or {}
 
-   if user_config.options ~= nil then
-      for key, info in pairs(user_config.options) do
-         config.options[key] = info
+   for option, value in pairs(user_config) do
+      if option == "options" then
+         for o, v in pairs(user_config.options) do
+            config.options[o] = v
+         end
+      else
+         config[option] = value
       end
    end
+
+   reset()
 
    if config.options.disable_mouse then
       vim.opt.mouse = ""
@@ -72,9 +84,7 @@ function hardtime.setup(user_config)
    for _, key in pairs(config.resetting_keys) do
       vim.keymap.set("n", key,
          function()
-            last_count = 0
-            last_time = get_time()
-            last_key = ""
+            reset()
             return key
          end, { noremap = true, expr = true })
    end
