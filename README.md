@@ -76,12 +76,10 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 
 ```Lua
 local config = {
-   options = {
-      max_time = 1000,
-      max_count = 2,
-      disable_mouse = true,
-      allow_different_key = false,
-   },
+   max_time = 1000,
+   max_count = 2,
+   disable_mouse = true,
+   allow_different_key = false,
    resetting_keys = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" },
    restricted_keys = { "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
    disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },

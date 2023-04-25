@@ -5,12 +5,10 @@ local last_count
 local last_key
 
 local config = {
-   options = {
-      max_time = 1000,
-      max_count = 2,
-      disable_mouse = true,
-      allow_different_key = false,
-   },
+   max_time = 1000,
+   max_count = 2,
+   disable_mouse = true,
+   allow_different_key = false,
    resetting_keys = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" },
    restricted_keys = { "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
    disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
@@ -38,10 +36,10 @@ local function handler(key)
 
    local curr_time = get_time()
 
-   if curr_time - last_time > config.options.max_time or
-      last_count < config.options.max_count or
-      (config.options.allow_different_key and key ~= last_key) then
-      if curr_time - last_time > config.options.max_time then
+   if curr_time - last_time > config.max_time or
+      last_count < config.max_count or
+      (config.allow_different_key and key ~= last_key) then
+      if curr_time - last_time > config.max_time then
          last_count = 1
       else
          last_count = last_count + 1
@@ -66,18 +64,12 @@ function hardtime.setup(user_config)
    user_config = user_config or {}
 
    for option, value in pairs(user_config) do
-      if option == "options" then
-         for o, v in pairs(user_config.options) do
-            config.options[o] = v
-         end
-      else
-         config[option] = value
-      end
+      config[option] = value
    end
 
    reset()
 
-   if config.options.disable_mouse then
+   if config.disable_mouse then
       vim.opt.mouse = ""
    end
 
