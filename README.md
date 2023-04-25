@@ -27,6 +27,16 @@ hardtime.nvim
 
 A Neovim plugin stopping you from repeating the basic movement keys
 
+Recommended workflow:
+1. Don’t use arrow keys and mouse.
+2. Use relative jump (eg: `5k` `12j`) for vertical movement inside screen.
+3. Use `CTRL-U` `CTRL-D` `CTRL-B` `CTRL-F` `gg` `G` for vertical movement outside screen.
+4. Use word-motion (`w` `W` `b` `B` `e` `E` `ge` `gE`) for short distance horizontal movement.
+5. Use `f` `F` `t` `T` `0` `^` `$` `,` `;` for mid long distance horizontal movement.
+6. Use operator + motion/text-object (eg: `ci{` `d5j`) whenever possible.
+
+Learn more in this [blog post](https://m4xshen.me/posts/vim-command-workflow/)
+
 ## 📦 Installation
 
 1. Install via your favorite package manager.
@@ -61,7 +71,6 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 ### Default config
 
 ```Lua
-
 local config = {
    options = {
       max_time = 1000,
