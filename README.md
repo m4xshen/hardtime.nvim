@@ -37,6 +37,10 @@ Recommended workflow:
 
 Learn more in this [blog post](https://m4xshen.me/posts/vim-command-workflow/)
 
+## ⚡ Requirements
+
+- Neovim >= [v0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0)
+
 ## 📦 Installation
 
 1. Install via your favorite package manager.
@@ -75,11 +79,12 @@ local config = {
    options = {
       max_time = 1000,
       max_count = 2,
+      disable_mouse = true,
       allow_different_key = false,
    },
    resetting_keys = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" },
-   restricted_keys = { "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>", "<CR>" },
+   restricted_keys = { "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
    disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
-   disabled_filetypes = { "NvimTree" }
+   disabled_filetypes = { "NvimTree", "qf" }
 }
 ```
