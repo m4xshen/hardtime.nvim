@@ -27,6 +27,11 @@ hardtime.nvim
 
 A Neovim plugin stopping you from repeating the basic movement keys
 
+## ⚙️  Features
+
+- Block repeated `k` `j` `h` `l` within a period of time
+- Print hint about better command eg: Use `C` instead of `c$`
+
 Recommended workflow:
 1. Don’t use arrow keys and mouse.
 2. Use relative jump (eg: `5k` `12j`) for vertical movement inside screen.
@@ -79,10 +84,12 @@ local config = {
    max_time = 1000,
    max_count = 2,
    disable_mouse = true,
+   hint = true,
    allow_different_key = false,
    resetting_keys = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" },
    restricted_keys = { "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
+   hint_keys = { "k", "j", "^", "$", "a", "A", "x", "i", "d", "y", "c", "l" },
    disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
-   disabled_filetypes = { "NvimTree", "qf" }
+   disabled_filetypes = { "qf", "NvimTree", "lazy", "mason" }
 }
 ```
