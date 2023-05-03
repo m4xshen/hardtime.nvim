@@ -25,7 +25,7 @@ hardtime.nvim
 
 ## 📃 Introduction
 
-A Neovim plugin stopping you from repeating the basic movement keys
+A Neovim plugin helping you establish good command workflow and habit
 
 ## ⚙️  Features
 
