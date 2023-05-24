@@ -33,12 +33,12 @@ A Neovim plugin helping you establish good command workflow and habit
 - Print hint about better command eg: Use `C` instead of `c$`
 
 Recommended workflow:
-1. Don’t use arrow keys and mouse.
-2. Use relative jump (eg: `5k` `12j`) for vertical movement inside screen.
-3. Use `CTRL-U` `CTRL-D` `CTRL-B` `CTRL-F` `gg` `G` for vertical movement outside screen.
-4. Use word-motion (`w` `W` `b` `B` `e` `E` `ge` `gE`) for short distance horizontal movement.
-5. Use `f` `F` `t` `T` `0` `^` `$` `,` `;` for mid long distance horizontal movement.
-6. Use operator + motion/text-object (eg: `ci{` `d5j`) whenever possible.
+1. Avoid using arrow keys and the mouse.
+2. Use relative jump (eg: `5k` `12j`) for vertical movement within the screen.
+3. Use `CTRL-U` `CTRL-D` `CTRL-B` `CTRL-F` `gg` `G` for vertical movement outside the screen.
+4. Use word-motion (`w` `W` `b` `B` `e` `E` `ge` `gE`) for short-distance horizontal movement.
+5. Use `f` `F` `t` `T` `0` `^` `$` `,` `;` for medium to long-distance horizontal movement.
+6. Use operator + motion/text-object (eg: `ci{` `y5j` `dap`) whenever possible.
 
 Learn more in this [blog post](https://m4xshen.me/posts/vim-command-workflow/)
 
@@ -77,6 +77,17 @@ require("hardtime").setup()
 
 You can pass your config table into the `setup()` function or `opts` if you use lazy.nvim.
 
+### Options
+
+- `max_time` (number): Maximum time (in milliseconds) to consider key presses as repeated.
+- `max_count` (number): Maximum count of repeated key presses allowed within the `max_time` period.
+- `disable_mouse` (boolean): Disable mouse support.
+- `hint` (boolean): Enable hint messages for better commands.
+- `allow_different_key` (boolean): Allow different keys to reset the count.
+- `resetting_keys` (table of strings): Keys that reset the count.
+- `restricted_keys` (table of strings): Keys triggering the count mechanism.
+- `hint_keys` (table of strings): Keys that trigger hint messages.
+
 ### Default config
 
 ```Lua
@@ -86,9 +97,9 @@ local config = {
    disable_mouse = true,
    hint = true,
    allow_different_key = false,
-   resetting_keys = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "c", "d" },
+   resetting_keys = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "c", "d", "x", "X", "p", "P" },
    restricted_keys = { "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
-   hint_keys = { "k", "j", "^", "$", "a", "x", "i", "d", "y", "c", "l" },
+   hint_keys = { "k", "j", "^", "$", "a", "i", "d", "y", "c", "l" },
    disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" }
 }
