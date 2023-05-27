@@ -30,15 +30,18 @@ A Neovim plugin helping you establish good command workflow and habit
 ## ⚙️  Features
 
 - Block repeated `k` `j` `h` `l` within a period of time
-- Print hint about better command eg: Use `C` instead of `c$`
+- Print hints about better commands eg: Use `C` instead of `c$`
+- Disable arrow keys and mouse
+- Provides customizable options for restricted keys, disabled keys, etc.
 
 Recommended workflow:
 1. Avoid using arrow keys and the mouse.
-2. Use relative jump (eg: `5k` `12j`) for vertical movement within the screen.
+2. Use relative jump (eg: `5j` `12-`) for vertical movement within the screen.
 3. Use `CTRL-U` `CTRL-D` `CTRL-B` `CTRL-F` `gg` `G` for vertical movement outside the screen.
 4. Use word-motion (`w` `W` `b` `B` `e` `E` `ge` `gE`) for short-distance horizontal movement.
-5. Use `f` `F` `t` `T` `0` `^` `$` `,` `;` for medium to long-distance horizontal movement.
+5. Use `f` `F` `t` `T` `,` `;` `0` `^` `$` for medium to long-distance horizontal movement.
 6. Use operator + motion/text-object (eg: `ci{` `y5j` `dap`) whenever possible.
+7. Use `%` and square bracket commands (see `:h [`) to jump between brackets.
 
 Learn more in this [blog post](https://m4xshen.me/posts/vim-command-workflow/)
 
