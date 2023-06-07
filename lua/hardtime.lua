@@ -44,19 +44,19 @@ end
 
 local function display_hint(key)
    if last_key == "k" and key == "^" then
-      print("Use - instead of k^")
+      vim.notify("Use - instead of k^")
    elseif last_key == "j" and key == "^" then
-      print("Use + instead of j^")
+      vim.notify("use + instead of j^")
    elseif last_key == "c" and key == "l" then
-      print("Use s instead of cl")
+      vim.notify("Use s instead of cl")
    elseif last_key == "d" and key == "$" then
-      print("Use D instead of d$")
+      vim.notify("Use D instead of d$")
    elseif last_key == "c" and key == "$" then
-      print("Use C instead of c$")
+      vim.notify("Use C instead of c$")
    elseif last_key == "$" and key == "a" then
-      print("Use A instead of $a")
+      vim.notify("Use A instead of $a")
    elseif last_key == "^" and key == "i" then
-      print("Use I instead of ^i")
+      vim.notify("Use I instead of ^i")
    end
 end
 
@@ -68,7 +68,7 @@ local function handler(key)
 
    -- key disabled
    if contains(config.disabled_keys, key) then
-      print("Key " .. key .. " is disabled!")
+      vim.notify("Key " .. key .. " is disabled!")
       return ""
    end
 
@@ -105,7 +105,7 @@ local function handler(key)
       return key
    end
 
-   print("You press key " .. key .. " too soon!")
+   vim.notify("You press key " .. key .. " too soon!")
    last_key = key
    return ""
 end
