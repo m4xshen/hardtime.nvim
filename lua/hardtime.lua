@@ -42,21 +42,28 @@ local function contains(array, element)
    return false
 end
 
+local hint_messages = {
+   ["k^"] = "Use - instead of k^",
+   ["j^"] = "Use + instead of j^",
+   ["cl"] = "Use s instead of cl",
+   ["d$"] = "Use D instead of d$",
+   ["c$"] = "Use C instead of c$",
+   ["$a"] = "Use A instead of $a",
+   ["^i"] = "Use I instead of ^i"
+}
+
 local function display_hint(key)
-   if last_key == "k" and key == "^" then
-      vim.notify("Use - instead of k^")
-   elseif last_key == "j" and key == "^" then
-      vim.notify("use + instead of j^")
-   elseif last_key == "c" and key == "l" then
-      vim.notify("Use s instead of cl")
-   elseif last_key == "d" and key == "$" then
-      vim.notify("Use D instead of d$")
-   elseif last_key == "c" and key == "$" then
-      vim.notify("Use C instead of c$")
-   elseif last_key == "$" and key == "a" then
-      vim.notify("Use A instead of $a")
-   elseif last_key == "^" and key == "i" then
-      vim.notify("Use I instead of ^i")
+   if last_key == nil then
+      return
+   end
+
+   local hint_key = last_key .. key
+   local hint_message = hint_messages[hint_key]
+
+   if hint_message then
+      vim.schedule(function()
+         vim.notify(hint_message)
+      end)
    end
 end
 
@@ -68,7 +75,9 @@ local function handler(key)
 
    -- key disabled
    if contains(config.disabled_keys, key) then
-      vim.notify("Key " .. key .. " is disabled!")
+      vim.schedule(function()
+         vim.notify("Key " .. key .. " is disabled!")
+      end)
       return ""
    end
 
@@ -105,7 +114,9 @@ local function handler(key)
       return key
    end
 
-   vim.notify("You press key " .. key .. " too soon!")
+   vim.schedule(function()
+      vim.notify("You press key " .. key .. " too soon!")
+   end)
    last_key = key
    return ""
 end
