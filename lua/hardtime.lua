@@ -14,12 +14,14 @@ local config = {
    disable_mouse = true,
    hint = true,
    allow_different_key = false,
-   resetting_keys = { "1", "2", "3", "4", "5", "6", "7", "8", "9",
-      "c", "C", "d", "x", "X", "y", "Y", "p", "P" },
+   resetting_keys = {
+      "1", "2", "3", "4", "5", "6", "7", "8", "9",
+      "c", "C", "d", "x", "X", "y", "Y", "p", "P",
+   },
    restricted_keys = { "h", "j", "k", "l", "-", "+", "gj", "gk" },
    hint_keys = { "k", "j", "^", "$", "a", "i", "d", "y", "c", "l" },
    disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
-   disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" }
+   disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
 }
 
 local function is_disabled()
@@ -49,7 +51,7 @@ local hint_messages = {
    ["d$"] = "Use D instead of d$",
    ["c$"] = "Use C instead of c$",
    ["$a"] = "Use A instead of $a",
-   ["^i"] = "Use I instead of ^i"
+   ["^i"] = "Use I instead of ^i",
 }
 
 local function display_hint(key)
@@ -99,11 +101,15 @@ local function handler(key)
    -- restrict
    local curr_time = get_time()
 
-   if last_count < config.max_count or
-      curr_time - last_time > config.max_time or
-      (config.allow_different_key and key ~= last_key) then
-      if curr_time - last_time > config.max_time or
-         (config.allow_different_key and key ~= last_key) then
+   if
+      last_count < config.max_count
+      or curr_time - last_time > config.max_time
+      or (config.allow_different_key and key ~= last_key)
+   then
+      if
+         curr_time - last_time > config.max_time
+         or (config.allow_different_key and key ~= last_key)
+      then
          last_count = 1
       else
          last_count = last_count + 1
@@ -133,24 +139,28 @@ function hardtime.setup(user_config)
    end
 
    for _, key in pairs(config.resetting_keys) do
-      vim.keymap.set("n", key, function() return handler(key)
+      vim.keymap.set("n", key, function()
+         return handler(key)
       end, { noremap = true, expr = true })
    end
 
    for _, key in pairs(config.restricted_keys) do
-      vim.keymap.set({ "n", "v" }, key, function() return handler(key)
+      vim.keymap.set({ "n", "v" }, key, function()
+         return handler(key)
       end, { noremap = true, expr = true })
    end
 
    if config.hint then
       for _, key in pairs(config.hint_keys) do
-         vim.keymap.set({ "n", "o", "v" }, key, function() return handler(key)
+         vim.keymap.set({ "n", "o", "v" }, key, function()
+            return handler(key)
          end, { noremap = true, expr = true })
       end
    end
 
    for _, key in pairs(config.disabled_keys) do
-      vim.keymap.set({ "", "i" }, key, function() return handler(key)
+      vim.keymap.set({ "", "i" }, key, function()
+         return handler(key)
       end, { noremap = true })
    end
 end
