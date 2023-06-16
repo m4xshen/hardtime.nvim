@@ -70,10 +70,19 @@ local function display_hint(key)
    end
 end
 
+local function try_eval(expression)
+   local success, result = pcall(vim.api.nvim_eval, expression)
+   if success then
+      return result
+   end
+   return expression
+end
+
+
 local function get_return_key(key)
    for _, mapping in ipairs(mappings) do
       if mapping.lhs == key then
-         return vim.api.nvim_eval(mapping.rhs)
+         return try_eval(mapping.rhs)
       end
    end
    return key
