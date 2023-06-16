@@ -7,6 +7,7 @@ end
 local last_time = get_time()
 local last_count = 0
 local last_key
+local mappings
 
 local config = {
    max_time = 1000,
@@ -69,10 +70,19 @@ local function display_hint(key)
    end
 end
 
+local function get_return_key(key)
+   for _, mapping in ipairs(mappings) do
+      if mapping.lhs == key then
+         return vim.api.nvim_eval(mapping.rhs)
+      end
+   end
+   return key
+end
+
 local function handler(key)
    -- plugin disabled
    if is_disabled() then
-      return key
+      return get_return_key(key)
    end
 
    -- key disabled
@@ -95,7 +105,7 @@ local function handler(key)
 
    if not contains(config.restricted_keys, key) then
       last_key = key
-      return key
+      return get_return_key(key)
    end
 
    -- restrict
@@ -117,7 +127,7 @@ local function handler(key)
 
       last_time = get_time()
       last_key = key
-      return key
+      return get_return_key(key)
    end
 
    vim.schedule(function()
@@ -129,6 +139,8 @@ end
 
 function hardtime.setup(user_config)
    user_config = user_config or {}
+
+   mappings = vim.api.nvim_get_keymap("n")
 
    for option, value in pairs(user_config) do
       config[option] = value
