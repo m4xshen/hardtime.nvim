@@ -20,7 +20,17 @@ local config = {
       "c", "C", "d", "x", "X", "y", "Y", "p", "P",
    },
    restricted_keys = { "h", "j", "k", "l", "-", "+", "gj", "gk" },
-   hint_keys = { "k", "j", "^", "$", "a", "i", "d", "y", "c", "l" },
+   hint_keys = {
+      ["k"] = { "n", "v" },
+      ["j"] = { "n", "v" },
+      ["^"] = { "n", "v" },
+      ["$"] = { "n", "o" },
+      ["a"] = { "n", "o" },
+      ["i"] = { "n" },
+      ["d"] = { "n" },
+      ["c"] = { "n" },
+      ["l"] = { "o" }
+   },
    disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
 }
@@ -103,9 +113,7 @@ local function handler(key)
    end
 
    -- hint
-   if contains(config.hint_keys, key) then
-      display_hint(key)
-   end
+   display_hint(key)
 
    -- reset
    if contains(config.resetting_keys, key) then
@@ -160,7 +168,7 @@ function hardtime.setup(user_config)
    end
 
    for _, key in pairs(config.resetting_keys) do
-      vim.keymap.set("n", key, function()
+      vim.keymap.set({ "n", "v" }, key, function()
          return handler(key)
       end, { noremap = true, expr = true })
    end
@@ -172,8 +180,8 @@ function hardtime.setup(user_config)
    end
 
    if config.hint then
-      for _, key in pairs(config.hint_keys) do
-         vim.keymap.set({ "n", "o", "v" }, key, function()
+      for key, mode in pairs(config.hint_keys) do
+         vim.keymap.set(mode, key, function()
             return handler(key)
          end, { noremap = true, expr = true })
       end
