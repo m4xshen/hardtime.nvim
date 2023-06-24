@@ -23,6 +23,10 @@ hardtime.nvim
   </a>
 </p>
 
+<p align="center">
+  <img src="https://github.com/m4xshen/hardtime.nvim/assets/74842863/f7c797a0-3fe6-47b3-9c9a-5ec7d54de128" width="700" />
+</p>
+
 ## 📃 Introduction
 
 A Neovim plugin helping you establish good command workflow and habit
@@ -57,9 +61,12 @@ Learn more in this [blog post](https://m4xshen.me/posts/vim-command-workflow/)
 ```Lua
 {
   "m4xshen/hardtime.nvim",
+  event = "VeryLazy",
   opts = {}
 },
 ```
+
+> ❗️make sure your custom keymaps related to restricted keys are set before the plugin loads
 
 - [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```Lua
