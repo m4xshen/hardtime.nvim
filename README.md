@@ -94,8 +94,8 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 - `disable_mouse` (boolean): Disable mouse support.
 - `hint` (boolean): Enable hint messages for better commands.
 - `allow_different_key` (boolean): Allow different keys to reset the count.
-- `resetting_keys` (table of strings): Keys that reset the count.
-- `restricted_keys` (table of strings): Keys triggering the count mechanism.
+- `resetting_keys` (table of strings/table pair): Keys in what modes that reset the count.
+- `restricted_keys` (table of strings/table pair): Keys in what modes triggering the count mechanism.
 - `hint_keys` (table of strings): Keys that trigger hint messages.
 
 ### Default config
@@ -107,11 +107,41 @@ local config = {
    disable_mouse = true,
    hint = true,
    allow_different_key = false,
-   resetting_keys = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-      "c", "C", "d", "x", "X", "y", "Y", "p", "P" },
-   restricted_keys = { "h", "j", "k", "l", "-", "+", "gj", "gk" },
-   hint_keys = { "k", "j", "^", "$", "a", "i", "d", "y", "c", "l" },
+   resetting_keys = {
+      ["1"] = { "n", "v" },
+      ["2"] = { "n", "v" },
+      ["3"] = { "n", "v" },
+      ["4"] = { "n", "v" },
+      ["5"] = { "n", "v" },
+      ["6"] = { "n", "v" },
+      ["7"] = { "n", "v" },
+      ["8"] = { "n", "v" },
+      ["9"] = { "n", "v" },
+      ["c"] = { "n" },
+      ["C"] = { "n" },
+      ["d"] = { "n" },
+      ["x"] = { "n" },
+      ["X"] = { "n" },
+      ["y"] = { "n" },
+      ["Y"] = { "n" },
+      ["p"] = { "n" },
+      ["P"] = { "n" },
+   },
+   restricted_keys = {
+      ["h"] = { "n", "v" },
+      ["j"] = { "n", "v" },
+      ["k"] = { "n", "v" },
+      ["l"] = { "n", "v" },
+      ["-"] = { "n", "v" },
+      ["+"] = { "n", "v" },
+      ["gj"] = { "n", "v" },
+      ["gk"] = { "n", "v" },
+      ["<CR>"] = { "n", "v" },
+      ["<C-M>"] = { "n", "v" },
+      ["<C-N>"] = { "n", "v" },
+      ["<C-P>"] = { "n", "v" },
+   },
    disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
-   disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" }
+   disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
 }
 ```
