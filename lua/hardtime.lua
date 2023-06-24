@@ -16,10 +16,35 @@ local config = {
    hint = true,
    allow_different_key = false,
    resetting_keys = {
-      "1", "2", "3", "4", "5", "6", "7", "8", "9",
-      "c", "C", "d", "x", "X", "y", "Y", "p", "P",
+      ["1"] = { "n", "v" },
+      ["2"] = { "n", "v" },
+      ["3"] = { "n", "v" },
+      ["4"] = { "n", "v" },
+      ["5"] = { "n", "v" },
+      ["6"] = { "n", "v" },
+      ["7"] = { "n", "v" },
+      ["8"] = { "n", "v" },
+      ["9"] = { "n", "v" },
+      ["c"] = { "n" },
+      ["C"] = { "n" },
+      ["d"] = { "n" },
+      ["x"] = { "n" },
+      ["X"] = { "n" },
+      ["y"] = { "n" },
+      ["Y"] = { "n" },
+      ["p"] = { "n" },
+      ["P"] = { "n" },
    },
-   restricted_keys = { "h", "j", "k", "l", "-", "+", "gj", "gk" },
+   restricted_keys = {
+      ["h"] = { "n", "v" },
+      ["j"] = { "n", "v" },
+      ["k"] = { "n", "v" },
+      ["l"] = { "n", "v" },
+      ["-"] = { "n", "v" },
+      ["+"] = { "n", "v" },
+      ["gj"] = { "n", "v" },
+      ["gk"] = { "n", "v" },
+   },
    hint_keys = {
       ["k"] = { "n", "v" },
       ["j"] = { "n", "v" },
@@ -29,7 +54,7 @@ local config = {
       ["i"] = { "n" },
       ["d"] = { "n" },
       ["c"] = { "n" },
-      ["l"] = { "o" }
+      ["l"] = { "o" },
    },
    disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
@@ -45,7 +70,7 @@ local function is_disabled()
    return false
 end
 
-local function contains(array, element)
+local function contains_val(array, element)
    for _, val in ipairs(array) do
       if val == element then
          return true
@@ -105,7 +130,7 @@ local function handler(key)
    end
 
    -- key disabled
-   if contains(config.disabled_keys, key) then
+   if contains_val(config.disabled_keys, key) then
       vim.schedule(function()
          vim.notify("Key " .. key .. " is disabled!")
       end)
@@ -116,11 +141,11 @@ local function handler(key)
    display_hint(key)
 
    -- reset
-   if contains(config.resetting_keys, key) then
+   if config.resetting_keys[key] then
       last_count = 0
    end
 
-   if not contains(config.restricted_keys, key) then
+   if config.restricted_keys[key] == nil then
       last_key = key
       return get_return_key(key)
    end
@@ -167,14 +192,14 @@ function hardtime.setup(user_config)
       vim.opt.mouse = ""
    end
 
-   for _, key in pairs(config.resetting_keys) do
-      vim.keymap.set({ "n", "v" }, key, function()
+   for key, mode in pairs(config.resetting_keys) do
+      vim.keymap.set(mode, key, function()
          return handler(key)
       end, { noremap = true, expr = true })
    end
 
-   for _, key in pairs(config.restricted_keys) do
-      vim.keymap.set({ "n", "v" }, key, function()
+   for key, mode in pairs(config.restricted_keys) do
+      vim.keymap.set(mode, key, function()
          return handler(key)
       end, { noremap = true, expr = true })
    end
