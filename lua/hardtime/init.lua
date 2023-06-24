@@ -1,68 +1,11 @@
-local hardtime = {}
+local util = require("hardtime.util")
 
-local function get_time()
-   return vim.fn.reltimefloat(vim.fn.reltime()) * 1000
-end
-
-local last_time = get_time()
+local last_time = util.get_time()
 local last_count = 0
 local last_key
 local mappings
 
-local config = {
-   max_time = 1000,
-   max_count = 2,
-   disable_mouse = true,
-   hint = true,
-   allow_different_key = false,
-   resetting_keys = {
-      ["1"] = { "n", "v" },
-      ["2"] = { "n", "v" },
-      ["3"] = { "n", "v" },
-      ["4"] = { "n", "v" },
-      ["5"] = { "n", "v" },
-      ["6"] = { "n", "v" },
-      ["7"] = { "n", "v" },
-      ["8"] = { "n", "v" },
-      ["9"] = { "n", "v" },
-      ["c"] = { "n" },
-      ["C"] = { "n" },
-      ["d"] = { "n" },
-      ["x"] = { "n" },
-      ["X"] = { "n" },
-      ["y"] = { "n" },
-      ["Y"] = { "n" },
-      ["p"] = { "n" },
-      ["P"] = { "n" },
-   },
-   restricted_keys = {
-      ["h"] = { "n", "v" },
-      ["j"] = { "n", "v" },
-      ["k"] = { "n", "v" },
-      ["l"] = { "n", "v" },
-      ["-"] = { "n", "v" },
-      ["+"] = { "n", "v" },
-      ["gj"] = { "n", "v" },
-      ["gk"] = { "n", "v" },
-      ["<CR>"] = { "n", "v" },
-      ["<C-M>"] = { "n", "v" },
-      ["<C-N>"] = { "n", "v" },
-      ["<C-P>"] = { "n", "v" },
-   },
-   hint_keys = {
-      ["k"] = { "n", "v" },
-      ["j"] = { "n", "v" },
-      ["^"] = { "n", "v" },
-      ["$"] = { "n", "o" },
-      ["a"] = { "n", "o" },
-      ["i"] = { "n" },
-      ["d"] = { "n" },
-      ["c"] = { "n" },
-      ["l"] = { "o" },
-   },
-   disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
-   disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
-}
+local config = require("hardtime.config").config
 
 local function is_disabled()
    local current_filetype = vim.api.nvim_buf_get_option(0, "filetype")
@@ -74,25 +17,7 @@ local function is_disabled()
    return false
 end
 
-local function contains_val(array, element)
-   for _, val in ipairs(array) do
-      if val == element then
-         return true
-      end
-   end
-
-   return false
-end
-
-local hint_messages = {
-   ["k^"] = "Use - instead of k^",
-   ["j^"] = "Use + instead of j^",
-   ["cl"] = "Use s instead of cl",
-   ["d$"] = "Use D instead of d$",
-   ["c$"] = "Use C instead of c$",
-   ["$a"] = "Use A instead of $a",
-   ["^i"] = "Use I instead of ^i",
-}
+local hint_messages = require("hardtime.config").hint_messages
 
 local function display_hint(key)
    if last_key == nil then
@@ -109,19 +34,10 @@ local function display_hint(key)
    end
 end
 
-local function try_eval(expression)
-   local success, result = pcall(vim.api.nvim_eval, expression)
-   if success then
-      return result
-   end
-   return expression
-end
-
-
 local function get_return_key(key)
    for _, mapping in ipairs(mappings) do
       if mapping.lhs == key then
-         return try_eval(mapping.rhs)
+         return util.try_eval(mapping.rhs)
       end
    end
    return key
@@ -134,7 +50,7 @@ local function handler(key)
    end
 
    -- key disabled
-   if contains_val(config.disabled_keys, key) then
+   if util.contains_val(config.disabled_keys, key) then
       vim.schedule(function()
          vim.notify("Key " .. key .. " is disabled!")
       end)
@@ -155,7 +71,7 @@ local function handler(key)
    end
 
    -- restrict
-   local curr_time = get_time()
+   local curr_time = util.get_time()
 
    if
       last_count < config.max_count
@@ -171,7 +87,7 @@ local function handler(key)
          last_count = last_count + 1
       end
 
-      last_time = get_time()
+      last_time = util.get_time()
       last_key = key
       return get_return_key(key)
    end
@@ -183,7 +99,9 @@ local function handler(key)
    return ""
 end
 
-function hardtime.setup(user_config)
+local M = {}
+
+function M.setup(user_config)
    user_config = user_config or {}
 
    mappings = vim.api.nvim_get_keymap("n")
@@ -223,4 +141,4 @@ function hardtime.setup(user_config)
    end
 end
 
-return hardtime
+return M
