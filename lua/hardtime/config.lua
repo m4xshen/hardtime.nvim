@@ -5,6 +5,7 @@ M.config = {
    max_count = 2,
    disable_mouse = true,
    hint = true,
+   notification = true,
    allow_different_key = false,
    resetting_keys = {
       ["1"] = { "n", "v" },

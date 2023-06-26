@@ -51,9 +51,11 @@ local function handler(key)
 
    -- key disabled
    if config.disabled_keys[key] then
-      vim.schedule(function()
-         vim.notify("Key " .. key .. " is disabled!")
-      end)
+      if config.notification then
+         vim.schedule(function()
+            vim.notify("Key " .. key .. " is disabled!")
+         end)
+      end
       return ""
    end
 
@@ -92,9 +94,11 @@ local function handler(key)
       return get_return_key(key)
    end
 
-   vim.schedule(function()
-      vim.notify("You press key " .. key .. " too soon!")
-   end)
+   if config.notification then
+      vim.schedule(function()
+         vim.notify("You press key " .. key .. " too soon!")
+      end)
+   end
    last_key = key
    return ""
 end

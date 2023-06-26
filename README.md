@@ -93,6 +93,7 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 - `max_count` (number): Maximum count of repeated key presses allowed within the `max_time` period.
 - `disable_mouse` (boolean): Disable mouse support.
 - `hint` (boolean): Enable hint messages for better commands.
+- `notification` (boolean): Enable notification messages for restricted and disabled keys.
 - `allow_different_key` (boolean): Allow different keys to reset the count.
 - `resetting_keys` (table of strings/table pair): Keys in what modes that reset the count.
 - `restricted_keys` (table of strings/table pair): Keys in what modes triggering the count mechanism.
@@ -107,6 +108,7 @@ local config = {
    max_count = 2,
    disable_mouse = true,
    hint = true,
+   notification = true,
    allow_different_key = false,
    resetting_keys = {
       ["1"] = { "n", "v" },
