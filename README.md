@@ -96,6 +96,7 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 - `allow_different_key` (boolean): Allow different keys to reset the count.
 - `resetting_keys` (table of strings/table pair): Keys in what modes that reset the count.
 - `restricted_keys` (table of strings/table pair): Keys in what modes triggering the count mechanism.
+- `disabled_keys` (table of strings/table pair): Keys in what modes are disabled.
 - `hint_keys` (table of strings): Keys that trigger hint messages.
 
 ### Default config
@@ -141,7 +142,12 @@ local config = {
       ["<C-N>"] = { "n", "v" },
       ["<C-P>"] = { "n", "v" },
    },
-   disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
+   disabled_keys = {
+      ["<UP>"] = { "", "i" },
+      ["<DOWN>"] = { "", "i" },
+      ["<LEFT>"] = { "", "i" },
+      ["<RIGHT>"] = { "", "i" }
+   },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
 }
 ```

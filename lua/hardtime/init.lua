@@ -50,7 +50,7 @@ local function handler(key)
    end
 
    -- key disabled
-   if util.contains_val(config.disabled_keys, key) then
+   if config.disabled_keys[key] then
       vim.schedule(function()
          vim.notify("Key " .. key .. " is disabled!")
       end)
@@ -134,8 +134,8 @@ function M.setup(user_config)
       end
    end
 
-   for _, key in pairs(config.disabled_keys) do
-      vim.keymap.set({ "", "i" }, key, function()
+   for key, mode in pairs(config.disabled_keys) do
+      vim.keymap.set(mode, key, function()
          return handler(key)
       end, { noremap = true })
    end

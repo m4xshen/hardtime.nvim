@@ -51,7 +51,12 @@ M.config = {
       ["c"] = { "n" },
       ["l"] = { "o" },
    },
-   disabled_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" },
+   disabled_keys = {
+      ["<UP>"] = { "", "i" },
+      ["<DOWN>"] = { "", "i" },
+      ["<LEFT>"] = { "", "i" },
+      ["<RIGHT>"] = { "", "i" }
+   },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
 }
 
