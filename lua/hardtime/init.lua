@@ -104,15 +104,15 @@ local function handler(key)
 end
 
 local M = {}
+local enabled = false
 
-function M.setup(user_config)
-   user_config = user_config or {}
-
-   mappings = vim.api.nvim_get_keymap("n")
-
-   for option, value in pairs(user_config) do
-      config[option] = value
+function M.enable()
+   if enabled then
+      return
    end
+
+   enabled = true
+   mappings = vim.api.nvim_get_keymap("n")
 
    if config.disable_mouse then
       vim.opt.mouse = ""
@@ -143,6 +143,49 @@ function M.setup(user_config)
          return handler(key)
       end, { noremap = true })
    end
+end
+
+function M.disable()
+   if not enabled then
+      return
+   end
+
+   enabled = false
+   vim.opt.mouse = "nvi"
+
+   for key, mode in pairs(config.resetting_keys) do
+      pcall(vim.keymap.del, mode, key)
+   end
+
+   for key, mode in pairs(config.restricted_keys) do
+      pcall(vim.keymap.del, mode, key)
+   end
+
+   if config.hint then
+      for key, mode in pairs(config.hint_keys) do
+         pcall(vim.keymap.del, mode, key)
+      end
+   end
+
+   for key, mode in pairs(config.disabled_keys) do
+      pcall(vim.keymap.del, mode, key)
+   end
+end
+
+function M.toggle()
+   (enabled and M.disable or M.enable)()
+end
+
+function M.setup(user_config)
+   user_config = user_config or {}
+
+   for option, value in pairs(user_config) do
+      config[option] = value
+   end
+
+   M.enable()
+
+   require("hardtime.command").setup()
 end
 
 return M
