@@ -83,6 +83,14 @@ Plug "m4xshen/hardtime.nvim"
 require("hardtime").setup()
 ```
 
+## 🚀 Usage
+
+hardtime.nvim is enable by default. You can change its state through commands:
+
+- `:Hardtime enable` enable hardtime.nvim
+- `:Hardtime disable` disable hardtime.nvim
+- `:Hardtime toggle` toggle hardtime.nvim
+
 ## 🔧 Configuration
 
 You can pass your config table into the `setup()` function or `opts` if you use lazy.nvim.
