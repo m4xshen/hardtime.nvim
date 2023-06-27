@@ -56,11 +56,10 @@ M.config = {
       ["<UP>"] = { "", "i" },
       ["<DOWN>"] = { "", "i" },
       ["<LEFT>"] = { "", "i" },
-      ["<RIGHT>"] = { "", "i" }
+      ["<RIGHT>"] = { "", "i" },
    },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
 }
-
 
 M.hint_messages = {
    ["k^"] = "Use - instead of k^",

@@ -1,7 +1,7 @@
 local commands = {
    enable = require("hardtime").enable,
    disable = require("hardtime").disable,
-   toggle = require("hardtime").toggle
+   toggle = require("hardtime").toggle,
 }
 
 local M = {}
@@ -12,11 +12,11 @@ function M.setup()
          commands[args.args]()
       end
    end, {
-         nargs = 1,
-         complete = function()
-            return { "enable", "disable", "toggle" }
-         end,
-      })
+      nargs = 1,
+      complete = function()
+         return { "enable", "disable", "toggle" }
+      end,
+   })
 end
 
 return M
