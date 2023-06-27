@@ -29,7 +29,7 @@ local function display_hint(key)
 
    if hint_message then
       vim.schedule(function()
-         vim.notify(hint_message)
+         util.notify(hint_message)
       end)
    end
 end
@@ -53,7 +53,7 @@ local function handler(key)
    if config.disabled_keys[key] then
       if config.notification then
          vim.schedule(function()
-            vim.notify("Key " .. key .. " is disabled!")
+            util.notify("Key " .. key .. " is disabled!")
          end)
       end
       return ""
@@ -96,7 +96,7 @@ local function handler(key)
 
    if config.notification then
       vim.schedule(function()
-         vim.notify("You press key " .. key .. " too soon!")
+         util.notify("You press key " .. key .. " too soon!")
       end)
    end
    last_key = key

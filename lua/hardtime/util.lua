@@ -12,4 +12,8 @@ function M.try_eval(expression)
    return expression
 end
 
+function M.notify(text)
+   vim.notify(text, vim.log.levels.WARN, { title = "hardtime" })
+end
+
 return M
