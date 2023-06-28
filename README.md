@@ -106,7 +106,6 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 - `resetting_keys` (table of strings/table pair): Keys in what modes that reset the count.
 - `restricted_keys` (table of strings/table pair): Keys in what modes triggering the count mechanism.
 - `disabled_keys` (table of strings/table pair): Keys in what modes are disabled.
-- `hint_keys` (table of strings): Keys that trigger hint messages.
 - `disabled_filetypes` (table of strings): hardtime.nvim is disabled under these filetypes.
 
 ### Default config
