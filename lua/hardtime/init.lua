@@ -183,7 +183,7 @@ function M.setup(user_config)
       config[option] = value
    end
 
-   M.enable()
+   vim.api.nvim_create_autocmd("BufNew", { once = true, callback = M.enable })
 
    require("hardtime.command").setup()
 end

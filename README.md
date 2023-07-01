@@ -57,16 +57,15 @@ Learn more in this [blog post](https://m4xshen.me/posts/vim-command-workflow/)
 
 1. Install via your favorite package manager.
 
+> ❗️You don't need to specify `event = "VeryLazy"` anymore.
+
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
 ```Lua
 {
   "m4xshen/hardtime.nvim",
-  event = "VeryLazy",
   opts = {}
 },
 ```
-
-> ❗️make sure your custom keymaps related to restricted keys are set before the plugin loads
 
 - [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```Lua
