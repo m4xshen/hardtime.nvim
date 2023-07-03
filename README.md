@@ -84,10 +84,10 @@ require("hardtime").setup()
 
 If you want to see the hint messages in insert and visual mode, set the `'showmode'` to false.
 
-But if you want to see both the hint message and mode you can:
-1. Display the mode on status line and set `'showmode'` to false. You can do this with some statusline plugin such as lualine.nvim.
-2. Set the `cmdheight` to 2 so that the hint message won't be replaced by mode message.
-3. Use nvim-notify to display hint messages on the right top corner instead of commandline.
+But if you want to see both the hint message and mode you can setup with one of the following methods:
+- Display the mode on status line and set `'showmode'` to false. You can do this with some statusline plugin such as lualine.nvim.
+- Set the `'cmdheight'` to 2 so that the hint message won't be replaced by mode message.
+- Use nvim-notify to display hint messages on the right top corner instead of commandline.
    
 ## 🚀 Usage
 
