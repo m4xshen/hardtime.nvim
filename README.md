@@ -47,7 +47,7 @@ Recommended workflow:
 6. Use operator + motion/text-object (eg: `ci{` `y5j` `dap`) whenever possible.
 7. Use `%` and square bracket commands (see `:h [`) to jump between brackets.
 
-Learn more in this [blog post](https://m4xshen.me/posts/vim-command-workflow/)
+Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 
 ## ⚡ Requirements
 
