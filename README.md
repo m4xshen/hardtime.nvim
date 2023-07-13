@@ -113,6 +113,7 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 - `restricted_keys` (table of strings/table pair): Keys in what modes triggering the count mechanism.
 - `disabled_keys` (table of strings/table pair): Keys in what modes are disabled.
 - `disabled_filetypes` (table of strings): hardtime.nvim is disabled under these filetypes.
+- `hints` (table of strings/strings pair): A table of `{key} = {value}` pair. The `{key}` is the keystrokes you want to avoid and use `{value}` instead.
 
 ### Default config
 
@@ -165,5 +166,14 @@ local config = {
       ["<RIGHT>"] = { "", "i" }
    },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
+   hints = {
+      ["k^"] = "-",
+      ["j^"] = "+",
+      ["cl"] = "s",
+      ["d$"] = "D",
+      ["c$"] = "C",
+      ["$a"] = "A",
+      ["^i"] = "I",
+   },
 }
 ```

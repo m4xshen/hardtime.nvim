@@ -41,17 +41,6 @@ M.config = {
       ["<C-N>"] = { "n", "x" },
       ["<C-P>"] = { "n", "x" },
    },
-   hint_keys = {
-      ["k"] = { "n", "x" },
-      ["j"] = { "n", "x" },
-      ["^"] = { "n", "x" },
-      ["$"] = { "n", "o" },
-      ["a"] = { "n", "o" },
-      ["i"] = { "n" },
-      ["d"] = { "n" },
-      ["c"] = { "n" },
-      ["l"] = { "o" },
-   },
    disabled_keys = {
       ["<UP>"] = { "", "i" },
       ["<DOWN>"] = { "", "i" },
@@ -59,16 +48,15 @@ M.config = {
       ["<RIGHT>"] = { "", "i" },
    },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
-}
-
-M.hint_messages = {
-   ["k^"] = "Use - instead of k^",
-   ["j^"] = "Use + instead of j^",
-   ["cl"] = "Use s instead of cl",
-   ["d$"] = "Use D instead of d$",
-   ["c$"] = "Use C instead of c$",
-   ["$a"] = "Use A instead of $a",
-   ["^i"] = "Use I instead of ^i",
+   hints = {
+      ["k^"] = "-",
+      ["j^"] = "+",
+      ["cl"] = "s",
+      ["d$"] = "D",
+      ["c$"] = "C",
+      ["$a"] = "A",
+      ["^i"] = "I",
+   },
 }
 
 return M

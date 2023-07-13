@@ -3,6 +3,7 @@ local util = require("hardtime.util")
 local last_time = util.get_time()
 local last_count = 0
 local last_key
+local last_keys = ""
 local mappings
 
 local config = require("hardtime.config").config
@@ -15,23 +16,6 @@ local function is_disabled()
       end
    end
    return false
-end
-
-local hint_messages = require("hardtime.config").hint_messages
-
-local function display_hint(key)
-   if last_key == nil then
-      return
-   end
-
-   local hint_key = last_key .. key
-   local hint_message = hint_messages[hint_key]
-
-   if hint_message then
-      vim.schedule(function()
-         util.notify(hint_message)
-      end)
-   end
 end
 
 local function get_return_key(key)
@@ -58,9 +42,6 @@ local function handler(key)
       end
       return ""
    end
-
-   -- hint
-   display_hint(key)
 
    -- reset
    if config.resetting_keys[key] then
@@ -130,14 +111,6 @@ function M.enable()
       end, { noremap = true, expr = true })
    end
 
-   if config.hint then
-      for key, mode in pairs(config.hint_keys) do
-         vim.keymap.set(mode, key, function()
-            return handler(key)
-         end, { noremap = true, expr = true })
-      end
-   end
-
    for key, mode in pairs(config.disabled_keys) do
       vim.keymap.set(mode, key, function()
          return handler(key)
@@ -161,12 +134,6 @@ function M.disable()
       pcall(vim.keymap.del, mode, key)
    end
 
-   if config.hint then
-      for key, mode in pairs(config.hint_keys) do
-         pcall(vim.keymap.del, mode, key)
-      end
-   end
-
    for key, mode in pairs(config.disabled_keys) do
       pcall(vim.keymap.del, mode, key)
    end
@@ -184,6 +151,20 @@ function M.setup(user_config)
    end
 
    vim.api.nvim_create_autocmd("BufNew", { once = true, callback = M.enable })
+
+   vim.on_key(function(key)
+      if (not config.hint) or not enabled then
+         return
+      end
+
+      last_keys = last_keys .. key
+      for pattern, hint in pairs(config.hints) do
+         local keys = string.sub(last_keys, -#pattern)
+         if keys == pattern then
+            util.notify("Use " .. hint .. " instead of " .. keys)
+         end
+      end
+   end)
 
    require("hardtime.command").setup()
 end
