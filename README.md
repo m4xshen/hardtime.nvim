@@ -154,4 +154,6 @@ hints = {
 }
 ```
 
+Learn more about [Lua string pattern](https://www.lua.org/pil/20.2.html).
+
 ### [Default config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua)
