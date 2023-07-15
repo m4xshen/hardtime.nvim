@@ -211,6 +211,42 @@ local config = {
          end,
          length = 2,
       },
+      ["[^dcy]f.h"] = {
+         message = function(keys)
+            return "Use t"
+               .. string.sub(keys, 3, 3)
+               .. " instead of "
+               .. string.sub(keys, 2)
+         end,
+         length = 4,
+      },
+      ["[^dcy]F.l"] = {
+         message = function(keys)
+            return "Use T"
+               .. string.sub(keys, 3, 3)
+               .. " instead of "
+               .. string.sub(keys, 2)
+         end,
+         length = 4,
+      },
+      ["[^dcy]T.h"] = {
+         message = function(keys)
+            return "Use F"
+               .. string.sub(keys, 3, 3)
+               .. " instead of "
+               .. string.sub(keys, 2)
+         end,
+         length = 4,
+      },
+      ["[^dcy]t.l"] = {
+         message = function(keys)
+            return "Use f"
+               .. string.sub(keys, 3, 3)
+               .. " instead of "
+               .. string.sub(keys, 2)
+         end,
+         length = 4,
+      },
       ["d[bBwWeE%^]i"] = {
          message = function(keys)
             return "Use "
