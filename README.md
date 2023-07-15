@@ -103,7 +103,7 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 
 ### Options
 
-If the option is boolean, number or array, your option will overwrite the default config.
+If the option is boolean, number or array, your key will overwrite the default config.
 
 example:
 ```lua
@@ -111,7 +111,7 @@ example:
 disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
 ```
 
-If the option is a table with `key = value` pair, your options will overwrite the default config if it exists, and will append to the default config if it doesn't exist. You can set the `key = {}` to remove it.
+If the option is a table with `key = value` pair, your value will overwrite the default if key exists, and the pair will be appended to the default config if key doesn't exist. You can set the `key = {}` to remove the default key value pair
 
 example:
 ```lua
