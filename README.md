@@ -113,7 +113,27 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 - `restricted_keys` (table of strings/table pair): Keys in what modes triggering the count mechanism.
 - `disabled_keys` (table of strings/table pair): Keys in what modes are disabled.
 - `disabled_filetypes` (table of strings): hardtime.nvim is disabled under these filetypes.
-- `hints` (table of strings/strings pair): A table of `{key} = {value}` pair. The `{key}` is the keystrokes you want to avoid and use `{value}` instead.
+- `hints` (table): key is a string pattern you want to match, value is a table of hint message and pattern length.
+
+See example:
+
+```lua
+hints = {
+   ["k%^"] = {
+      message = function()
+         return "Use - instead of k^" -- return the hint message you want to display
+      end,
+      length = 2, -- the length of actual key strokes that matches this pattern
+   },
+   ["d[tTfF].i"] = { -- this matches d + {t/T/f/F} + {any character} + i
+      message = function(keys) -- keys is the key strokes that matches the pattern
+         return "Use " .. "c" .. string.sub(keys, 2, 3) .. " instead of " .. keys
+         -- example: Use ct( instead of dt(i
+      end,
+      length = 4,
+   },
+}
+```
 
 ### Default config
 
@@ -167,13 +187,88 @@ local config = {
    },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
    hints = {
-      ["k^"] = "-",
-      ["j^"] = "+",
-      ["cl"] = "s",
-      ["d$"] = "D",
-      ["c$"] = "C",
-      ["$a"] = "A",
-      ["^i"] = "I",
+      ["k%^"] = {
+         message = function()
+            return "Use - instead of k^"
+         end,
+         length = 2,
+      },
+      ["j%^"] = {
+         message = function()
+            return "Use + instead of j^"
+         end,
+         length = 2,
+      },
+      ["cl"] = {
+         message = function()
+            return "Use s instead of cl"
+         end,
+         length = 2,
+      },
+      ["d%$"] = {
+         message = function()
+            return "Use D instead of d$"
+         end,
+         length = 2,
+      },
+      ["c%$"] = {
+         message = function()
+            return "Use C instead of c$"
+         end,
+         length = 2,
+      },
+      ["%$a"] = {
+         message = function()
+            return "Use A instead of $a"
+         end,
+         length = 2,
+      },
+      ["%^i"] = {
+         message = function()
+            return "Use I instead of ^i"
+         end,
+         length = 2,
+      },
+      ["d[bBwWeE%^]i"] = {
+         message = function(keys)
+            return "Use "
+               .. "c"
+               .. string.sub(keys, 2, 2)
+               .. " instead of "
+               .. keys
+         end,
+         length = 3,
+      },
+      ["dg[eE]i"] = {
+         message = function(keys)
+            return "Use "
+               .. "c"
+               .. string.sub(keys, 2, 3)
+               .. " instead of "
+               .. keys
+         end,
+         length = 4,
+      },
+      ["d[tTfF].i"] = {
+         message = function(keys)
+            return "Use "
+               .. "c"
+               .. string.sub(keys, 2, 3)
+               .. " instead of "
+               .. keys
+         end,
+         length = 4,
+      },
+      ["d[ia][\"'{}%[%]()bBwWspt]i"] = {
+         message = function(keys)
+            return "Use "
+               .. "c"
+               .. string.sub(keys, 2, 3)
+               .. " instead of "
+               .. keys
+         end,
+         length = 4,
+      },
    },
 }
 ```

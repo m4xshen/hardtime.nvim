@@ -49,13 +49,88 @@ M.config = {
    },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
    hints = {
-      ["k^"] = "-",
-      ["j^"] = "+",
-      ["cl"] = "s",
-      ["d$"] = "D",
-      ["c$"] = "C",
-      ["$a"] = "A",
-      ["^i"] = "I",
+      ["k%^"] = {
+         message = function()
+            return "Use - instead of k^"
+         end,
+         length = 2,
+      },
+      ["j%^"] = {
+         message = function()
+            return "Use + instead of j^"
+         end,
+         length = 2,
+      },
+      ["cl"] = {
+         message = function()
+            return "Use s instead of cl"
+         end,
+         length = 2,
+      },
+      ["d%$"] = {
+         message = function()
+            return "Use D instead of d$"
+         end,
+         length = 2,
+      },
+      ["c%$"] = {
+         message = function()
+            return "Use C instead of c$"
+         end,
+         length = 2,
+      },
+      ["%$a"] = {
+         message = function()
+            return "Use A instead of $a"
+         end,
+         length = 2,
+      },
+      ["%^i"] = {
+         message = function()
+            return "Use I instead of ^i"
+         end,
+         length = 2,
+      },
+      ["d[bBwWeE%^]i"] = {
+         message = function(keys)
+            return "Use "
+               .. "c"
+               .. string.sub(keys, 2, 2)
+               .. " instead of "
+               .. keys
+         end,
+         length = 3,
+      },
+      ["dg[eE]i"] = {
+         message = function(keys)
+            return "Use "
+               .. "c"
+               .. string.sub(keys, 2, 3)
+               .. " instead of "
+               .. keys
+         end,
+         length = 4,
+      },
+      ["d[tTfF].i"] = {
+         message = function(keys)
+            return "Use "
+               .. "c"
+               .. string.sub(keys, 2, 3)
+               .. " instead of "
+               .. keys
+         end,
+         length = 4,
+      },
+      ["d[ia][\"'{}%[%]()bBwWspt]i"] = {
+         message = function(keys)
+            return "Use "
+               .. "c"
+               .. string.sub(keys, 2, 3)
+               .. " instead of "
+               .. keys
+         end,
+         length = 4,
+      },
    },
 }
 

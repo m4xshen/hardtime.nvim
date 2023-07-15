@@ -159,9 +159,20 @@ function M.setup(user_config)
 
       last_keys = last_keys .. key
       for pattern, hint in pairs(config.hints) do
-         local keys = string.sub(last_keys, -#pattern)
-         if keys == pattern then
-            util.notify("Use " .. hint .. " instead of " .. keys)
+         local l = hint.length
+         if l == nil then
+            l = #pattern
+         end
+         local found = string.find(last_keys, pattern, -l)
+         local keys = string.sub(last_keys, #last_keys - l + 1, #last_keys)
+
+         if found then
+            if vim.fn.mode() == "i" then
+               return
+            end
+
+            local text = hint.message(keys)
+            util.notify(text)
          end
       end
    end)
