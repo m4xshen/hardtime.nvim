@@ -211,6 +211,18 @@ local config = {
          end,
          length = 2,
       },
+      ["2dd"] = {
+         message = function()
+            return "Use dj instead of 2dd"
+         end,
+         length = 3,
+      },
+      ["2D"] = {
+         message = function()
+            return "Use dj instead of 2D"
+         end,
+         length = 2,
+      },
       ["[^dcy]f.h"] = {
          message = function(keys)
             return "Use t"
