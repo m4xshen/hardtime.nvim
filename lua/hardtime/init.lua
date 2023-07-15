@@ -166,8 +166,9 @@ function M.setup(user_config)
          local found = string.find(last_keys, pattern, -l)
          local keys = string.sub(last_keys, #last_keys - l + 1, #last_keys)
 
+         local mode = vim.fn.mode()
          if found then
-            if vim.fn.mode() == "i" then
+            if mode == "i" or mode == "c" or mode == "R" then
                return
             end
 
