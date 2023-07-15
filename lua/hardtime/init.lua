@@ -157,21 +157,18 @@ function M.setup(user_config)
          return
       end
 
+      local mode = vim.fn.mode()
+      if mode == "i" or mode == "c" or mode == "R" then
+         return
+      end
+
       last_keys = last_keys .. key
       for pattern, hint in pairs(config.hints) do
-         local l = hint.length
-         if l == nil then
-            l = #pattern
-         end
-         local found = string.find(last_keys, pattern, -l)
-         local keys = string.sub(last_keys, #last_keys - l + 1, #last_keys)
+         local len = hint.length or #pattern
+         local found = string.find(last_keys, pattern, -len)
+         local keys = string.sub(last_keys, #last_keys - len + 1, #last_keys)
 
-         local mode = vim.fn.mode()
          if found then
-            if mode == "i" or mode == "c" or mode == "R" then
-               return
-            end
-
             local text = hint.message(keys)
             util.notify(text)
          end

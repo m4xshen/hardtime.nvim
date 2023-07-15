@@ -247,7 +247,7 @@ local config = {
          end,
          length = 4,
       },
-      ["d[bBwWeE%^]i"] = {
+      ["d[bBwWeE%^%$]i"] = {
          message = function(keys)
             return "Use " .. "c" .. keys:sub(2, 2) .. " instead of " .. keys
          end,
@@ -265,19 +265,39 @@ local config = {
          end,
          length = 4,
       },
-      ["d[ia][\"'{}%[%]()bBwWspt]i"] = {
+      ["d[ia][\"'`{}%[%]()<>bBwWspt]i"] = {
          message = function(keys)
             return "Use " .. "c" .. keys:sub(2, 3) .. " instead of " .. keys
          end,
          length = 4,
       },
-      ["VG[dcy=]"] = {
+      ["VG[dcy=<>]"] = {
          message = function(keys)
             return "Use " .. keys:sub(3, 3) .. "G instead of " .. keys
          end,
          length = 3,
       },
-      ["[vV][bBwWeE%^][dcy=]"] = {
+      ["V%d[kj][dcy=<>]"] = {
+         message = function(keys)
+            return "Use "
+               .. keys:sub(4, 4)
+               .. keys:sub(2, 3)
+               .. " instead of "
+               .. keys
+         end,
+         length = 4,
+      },
+      ["V%d%d[kj][dcy=<>]"] = {
+         message = function(keys)
+            return "Use "
+               .. keys:sub(5, 5)
+               .. keys:sub(2, 4)
+               .. " instead of "
+               .. keys
+         end,
+         length = 5,
+      },
+      ["[vV][bBwWeE%^%$][dcy=<>]"] = {
          message = function(keys)
             return "Use "
                .. keys:sub(3, 3)
@@ -287,7 +307,7 @@ local config = {
          end,
          length = 3,
       },
-      ["[vV]g[eE][dcy=]"] = {
+      ["[vV]g[eE][dcy=<>]"] = {
          message = function(keys)
             return "Use "
                .. keys:sub(4, 4)
@@ -297,7 +317,7 @@ local config = {
          end,
          length = 4,
       },
-      ["[vV][tTfF].[dcy=]"] = {
+      ["[vV][tTfF].[dcy=<>]"] = {
          message = function(keys)
             return "Use "
                .. keys:sub(4, 4)
@@ -307,7 +327,7 @@ local config = {
          end,
          length = 4,
       },
-      ["[vV][ia][\"'{}%[%]()bBwWspt][dcy=]"] = {
+      ["[vV][ia][\"'`{}%[%]()<>bBwWspt][dcy=<>]"] = {
          message = function(keys)
             return "Use "
                .. keys:sub(4, 4)
