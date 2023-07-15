@@ -34,7 +34,7 @@ A Neovim plugin helping you establish good command workflow and habit
 ## ⚙️  Features
 
 - Block repeated keys within a period of time
-- Print hints about better commands eg: Use `C` instead of `c$`
+- Print hints about better commands eg: Use `ci"` instead of `di"i`
 - Disable keys and mouse
 - Customizable options for restricted keys, disabled keys, etc.
 
@@ -196,24 +196,6 @@ local config = {
       ["j%^"] = {
          message = function()
             return "Use + instead of j^"
-         end,
-         length = 2,
-      },
-      ["cl"] = {
-         message = function()
-            return "Use s instead of cl"
-         end,
-         length = 2,
-      },
-      ["d%$"] = {
-         message = function()
-            return "Use D instead of d$"
-         end,
-         length = 2,
-      },
-      ["c%$"] = {
-         message = function()
-            return "Use C instead of c$"
          end,
          length = 2,
       },

@@ -61,24 +61,25 @@ M.config = {
          end,
          length = 2,
       },
-      ["cl"] = {
-         message = function()
-            return "Use s instead of cl"
-         end,
-         length = 2,
-      },
-      ["d%$"] = {
-         message = function()
-            return "Use D instead of d$"
-         end,
-         length = 2,
-      },
-      ["c%$"] = {
-         message = function()
-            return "Use C instead of c$"
-         end,
-         length = 2,
-      },
+      -- BUG: vim.onkey() capture the synonym keys
+      -- ["cl"] = {
+      --    message = function()
+      --       return "Use s instead of cl"
+      --    end,
+      --    length = 2,
+      -- },
+      -- ["d%$"] = {
+      --    message = function()
+      --       return "Use D instead of d$"
+      --    end,
+      --    length = 2,
+      -- },
+      -- ["c%$"] = {
+      --    message = function()
+      --       return "Use C instead of c$"
+      --    end,
+      --    length = 2,
+      -- },
       ["%$a"] = {
          message = function()
             return "Use A instead of $a"
