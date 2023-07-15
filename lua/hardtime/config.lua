@@ -108,37 +108,25 @@ M.config = {
       -- hints for f/F/t/T
       ["[^dcy=]f.h"] = {
          message = function(keys)
-            return "Use t"
-               .. string.sub(keys, 3, 3)
-               .. " instead of "
-               .. string.sub(keys, 2)
+            return "Use t" .. keys:sub(3, 3) .. " instead of " .. keys:sub(2)
          end,
          length = 4,
       },
       ["[^dcy=]F.l"] = {
          message = function(keys)
-            return "Use T"
-               .. string.sub(keys, 3, 3)
-               .. " instead of "
-               .. string.sub(keys, 2)
+            return "Use T" .. keys:sub(3, 3) .. " instead of " .. keys:sub(2)
          end,
          length = 4,
       },
       ["[^dcy=]T.h"] = {
          message = function(keys)
-            return "Use F"
-               .. string.sub(keys, 3, 3)
-               .. " instead of "
-               .. string.sub(keys, 2)
+            return "Use F" .. keys:sub(3, 3) .. " instead of " .. keys:sub(2)
          end,
          length = 4,
       },
       ["[^dcy=]t.l"] = {
          message = function(keys)
-            return "Use f"
-               .. string.sub(keys, 3, 3)
-               .. " instead of "
-               .. string.sub(keys, 2)
+            return "Use f" .. keys:sub(3, 3) .. " instead of " .. keys:sub(2)
          end,
          length = 4,
       },
@@ -146,41 +134,25 @@ M.config = {
       -- hints for delete + insert
       ["d[bBwWeE%^]i"] = {
          message = function(keys)
-            return "Use "
-               .. "c"
-               .. string.sub(keys, 2, 2)
-               .. " instead of "
-               .. keys
+            return "Use " .. "c" .. keys:sub(2, 2) .. " instead of " .. keys
          end,
          length = 3,
       },
       ["dg[eE]i"] = {
          message = function(keys)
-            return "Use "
-               .. "c"
-               .. string.sub(keys, 2, 3)
-               .. " instead of "
-               .. keys
+            return "Use " .. "c" .. keys:sub(2, 3) .. " instead of " .. keys
          end,
          length = 4,
       },
       ["d[tTfF].i"] = {
          message = function(keys)
-            return "Use "
-               .. "c"
-               .. string.sub(keys, 2, 3)
-               .. " instead of "
-               .. keys
+            return "Use " .. "c" .. keys:sub(2, 3) .. " instead of " .. keys
          end,
          length = 4,
       },
       ["d[ia][\"'{}%[%]()bBwWspt]i"] = {
          message = function(keys)
-            return "Use "
-               .. "c"
-               .. string.sub(keys, 2, 3)
-               .. " instead of "
-               .. keys
+            return "Use " .. "c" .. keys:sub(2, 3) .. " instead of " .. keys
          end,
          length = 4,
       },
@@ -188,18 +160,15 @@ M.config = {
       -- hints for unnecessary visual mode
       ["VG[dcy=]"] = {
          message = function(keys)
-            return "Use "
-               .. string.sub(keys, 3, 3)
-               .. "G instead of "
-               .. keys
+            return "Use " .. keys:sub(3, 3) .. "G instead of " .. keys
          end,
          length = 3,
       },
       ["[vV][bBwWeE%^][dcy=]"] = {
          message = function(keys)
             return "Use "
-               .. string.sub(keys, 3, 3)
-               .. string.sub(keys, 2, 2)
+               .. keys:sub(3, 3)
+               .. keys:sub(2, 2)
                .. " instead of "
                .. keys
          end,
@@ -208,8 +177,8 @@ M.config = {
       ["[vV]g[eE][dcy=]"] = {
          message = function(keys)
             return "Use "
-               .. string.sub(keys, 4, 4)
-               .. string.sub(keys, 2, 3)
+               .. keys:sub(4, 4)
+               .. keys:sub(2, 3)
                .. " instead of "
                .. keys
          end,
@@ -218,8 +187,8 @@ M.config = {
       ["[vV][tTfF].[dcy=]"] = {
          message = function(keys)
             return "Use "
-               .. string.sub(keys, 4, 4)
-               .. string.sub(keys, 2, 3)
+               .. keys:sub(4, 4)
+               .. keys:sub(2, 3)
                .. " instead of "
                .. keys
          end,
@@ -228,8 +197,8 @@ M.config = {
       ["[vV][ia][\"'{}%[%]()bBwWspt][dcy=]"] = {
          message = function(keys)
             return "Use "
-               .. string.sub(keys, 4, 4)
-               .. string.sub(keys, 2, 3)
+               .. keys:sub(4, 4)
+               .. keys:sub(2, 3)
                .. " instead of "
                .. keys
          end,
