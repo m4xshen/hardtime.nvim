@@ -104,7 +104,9 @@ M.config = {
          end,
          length = 2,
       },
-      ["[^dcy]f.h"] = {
+
+      -- hints for f/F/t/T
+      ["[^dcy=]f.h"] = {
          message = function(keys)
             return "Use t"
                .. string.sub(keys, 3, 3)
@@ -113,7 +115,7 @@ M.config = {
          end,
          length = 4,
       },
-      ["[^dcy]F.l"] = {
+      ["[^dcy=]F.l"] = {
          message = function(keys)
             return "Use T"
                .. string.sub(keys, 3, 3)
@@ -122,7 +124,7 @@ M.config = {
          end,
          length = 4,
       },
-      ["[^dcy]T.h"] = {
+      ["[^dcy=]T.h"] = {
          message = function(keys)
             return "Use F"
                .. string.sub(keys, 3, 3)
@@ -131,7 +133,7 @@ M.config = {
          end,
          length = 4,
       },
-      ["[^dcy]t.l"] = {
+      ["[^dcy=]t.l"] = {
          message = function(keys)
             return "Use f"
                .. string.sub(keys, 3, 3)
@@ -140,6 +142,8 @@ M.config = {
          end,
          length = 4,
       },
+
+      -- hints for delete + insert
       ["d[bBwWeE%^]i"] = {
          message = function(keys)
             return "Use "
@@ -174,6 +178,57 @@ M.config = {
          message = function(keys)
             return "Use "
                .. "c"
+               .. string.sub(keys, 2, 3)
+               .. " instead of "
+               .. keys
+         end,
+         length = 4,
+      },
+
+      -- hints for unnecessary visual mode
+      ["VG[dcy=]"] = {
+         message = function(keys)
+            return "Use "
+               .. string.sub(keys, 3, 3)
+               .. "G instead of "
+               .. keys
+         end,
+         length = 3,
+      },
+      ["[vV][bBwWeE%^][dcy=]"] = {
+         message = function(keys)
+            return "Use "
+               .. string.sub(keys, 3, 3)
+               .. string.sub(keys, 2, 2)
+               .. " instead of "
+               .. keys
+         end,
+         length = 3,
+      },
+      ["[vV]g[eE][dcy=]"] = {
+         message = function(keys)
+            return "Use "
+               .. string.sub(keys, 4, 4)
+               .. string.sub(keys, 2, 3)
+               .. " instead of "
+               .. keys
+         end,
+         length = 4,
+      },
+      ["[vV][tTfF].[dcy=]"] = {
+         message = function(keys)
+            return "Use "
+               .. string.sub(keys, 4, 4)
+               .. string.sub(keys, 2, 3)
+               .. " instead of "
+               .. keys
+         end,
+         length = 4,
+      },
+      ["[vV][ia][\"'{}%[%]()bBwWspt][dcy=]"] = {
+         message = function(keys)
+            return "Use "
+               .. string.sub(keys, 4, 4)
                .. string.sub(keys, 2, 3)
                .. " instead of "
                .. keys
