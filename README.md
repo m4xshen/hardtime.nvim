@@ -103,19 +103,19 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 
 ### Options
 
-If the option is boolean, number or array, your key will overwrite the default config.
+If the option is a boolean, number, or array, your value will overwrite the default configuration.
 
-example:
+Example:
 ```lua
--- add oil to the disabled_filetypes
+-- Add "oil" to the disabled_filetypes
 disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
 ```
 
-If the option is a table with `key = value` pair, your value will overwrite the default if key exists, and the pair will be appended to the default config if key doesn't exist. You can set the `key = {}` to remove the default key value pair
+If the option is a table with a `key = value` pair, your value will overwrite the default if the key exists, and the pair will be appended to the default configuration if the key doesn't exist. You can set `key = {}` to remove the default key-value pair.
 
-example:
+Example:
 ```lua
--- remove <UP> keys and append <Space> to the disabled_keys
+-- Remove <UP> keys and append <Space> to the disabled_keys
 disabled_keys = {
    ["<UP>"] = {},
    ["<Space>"] = { "n", "x" },
@@ -145,7 +145,7 @@ hints = {
       length = 2, -- the length of actual key strokes that matches this pattern
    },
    ["d[tTfF].i"] = { -- this matches d + {t/T/f/F} + {any character} + i
-      message = function(keys) -- keys is the key strokes that matches the pattern
+      message = function(keys) -- keys is a string of key strokes that matches the pattern
          return "Use " .. "c" .. keys:sub(2, 3) .. " instead of " .. keys
          -- example: Use ct( instead of dt(i
       end,
