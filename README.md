@@ -101,8 +101,6 @@ hardtime.nvim is enable by default. You can change its state through commands:
 
 You can pass your config table into the `setup()` function or `opts` if you use lazy.nvim.
 
-### Options
-
 If the option is a boolean, number, or array, your value will overwrite the default configuration.
 
 Example:
@@ -122,6 +120,8 @@ disabled_keys = {
 },
 ```
 
+### Options
+
 - `max_time` (number): Maximum time (in milliseconds) to consider key presses as repeated.
 - `max_count` (number): Maximum count of repeated key presses allowed within the `max_time` period.
 - `disable_mouse` (boolean): Disable mouse support.
@@ -134,7 +134,7 @@ disabled_keys = {
 - `disabled_filetypes` (table of strings): hardtime.nvim is disabled under these filetypes.
 - `hints` (table): key is a string pattern you want to match, value is a table of hint message and pattern length.
 
-example:
+Example:
 
 ```lua
 hints = {
