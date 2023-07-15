@@ -147,7 +147,17 @@ function M.setup(user_config)
    user_config = user_config or {}
 
    for option, value in pairs(user_config) do
-      config[option] = value
+      if type(value) == "table" and #value == 0 then
+         for k, v in pairs(value) do
+            if next(value) == nil then
+               config[option][k] = nil
+            else
+               config[option][k] = v
+            end
+         end
+      else
+         config[option] = value
+      end
    end
 
    vim.api.nvim_create_autocmd("BufEnter", { once = true, callback = M.enable })

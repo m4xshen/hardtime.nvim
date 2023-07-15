@@ -103,6 +103,25 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 
 ### Options
 
+If the option is boolean, number or array, your option will overwrite the default config.
+
+example:
+```lua
+-- add oil to the disabled_filetypes
+disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
+```
+
+If the option is a table with `key = value` pair, your options will overwrite the default config if it exists, and will append to the default config if it doesn't exist. You can set the `key = {}` to remove it.
+
+example:
+```lua
+-- remove <UP> keys and append <Space> to the disabled_keys
+disabled_keys = {
+   ["<UP>"] = {},
+   ["<Space>"] = { "n", "x" },
+},
+```
+
 - `max_time` (number): Maximum time (in milliseconds) to consider key presses as repeated.
 - `max_count` (number): Maximum count of repeated key presses allowed within the `max_time` period.
 - `disable_mouse` (boolean): Disable mouse support.
@@ -115,7 +134,7 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 - `disabled_filetypes` (table of strings): hardtime.nvim is disabled under these filetypes.
 - `hints` (table): key is a string pattern you want to match, value is a table of hint message and pattern length.
 
-See example:
+example:
 
 ```lua
 hints = {
@@ -135,208 +154,4 @@ hints = {
 }
 ```
 
-### Default config
-
-```Lua
-local config = {
-   max_time = 1000,
-   max_count = 2,
-   disable_mouse = true,
-   hint = true,
-   notification = true,
-   allow_different_key = false,
-   resetting_keys = {
-      ["1"] = { "n", "x" },
-      ["2"] = { "n", "x" },
-      ["3"] = { "n", "x" },
-      ["4"] = { "n", "x" },
-      ["5"] = { "n", "x" },
-      ["6"] = { "n", "x" },
-      ["7"] = { "n", "x" },
-      ["8"] = { "n", "x" },
-      ["9"] = { "n", "x" },
-      ["c"] = { "n" },
-      ["C"] = { "n" },
-      ["d"] = { "n" },
-      ["x"] = { "n" },
-      ["X"] = { "n" },
-      ["y"] = { "n" },
-      ["Y"] = { "n" },
-      ["p"] = { "n" },
-      ["P"] = { "n" },
-   },
-   restricted_keys = {
-      ["h"] = { "n", "x" },
-      ["j"] = { "n", "x" },
-      ["k"] = { "n", "x" },
-      ["l"] = { "n", "x" },
-      ["-"] = { "n", "x" },
-      ["+"] = { "n", "x" },
-      ["gj"] = { "n", "x" },
-      ["gk"] = { "n", "x" },
-      ["<CR>"] = { "n", "x" },
-      ["<C-M>"] = { "n", "x" },
-      ["<C-N>"] = { "n", "x" },
-      ["<C-P>"] = { "n", "x" },
-   },
-   disabled_keys = {
-      ["<UP>"] = { "", "i" },
-      ["<DOWN>"] = { "", "i" },
-      ["<LEFT>"] = { "", "i" },
-      ["<RIGHT>"] = { "", "i" }
-   },
-   disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
-   hints = {
-      ["k%^"] = {
-         message = function()
-            return "Use - instead of k^"
-         end,
-         length = 2,
-      },
-      ["j%^"] = {
-         message = function()
-            return "Use + instead of j^"
-         end,
-         length = 2,
-      },
-      ["%$a"] = {
-         message = function()
-            return "Use A instead of $a"
-         end,
-         length = 2,
-      },
-      ["%^i"] = {
-         message = function()
-            return "Use I instead of ^i"
-         end,
-         length = 2,
-      },
-      ["2dd"] = {
-         message = function()
-            return "Use dj instead of 2dd"
-         end,
-         length = 3,
-      },
-      ["2D"] = {
-         message = function()
-            return "Use dj instead of 2D"
-         end,
-         length = 2,
-      },
-      ["[^dcy=]f.h"] = {
-         message = function(keys)
-            return "Use t" .. keys:sub(3, 3) .. " instead of " .. keys:sub(2)
-         end,
-         length = 4,
-      },
-      ["[^dcy=]F.l"] = {
-         message = function(keys)
-            return "Use T" .. keys:sub(3, 3) .. " instead of " .. keys:sub(2)
-         end,
-         length = 4,
-      },
-      ["[^dcy=]T.h"] = {
-         message = function(keys)
-            return "Use F" .. keys:sub(3, 3) .. " instead of " .. keys:sub(2)
-         end,
-         length = 4,
-      },
-      ["[^dcy=]t.l"] = {
-         message = function(keys)
-            return "Use f" .. keys:sub(3, 3) .. " instead of " .. keys:sub(2)
-         end,
-         length = 4,
-      },
-      ["d[bBwWeE%^%$]i"] = {
-         message = function(keys)
-            return "Use " .. "c" .. keys:sub(2, 2) .. " instead of " .. keys
-         end,
-         length = 3,
-      },
-      ["dg[eE]i"] = {
-         message = function(keys)
-            return "Use " .. "c" .. keys:sub(2, 3) .. " instead of " .. keys
-         end,
-         length = 4,
-      },
-      ["d[tTfF].i"] = {
-         message = function(keys)
-            return "Use " .. "c" .. keys:sub(2, 3) .. " instead of " .. keys
-         end,
-         length = 4,
-      },
-      ["d[ia][\"'`{}%[%]()<>bBwWspt]i"] = {
-         message = function(keys)
-            return "Use " .. "c" .. keys:sub(2, 3) .. " instead of " .. keys
-         end,
-         length = 4,
-      },
-      ["VG[dcy=<>]"] = {
-         message = function(keys)
-            return "Use " .. keys:sub(3, 3) .. "G instead of " .. keys
-         end,
-         length = 3,
-      },
-      ["V%d[kj][dcy=<>]"] = {
-         message = function(keys)
-            return "Use "
-               .. keys:sub(4, 4)
-               .. keys:sub(2, 3)
-               .. " instead of "
-               .. keys
-         end,
-         length = 4,
-      },
-      ["V%d%d[kj][dcy=<>]"] = {
-         message = function(keys)
-            return "Use "
-               .. keys:sub(5, 5)
-               .. keys:sub(2, 4)
-               .. " instead of "
-               .. keys
-         end,
-         length = 5,
-      },
-      ["[vV][bBwWeE%^%$][dcy=<>]"] = {
-         message = function(keys)
-            return "Use "
-               .. keys:sub(3, 3)
-               .. keys:sub(2, 2)
-               .. " instead of "
-               .. keys
-         end,
-         length = 3,
-      },
-      ["[vV]g[eE][dcy=<>]"] = {
-         message = function(keys)
-            return "Use "
-               .. keys:sub(4, 4)
-               .. keys:sub(2, 3)
-               .. " instead of "
-               .. keys
-         end,
-         length = 4,
-      },
-      ["[vV][tTfF].[dcy=<>]"] = {
-         message = function(keys)
-            return "Use "
-               .. keys:sub(4, 4)
-               .. keys:sub(2, 3)
-               .. " instead of "
-               .. keys
-         end,
-         length = 4,
-      },
-      ["[vV][ia][\"'`{}%[%]()<>bBwWspt][dcy=<>]"] = {
-         message = function(keys)
-            return "Use "
-               .. keys:sub(4, 4)
-               .. keys:sub(2, 3)
-               .. " instead of "
-               .. keys
-         end,
-         length = 4,
-      },
-   },
-}
-```
+### [Default config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua)
