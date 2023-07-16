@@ -27,6 +27,8 @@ hardtime.nvim
   <img src="https://github.com/m4xshen/hardtime.nvim/assets/74842863/117a8d30-64ba-4ca9-8414-5c493cbe8a70" width="700" />
 </p>
 
+## ⚠️ The [config mechanism](https://github.com/m4xshen/hardtime.nvim#-configuration) is update!
+
 ## 📃 Introduction
 
 A Neovim plugin helping you establish good command workflow and habit
