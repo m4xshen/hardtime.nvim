@@ -78,9 +78,29 @@ M.config = {
             return "Use dj instead of 2dd"
          end,
       },
-      ["2D"] = {
+      ["2cc"] = {
          message = function()
-            return "Use dj instead of 2D"
+            return "Use cj instead of 2cc"
+         end,
+      },
+      ["2yy"] = {
+         message = function()
+            return "Use yj instead of 2yy"
+         end,
+      },
+      ["2=="] = {
+         message = function()
+            return "Use =j instead of 2=y"
+         end,
+      },
+      ["2>>"] = {
+         message = function()
+            return "Use >j instead of 2>>"
+         end,
+      },
+      ["2<<"] = {
+         message = function()
+            return "Use <j instead of 2<<"
          end,
       },
 
@@ -271,7 +291,7 @@ M.config = {
          end,
          length = 4,
       },
-      ["[vV][ia][\"'`{}%[%]()<>bBwWspt]\".[dy]"] = {
+      ['[vV][ia]["\'`{}%[%]()<>bBwWspt]".[dy]'] = {
          message = function(keys)
             return "Use "
                .. keys:sub(4, 6)
