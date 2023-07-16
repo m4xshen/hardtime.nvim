@@ -24,7 +24,7 @@ hardtime.nvim
 </p>
 
 <p align="center">
-  <img src="https://github.com/m4xshen/hardtime.nvim/assets/74842863/f7c797a0-3fe6-47b3-9c9a-5ec7d54de128" width="700" />
+  <img src="https://github.com/m4xshen/hardtime.nvim/assets/74842863/117a8d30-64ba-4ca9-8414-5c493cbe8a70" width="700" />
 </p>
 
 ## 📃 Introduction
