@@ -176,9 +176,8 @@ function M.setup(user_config)
       for pattern, hint in pairs(config.hints) do
          local len = hint.length or #pattern
          local found = string.find(last_keys, pattern, -len)
-         local keys = string.sub(last_keys, #last_keys - len + 1, #last_keys)
-
          if found then
+            local keys = string.sub(last_keys, found, #last_keys)
             local text = hint.message(keys)
             util.notify(text)
          end
