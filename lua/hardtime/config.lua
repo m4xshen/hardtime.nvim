@@ -90,7 +90,7 @@ M.config = {
       },
       ["2=="] = {
          message = function()
-            return "Use =j instead of 2=y"
+            return "Use =j instead of 2=="
          end,
       },
       ["2>>"] = {
