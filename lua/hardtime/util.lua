@@ -1,4 +1,5 @@
 local M = {}
+local previous_text
 
 function M.get_time()
    return vim.fn.reltimefloat(vim.fn.reltime()) * 1000
@@ -13,7 +14,14 @@ function M.try_eval(expression)
 end
 
 function M.notify(text)
-   vim.notify(text, vim.log.levels.WARN, { title = "hardtime" })
+   if text ~= previous_text then
+      vim.notify(text, vim.log.levels.WARN, { title = "hardtime" })
+   end
+   previous_text = text
+end
+
+function M.reset_notification()
+   previous_text = nil
 end
 
 return M
