@@ -159,3 +159,9 @@ hints = {
 Learn more about [Lua string pattern](https://www.lua.org/pil/20.2.html).
 
 ### [Default config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua)
+
+## 🦾 Contributing
+
+All contributions are welcome! Just open a pull request.
+
+You can start by fixing an issue or adding features listed on [project board](https://github.com/users/m4xshen/projects/2).
