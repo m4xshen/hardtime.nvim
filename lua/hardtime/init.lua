@@ -1,6 +1,7 @@
 local util = require("hardtime.util")
 
 local last_time = util.get_time()
+local last_notification = util.get_time()
 local last_count = 0
 local last_key
 local last_keys = ""
@@ -33,12 +34,21 @@ local function handler(key)
       return get_return_key(key)
    end
 
+   local curr_time = util.get_time()
+   if curr_time - last_notification > config.max_time then
+      util.reset_notification()
+   end
+
    -- key disabled
    if config.disabled_keys[key] then
-      if config.notification then
+      if
+         config.notification
+         and curr_time - last_notification > config.max_time
+      then
          vim.schedule(function()
             util.notify("The " .. key .. " key is disabled!")
          end)
+         last_notification = util.get_time()
       end
       return ""
    end
@@ -54,8 +64,6 @@ local function handler(key)
    end
 
    -- restrict
-   local curr_time = util.get_time()
-
    if
       last_count < config.max_count
       or curr_time - last_time > config.max_time
@@ -66,6 +74,7 @@ local function handler(key)
          or (config.allow_different_key and key ~= last_key)
       then
          last_count = 1
+         util.reset_notification()
       else
          last_count = last_count + 1
       end
@@ -79,6 +88,7 @@ local function handler(key)
       vim.schedule(function()
          util.notify("You pressed the " .. key .. " key too soon!")
       end)
+      last_notification = util.get_time()
    end
    last_key = key
    return ""
