@@ -29,6 +29,11 @@ local function get_return_key(key)
 end
 
 local function handler(key)
+   -- plugin disabled
+   if is_disabled() then
+      return get_return_key(key)
+   end
+
    local curr_time = util.get_time()
    if curr_time - last_notification > config.max_time then
       util.reset_notification()
@@ -46,11 +51,6 @@ local function handler(key)
          last_notification = util.get_time()
       end
       return ""
-   end
-
-   -- plugin disabled
-   if is_disabled() then
-      return get_return_key(key)
    end
 
    -- reset
