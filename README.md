@@ -27,8 +27,6 @@ hardtime.nvim
   <img src="https://github.com/m4xshen/hardtime.nvim/assets/74842863/117a8d30-64ba-4ca9-8414-5c493cbe8a70" width="700" />
 </p>
 
-## ⚠️ The [config mechanism](https://github.com/m4xshen/hardtime.nvim#-configuration) is update!
-
 ## 📃 Introduction
 
 A Neovim plugin helping you establish good command workflow and habit
@@ -59,8 +57,6 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 
 1. Install via your favorite package manager.
 
-> ❗️You don't need to specify `event = "VeryLazy"` anymore.
-
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
 ```Lua
 {
@@ -86,7 +82,7 @@ require("hardtime").setup()
 
 If you want to see the hint messages in insert and visual mode, set the `'showmode'` to false.
 
-But if you want to see both the hint message and mode you can setup with one of the following methods:
+But if you want to see both the hint message and current mode you can setup with one of the following methods:
 - Display the mode on status line and set `'showmode'` to false. You can do this with some statusline plugin such as lualine.nvim.
 - Set the `'cmdheight'` to 2 so that the hint message won't be replaced by mode message.
 - Use nvim-notify to display hint messages on the right top corner instead of commandline.
