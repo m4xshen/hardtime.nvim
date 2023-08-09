@@ -57,7 +57,7 @@ M.config = {
       },
       ["j%^"] = {
          message = function()
-            return "Use + instead of j^"
+            return "Use <CR> or + instead of j^"
          end,
          length = 2,
       },
