@@ -1,5 +1,4 @@
 local M = {}
-local previous_text
 
 local logger = require("hardtime.log").new({
    plugin = "hardtime.nvim",
@@ -19,16 +18,25 @@ function M.try_eval(expression)
    return expression
 end
 
+local last_notification_text
+local last_notification_time = M.get_time()
+
 function M.notify(text)
-   if text ~= previous_text then
+   if text ~= last_notification_text then
       logger.info(text)
       vim.notify(text, vim.log.levels.WARN, { title = "hardtime" })
    end
-   previous_text = text
+   last_notification_text = text
+   last_notification_time = M.get_time()
+end
+
+function M.should_reset()
+   return M.get_time() - last_notification_time()
+      > require("hardtime.config").config.max_time
 end
 
 function M.reset_notification()
-   previous_text = nil
+   last_notification_text = nil
 end
 
 return M

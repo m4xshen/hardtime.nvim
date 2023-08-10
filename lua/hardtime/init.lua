@@ -1,9 +1,7 @@
 local util = require("hardtime.util")
 
 local last_time = util.get_time()
-local last_notification = util.get_time()
-local last_count = 0
-local last_key
+local key_count = 0
 local last_keys = ""
 local mappings
 
@@ -29,58 +27,53 @@ local function get_return_key(key)
 end
 
 local function handler(key)
-   -- plugin disabled
    if is_disabled() then
       return get_return_key(key)
    end
 
    local curr_time = util.get_time()
-   if curr_time - last_notification > config.max_time then
+   local should_reset_notification = require("hardtime.util").should_reset()
+
+   if should_reset_notification then
       util.reset_notification()
    end
 
    -- key disabled
    if config.disabled_keys[key] then
-      if
-         config.notification
-         and curr_time - last_notification > config.max_time
-      then
+      if config.notification and should_reset_notification then
          vim.schedule(function()
             util.notify("The " .. key .. " key is disabled!")
          end)
-         last_notification = util.get_time()
       end
       return ""
    end
 
    -- reset
    if config.resetting_keys[key] then
-      last_count = 0
+      key_count = 0
    end
 
    if config.restricted_keys[key] == nil then
-      last_key = key
       return get_return_key(key)
    end
 
    -- restrict
+   local last_key = last_keys:sub(-1)
+   local should_reset_key_count = curr_time - last_time > config.max_time
+   local is_different_key = config.allow_different_key and key ~= last_key
    if
-      last_count < config.max_count
-      or curr_time - last_time > config.max_time
-      or (config.allow_different_key and key ~= last_key)
+      key_count < config.max_count
+      or should_reset_key_count
+      or is_different_key
    then
-      if
-         curr_time - last_time > config.max_time
-         or (config.allow_different_key and key ~= last_key)
-      then
-         last_count = 1
+      if should_reset_key_count or is_different_key then
+         key_count = 1
          util.reset_notification()
       else
-         last_count = last_count + 1
+         key_count = key_count + 1
       end
 
       last_time = util.get_time()
-      last_key = key
       return get_return_key(key)
    end
 
@@ -88,9 +81,7 @@ local function handler(key)
       vim.schedule(function()
          util.notify("You pressed the " .. key .. " key too soon!")
       end)
-      last_notification = util.get_time()
    end
-   last_key = key
    return ""
 end
 
@@ -146,19 +137,7 @@ end
 function M.setup(user_config)
    user_config = user_config or {}
 
-   for option, value in pairs(user_config) do
-      if type(value) == "table" and #value == 0 then
-         for k, v in pairs(value) do
-            if next(value) == nil then
-               config[option][k] = nil
-            else
-               config[option][k] = v
-            end
-         end
-      else
-         config[option] = value
-      end
-   end
+   require("hardtime.config").set_defaults(user_config)
 
    if config.enabled then
       vim.api.nvim_create_autocmd(
