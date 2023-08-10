@@ -74,6 +74,24 @@ M.config = {
          end,
          length = 2,
       },
+      ["ko"] = {
+         message = function()
+            return "Use O instead of ko"
+         end,
+         length = 2,
+      },
+      ["jO"] = {
+         message = function()
+            return "Use o instead of jO"
+         end,
+         length = 2,
+      },
+      ["li"] = {
+         message = function()
+            return "Use a instead of li"
+         end,
+         length = 2,
+      },
       ["2dd"] = {
          message = function()
             return "Use dj instead of 2dd"
