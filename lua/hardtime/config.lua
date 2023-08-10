@@ -7,6 +7,7 @@ M.config = {
    hint = true,
    notification = true,
    allow_different_key = false,
+   enabled = true,
    resetting_keys = {
       ["1"] = { "n", "x" },
       ["2"] = { "n", "x" },

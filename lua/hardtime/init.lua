@@ -170,7 +170,12 @@ function M.setup(user_config)
       end
    end
 
-   vim.api.nvim_create_autocmd("BufEnter", { once = true, callback = M.enable })
+   if config.enabled then
+      vim.api.nvim_create_autocmd(
+         "BufEnter",
+         { once = true, callback = M.enable }
+      )
+   end
 
    vim.on_key(function(key)
       if (not config.hint) or not enabled then

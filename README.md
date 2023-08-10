@@ -126,6 +126,7 @@ disabled_keys = {
 - `hint` (boolean): Enable hint messages for better commands.
 - `notification` (boolean): Enable notification messages for restricted and disabled keys.
 - `allow_different_key` (boolean): Allow different keys to reset the count.
+- `enabled` (boolean): Whether the plugin is enabled by default or not.
 - `resetting_keys` (table of strings/table pair): Keys in what modes that reset the count.
 - `restricted_keys` (table of strings/table pair): Keys in what modes triggering the count mechanism.
 - `disabled_keys` (table of strings/table pair): Keys in what modes are disabled.
