@@ -327,7 +327,7 @@ function M.set_defaults(user_config)
    for option, value in pairs(user_config) do
       if type(value) == "table" and #value == 0 then
          for k, v in pairs(value) do
-            if next(value) == nil then
+            if next(v) == nil then
                M.config[option][k] = nil
             else
                M.config[option][k] = v
