@@ -97,6 +97,12 @@ end
 local M = {}
 local enabled = false
 
+local keys_groups = {
+   config.resetting_keys,
+   config.restricted_keys,
+   config.disabled_keys,
+}
+
 function M.enable()
    if enabled then
       return
@@ -109,22 +115,12 @@ function M.enable()
       vim.opt.mouse = ""
    end
 
-   for key, mode in pairs(config.resetting_keys) do
-      vim.keymap.set(mode, key, function()
-         return handler(key)
-      end, { noremap = true, expr = true })
-   end
-
-   for key, mode in pairs(config.restricted_keys) do
-      vim.keymap.set(mode, key, function()
-         return handler(key)
-      end, { noremap = true, expr = true })
-   end
-
-   for key, mode in pairs(config.disabled_keys) do
-      vim.keymap.set(mode, key, function()
-         return handler(key)
-      end, { noremap = true })
+   for _, keys in ipairs(keys_groups) do
+      for key, mode in pairs(keys) do
+         vim.keymap.set(mode, key, function()
+            return handler(key)
+         end, { noremap = true, expr = true })
+      end
    end
 end
 
@@ -136,16 +132,10 @@ function M.disable()
    enabled = false
    vim.opt.mouse = "nvi"
 
-   for key, mode in pairs(config.resetting_keys) do
-      pcall(vim.keymap.del, mode, key)
-   end
-
-   for key, mode in pairs(config.restricted_keys) do
-      pcall(vim.keymap.del, mode, key)
-   end
-
-   for key, mode in pairs(config.disabled_keys) do
-      pcall(vim.keymap.del, mode, key)
+   for _, keys in ipairs(keys_groups) do
+      for key, mode in pairs(keys) do
+         pcall(vim.keymap.del, mode, key)
+      end
    end
 end
 
