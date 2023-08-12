@@ -35,8 +35,8 @@ A Neovim plugin helping you establish good command workflow and habit
 
 - Block repeated keys within a period of time
 - Print hints about better commands eg: Use `ci"` instead of `di"i`
-- Disable keys and mouse
 - Customizable options for restricted keys, disabled keys, etc.
+- Get report for your most common bad habits for improvement
 
 Recommended workflow:
 1. Avoid using the mouse and arrow keys if they are not at the home row of your keyboard.
@@ -94,6 +94,8 @@ hardtime.nvim is enable by default. You can change its state through commands:
 - `:Hardtime enable` enable hardtime.nvim
 - `:Hardtime disable` disable hardtime.nvim
 - `:Hardtime toggle` toggle hardtime.nvim
+
+You can view the most frequently seen hints with `:Hardtime report`.
 
 ## 🔧 Configuration
 

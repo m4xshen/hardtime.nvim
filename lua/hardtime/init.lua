@@ -171,4 +171,38 @@ function M.setup(user_config)
    require("hardtime.command").setup()
 end
 
+function M.report()
+   local file_path = os.getenv("HOME") .. "/.cache/nvim/hardtime.nvim.log"
+   local file = io.open(file_path, "r")
+   if file == nil then
+      print("Error: Unable to open", file_path)
+      return
+   end
+
+   local hints = {}
+   for line in file:lines() do
+      local hint = string.sub(line, 41)
+      hints[hint] = hints[hint] and hints[hint] + 1 or 1
+   end
+   file:close()
+
+   local sorted_hints = {}
+   for hint, count in pairs(hints) do
+      table.insert(sorted_hints, { hint, count })
+   end
+
+   table.sort(sorted_hints, function(a, b)
+      return a[2] > b[2]
+   end)
+
+   for i, pair in ipairs(sorted_hints) do
+      print(
+         i .. ".",
+         pair[1],
+         "(" .. pair[2],
+         "time" .. (pair[2] > 1 and "s)" or ")")
+      )
+   end
+end
+
 return M
