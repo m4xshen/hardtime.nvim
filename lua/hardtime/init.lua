@@ -195,13 +195,36 @@ function M.report()
       return a[2] > b[2]
    end)
 
+   local Popup = require("nui.popup")
+   local event = require("nui.utils.autocmd").event
+
+   local popup = Popup({
+      enter = true,
+      focusable = true,
+      border = {
+         style = "rounded",
+         text = {
+            top = "Hardtime Report",
+            top_align = "center",
+         },
+      },
+      position = "50%",
+      size = {
+         width = "40%",
+         height = "60%",
+      },
+   })
+
+   popup:mount()
+   popup:on(event.BufLeave, function()
+      popup:unmount()
+   end)
+
    for i, pair in ipairs(sorted_hints) do
-      print(
-         i .. ".",
-         pair[1],
-         "(" .. pair[2],
-         "time" .. (pair[2] > 1 and "s)" or ")")
-      )
+      local content = string.format("%d. %s (%d times)", i, pair[1], pair[2])
+
+      vim.api.nvim_buf_set_lines(popup.bufnr, i - 1, i - 1, false, { content })
+      vim.api.nvim_win_set_cursor(0, { 1, 0 })
    end
 end
 

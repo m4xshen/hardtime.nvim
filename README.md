@@ -60,19 +60,18 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
 ```Lua
 {
-  "m4xshen/hardtime.nvim",
-  opts = {}
+   "m4xshen/hardtime.nvim",
+   dependencies = { 'MunifTanjim/nui.nvim' },
+   opts = {}
 },
 ```
 
 - [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```Lua
-use "m4xshen/hardtime.nvim"
-```
-
-- [vim-plug](https://github.com/junegunn/vim-plug)
-```VimL
-Plug "m4xshen/hardtime.nvim"
+use {
+   "m4xshen/hardtime.nvim",
+   requires = { 'MunifTanjim/nui.nvim' }
+}
 ```
 
 2. Setup the plugin in your `init.lua`. This step is not needed with lazy.nvim if `opts` is set as above.
