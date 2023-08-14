@@ -74,15 +74,15 @@ M.config = {
          end,
          length = 2,
       },
-      ["%Dko"] = {
-         message = function()
-            return "Use O instead of ko"
+      ["%D[k-]o"] = {
+         message = function(keys)
+            return "Use O instead of " .. keys:sub(2)
          end,
          length = 3,
       },
-      ["%DjO"] = {
-         message = function()
-            return "Use o instead of jO"
+      ["%D[j+]O"] = {
+         message = function(keys)
+            return "Use o instead of " .. keys:sub(2)
          end,
          length = 3,
       },
