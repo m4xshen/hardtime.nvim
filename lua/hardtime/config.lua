@@ -74,17 +74,17 @@ M.config = {
          end,
          length = 2,
       },
-      ["ko"] = {
+      ["%Dko"] = {
          message = function()
             return "Use O instead of ko"
          end,
-         length = 2,
+         length = 3,
       },
-      ["jO"] = {
+      ["%DjO"] = {
          message = function()
             return "Use o instead of jO"
          end,
-         length = 2,
+         length = 3,
       },
       ["li"] = {
          message = function()
