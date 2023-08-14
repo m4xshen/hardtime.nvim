@@ -7,16 +7,6 @@ local mappings
 
 local config = require("hardtime.config").config
 
-local function is_disabled()
-   local current_filetype = vim.api.nvim_buf_get_option(0, "filetype")
-   for _, filetype in pairs(config.disabled_filetypes) do
-      if filetype == current_filetype then
-         return true
-      end
-   end
-   return false
-end
-
 local function get_return_key(key)
    for _, mapping in ipairs(mappings) do
       if mapping.lhs == key then
@@ -27,7 +17,7 @@ local function get_return_key(key)
 end
 
 local function handler(key)
-   if is_disabled() then
+   if vim.tbl_contains(config.disabled_filetypes, vim.bo.ft) then
       return get_return_key(key)
    end
 
