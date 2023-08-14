@@ -2,7 +2,7 @@ local commands = {
    enable = require("hardtime").enable,
    disable = require("hardtime").disable,
    toggle = require("hardtime").toggle,
-   report = require("hardtime").report,
+   report = require("hardtime.report").report,
 }
 
 local M = {}
