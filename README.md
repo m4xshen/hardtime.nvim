@@ -61,7 +61,7 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 ```Lua
 {
    "m4xshen/hardtime.nvim",
-   dependencies = { 'MunifTanjim/nui.nvim' },
+   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
    opts = {}
 },
 ```
@@ -70,7 +70,7 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 ```Lua
 use {
    "m4xshen/hardtime.nvim",
-   requires = { 'MunifTanjim/nui.nvim' }
+   requires = { 'MunifTanjim/nui.nvim', "nvim-lua/plenary.nvim" }
 }
 ```
 
