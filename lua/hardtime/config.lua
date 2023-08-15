@@ -86,11 +86,11 @@ M.config = {
          end,
          length = 3,
       },
-      ["li"] = {
+      ["[^fFtT]li"] = {
          message = function()
             return "Use a instead of li"
          end,
-         length = 2,
+         length = 3,
       },
       ["2dd"] = {
          message = function()
