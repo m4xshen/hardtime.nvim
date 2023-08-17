@@ -3,6 +3,7 @@ local util = require("hardtime.util")
 local last_time = util.get_time()
 local key_count = 0
 local last_keys = ""
+local last_key = ""
 local mappings
 
 local config = require("hardtime.config").config
@@ -48,7 +49,6 @@ local function handler(key)
    end
 
    -- restrict
-   local last_key = last_keys:sub(-1)
    local should_reset_key_count = curr_time - last_time > config.max_time
    local is_different_key = config.allow_different_key and key ~= last_key
    if
@@ -136,7 +136,26 @@ function M.setup(user_config)
       )
    end
 
-   vim.on_key(function(key)
+   local function handle_key(key)
+      if key:sub(1, 1) == "\x80" then
+         local code = key:sub(2)
+
+         if code == "kd" then
+            return "<DOWN>"
+         elseif code == "ku" then
+            return "<UP>"
+         elseif code == "kl" then
+            return "<LEFT>"
+         elseif code == "kr" then
+            return "<RIGHT>"
+         end
+      end
+      return key
+   end
+
+   vim.on_key(function(k)
+      local key = handle_key(k)
+
       if (not config.hint) or not enabled then
          return
       end
@@ -147,6 +166,7 @@ function M.setup(user_config)
       end
 
       last_keys = last_keys .. key
+      last_key = key
       for pattern, hint in pairs(config.hints) do
          local len = hint.length or #pattern
          local found = string.find(last_keys, pattern, -len)
