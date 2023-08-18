@@ -112,9 +112,9 @@ If the option is a table with a `key = value` pair, your value will overwrite th
 
 Example:
 ```lua
--- Remove <UP> keys and append <Space> to the disabled_keys
+-- Remove <Up> keys and append <Space> to the disabled_keys
 disabled_keys = {
-   ["<UP>"] = {},
+   ["<Up>"] = {},
    ["<Space>"] = { "n", "x" },
 },
 ```
