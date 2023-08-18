@@ -136,25 +136,8 @@ function M.setup(user_config)
       )
    end
 
-   local function handle_key(key)
-      if key:sub(1, 1) == "\x80" then
-         local code = key:sub(2)
-
-         if code == "kd" then
-            return "<DOWN>"
-         elseif code == "ku" then
-            return "<UP>"
-         elseif code == "kl" then
-            return "<LEFT>"
-         elseif code == "kr" then
-            return "<RIGHT>"
-         end
-      end
-      return key
-   end
-
    vim.on_key(function(k)
-      local key = handle_key(k)
+      local key = vim.fn.keytrans(k)
 
       if (not config.hint) or not enabled then
          return
