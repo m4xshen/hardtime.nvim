@@ -10,6 +10,9 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
+**Config options**
+The options table passed into the `setup()` function.
+
 **To Reproduce**
 Steps to reproduce the behavior:
 1. Go to '...'
