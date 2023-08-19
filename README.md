@@ -96,6 +96,8 @@ hardtime.nvim is enable by default. You can change its state through commands:
 
 You can view the most frequently seen hints with `:Hardtime report`.
 
+Your log file is at `~/.cache/nvim/hardtime.nvim.log`.
+
 ## 🔧 Configuration
 
 You can pass your config table into the `setup()` function or `opts` if you use lazy.nvim.
