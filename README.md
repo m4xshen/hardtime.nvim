@@ -134,7 +134,7 @@ disabled_keys = {
 - `restricted_keys` (table of strings/table pair): Keys in what modes triggering the count mechanism.
 - `disabled_keys` (table of strings/table pair): Keys in what modes are disabled.
 - `disabled_filetypes` (table of strings): hardtime.nvim is disabled under these filetypes.
-- `hints` (table): key is a string pattern you want to match, value is a table of hint message and pattern length.
+- `hints` (table): key is a string pattern you want to match, value is a table of hint message and pattern length. (hardtime.nvim only supports hints in Normal mode and Visual mode currently)
 
 Example:
 
