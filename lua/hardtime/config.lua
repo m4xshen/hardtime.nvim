@@ -50,15 +50,12 @@ M.config = {
    },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
    hints = {
-      ["k%^"] = {
-         message = function()
-            return "Use - instead of k^"
-         end,
-         length = 2,
-      },
-      ["j%^"] = {
-         message = function()
-            return "Use <CR> or + instead of j^"
+      ["[kj]%^"] = {
+         message = function(key)
+            return "Use "
+               .. (key == "k^" and "-" or "<CR> or +")
+               .. " instead of "
+               .. key
          end,
          length = 2,
       },
@@ -96,7 +93,7 @@ M.config = {
          message = function(key)
             return "Use " .. key:sub(3) .. "j instead of " .. key
          end,
-         length = 3
+         length = 3,
       },
 
       -- hints for f/F/t/T
