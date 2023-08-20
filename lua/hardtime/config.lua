@@ -92,35 +92,11 @@ M.config = {
          end,
          length = 3,
       },
-      ["2dd"] = {
-         message = function()
-            return "Use dj instead of 2dd"
+      ["2([dcy=<>])%1"] = {
+         message = function(key)
+            return "Use " .. key:sub(3) .. "j instead of " .. key
          end,
-      },
-      ["2cc"] = {
-         message = function()
-            return "Use cj instead of 2cc"
-         end,
-      },
-      ["2yy"] = {
-         message = function()
-            return "Use yj instead of 2yy"
-         end,
-      },
-      ["2=="] = {
-         message = function()
-            return "Use =j instead of 2=="
-         end,
-      },
-      ["2>>"] = {
-         message = function()
-            return "Use >j instead of 2>>"
-         end,
-      },
-      ["2<<"] = {
-         message = function()
-            return "Use <j instead of 2<<"
-         end,
+         length = 3
       },
 
       -- hints for f/F/t/T
