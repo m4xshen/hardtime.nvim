@@ -137,8 +137,6 @@ function M.setup(user_config)
    end
 
    vim.on_key(function(k)
-      local key = vim.fn.keytrans(k)
-
       if (not config.hint) or not enabled then
          return
       end
@@ -146,6 +144,11 @@ function M.setup(user_config)
       local mode = vim.fn.mode()
       if mode == "i" or mode == "c" or mode == "R" then
          return
+      end
+
+      local key = vim.fn.keytrans(k)
+      if k == "<" then
+         key = "<"
       end
 
       last_keys = last_keys .. key
