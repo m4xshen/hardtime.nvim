@@ -10,7 +10,7 @@ function M.report()
 
    local hints = {}
    for line in file:lines() do
-      local hint = string.sub(line, 41)
+      local hint = string.gsub(line, "%[.-%] ", "")
       hints[hint] = hints[hint] and hints[hint] + 1 or 1
    end
    file:close()
