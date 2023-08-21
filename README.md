@@ -123,20 +123,22 @@ disabled_keys = {
 
 ### Options
 
-- `max_time` (number): Maximum time (in milliseconds) to consider key presses as repeated.
-- `max_count` (number): Maximum count of repeated key presses allowed within the `max_time` period.
-- `disable_mouse` (boolean): Disable mouse support.
-- `hint` (boolean): Enable hint messages for better commands.
-- `notification` (boolean): Enable notification messages for restricted and disabled keys.
-- `allow_different_key` (boolean): Allow different keys to reset the count.
-- `enabled` (boolean): Whether the plugin is enabled by default or not.
-- `resetting_keys` (table of strings/table pair): Keys in what modes that reset the count.
-- `restricted_keys` (table of strings/table pair): Keys in what modes triggering the count mechanism.
-- `disabled_keys` (table of strings/table pair): Keys in what modes are disabled.
-- `disabled_filetypes` (table of strings): hardtime.nvim is disabled under these filetypes.
-- `hints` (table): key is a string pattern you want to match, value is a table of hint message and pattern length. (hardtime.nvim only supports hints in Normal mode and Visual mode currently)
+| Option Name         | Type                    | Default Valuae |  Meaning                                             |
+|---------------------|-------------------------|----------------|-----------------------------------------------------|
+| `max_time`          | number                  | `1000` | Maximum time (in milliseconds) to consider key presses as repeated. |
+| `max_count`         | number                  | `2` | Maximum count of repeated key presses allowed within the `max_time` period. |
+| `disable_mouse`     | boolean                 | `true` | Disable mouse support. |
+| `hint`              | boolean                 | `true` | Enable hint messages for better commands. |
+| `notification`      | boolean                 | `true` | Enable notification messages for restricted and disabled keys. |
+| `allow_different_key` | boolean                | `false` | Allow different keys to reset the count. |
+| `enabled`           | boolean                 | `true` | Whether the plugin is enabled by default or not. |
+| `resetting_keys`    | table of strings/table pair | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes that reset the count. |
+| `restricted_keys`   | table of strings/table pair | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes triggering the count mechanism. |
+| `disabled_keys`     | table of strings/table pair | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes are disabled. |
+| `disabled_filetypes` | table of strings        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | `hardtime.nvim` is disabled under these filetypes. |
+| `hints`             | table                   | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) |`key` is a string pattern you want to match, `value` is a table of hint message and pattern length. |
 
-Example:
+`hints` example:
 
 ```lua
 hints = {
