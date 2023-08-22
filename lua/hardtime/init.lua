@@ -72,6 +72,10 @@ local function handler(key)
          util.notify("You pressed the " .. key .. " key too soon!")
       end)
    end
+
+   if config.restriction_mode == "hint" then
+      return key
+   end
    return ""
 end
 

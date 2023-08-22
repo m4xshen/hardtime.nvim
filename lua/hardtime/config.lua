@@ -28,6 +28,7 @@ M.config = {
       ["p"] = { "n" },
       ["P"] = { "n" },
    },
+   restriction_mode = "block", -- block or hint
    restricted_keys = {
       ["h"] = { "n", "x" },
       ["j"] = { "n", "x" },
