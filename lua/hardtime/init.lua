@@ -141,10 +141,6 @@ function M.setup(user_config)
    end
 
    vim.on_key(function(k)
-      if (not config.hint) or not enabled then
-         return
-      end
-
       local mode = vim.fn.mode()
       if mode == "i" or mode == "c" or mode == "R" then
          return
@@ -157,6 +153,11 @@ function M.setup(user_config)
 
       last_keys = last_keys .. key
       last_key = key
+
+      if (not config.hint) or not enabled then
+         return
+      end
+
       for pattern, hint in pairs(config.hints) do
          local len = hint.length or #pattern
          local found = string.find(last_keys, pattern, -len)
