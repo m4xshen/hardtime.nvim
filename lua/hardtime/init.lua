@@ -11,6 +11,10 @@ local config = require("hardtime.config").config
 local function get_return_key(key)
    for _, mapping in ipairs(mappings) do
       if mapping.lhs == key then
+         if mapping.callback then
+            mapping.callback()
+            return ""
+         end
          return util.try_eval(mapping.rhs)
       end
    end
@@ -74,7 +78,7 @@ local function handler(key)
    end
 
    if config.restriction_mode == "hint" then
-      return key
+      return get_return_key(key)
    end
    return ""
 end
