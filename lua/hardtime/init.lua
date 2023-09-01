@@ -160,7 +160,7 @@ function M.setup(user_config)
       last_keys = last_keys .. key
       last_key = key
 
-      if (not config.hint) or not enabled then
+      if not config.hint or not enabled or vim.fn.reg_executing() ~= "" then
          return
       end
 
