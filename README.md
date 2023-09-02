@@ -137,9 +137,9 @@ disabled_keys = {
 | `restriction_mode`  | string (`"block" or "hint"`) | `"block"` | The behavior when `restricted_keys` trigger count mechanism.
 | `disabled_keys`     | table of strings/table pair | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes are disabled. |
 | `disabled_filetypes` | table of strings        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | `hardtime.nvim` is disabled under these filetypes. |
-| `hints`             | table                   | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) |`key` is a string pattern you want to match, `value` is a table of hint message and pattern length. |
+| `hints`             | table                   | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) |`key` is a string pattern you want to match, `value` is a table of hint message and pattern length. Learn more about [Lua string pattern](https://www.lua.org/pil/20.2.html). |
 
-`hints` example:
+`hints` example (these two are default hints):
 
 ```lua
 hints = {
@@ -159,7 +159,9 @@ hints = {
 }
 ```
 
-Learn more about [Lua string pattern](https://www.lua.org/pil/20.2.html).
+Share your custom hints in [discussion](https://github.com/m4xshen/hardtime.nvim/discussions/categories/custom-hints)!
+
+I'll consider adding them to the default config if they're useful and general enough.
 
 ### [Default config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua)
 
