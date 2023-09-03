@@ -24,6 +24,8 @@ end
 local function handler(key)
    local disabled = vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
       or vim.fn.reg_executing() ~= ""
+      or vim.fn.reg_recording() ~= ""
+
    if disabled then
       return get_return_key(key)
    end
