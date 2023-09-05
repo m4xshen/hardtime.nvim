@@ -51,10 +51,10 @@ M.config = {
    },
    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason" },
    hints = {
-      ["[kj]%^"] = {
+      ["[kj][%^_]"] = {
          message = function(key)
             return "Use "
-               .. (key == "k^" and "-" or "<CR> or +")
+               .. (key:sub(1, 1) == "k" and "-" or "<CR> or +")
                .. " instead of "
                .. key
          end,
