@@ -57,21 +57,13 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 
 1. Install via your favorite package manager.
 
-- [lazy.nvim](https://github.com/folke/lazy.nvim)
 ```Lua
+-- lazy.nvim
 {
    "m4xshen/hardtime.nvim",
    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
    opts = {}
 },
-```
-
-- [packer.nvim](https://github.com/wbthomason/packer.nvim)
-```Lua
-use {
-   "m4xshen/hardtime.nvim",
-   requires = { 'MunifTanjim/nui.nvim', "nvim-lua/plenary.nvim" }
-}
 ```
 
 2. Setup the plugin in your `init.lua`. This step is not needed with lazy.nvim if `opts` is set as above.
@@ -159,9 +151,7 @@ hints = {
 }
 ```
 
-Share your custom hints in [discussion](https://github.com/m4xshen/hardtime.nvim/discussions/categories/custom-hints)!
-
-I'll consider adding them to the default config if they're useful and general enough.
+Check out some examples of custom hint in [discussion](https://github.com/m4xshen/hardtime.nvim/discussions/categories/custom-hints)!
 
 ### [Default config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua)
 
