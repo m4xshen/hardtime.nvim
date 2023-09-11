@@ -88,7 +88,7 @@ local function handler(key)
 end
 
 local M = {}
-M.enabled = false
+M.is_enabled = false
 
 local keys_groups = {
    config.resetting_keys,
@@ -97,11 +97,11 @@ local keys_groups = {
 }
 
 function M.enable()
-   if M.enabled then
+   if M.is_enabled then
       return
    end
 
-   M.enabled = true
+   M.is_enabled = true
    mappings = vim.api.nvim_get_keymap("n")
 
    if config.disable_mouse then
@@ -118,11 +118,11 @@ function M.enable()
 end
 
 function M.disable()
-   if not M.enabled then
+   if not M.is_enabled then
       return
    end
 
-   M.enabled = false
+   M.is_enabled = false
    vim.opt.mouse = "nvi"
 
    for _, keys in ipairs(keys_groups) do
@@ -133,7 +133,7 @@ function M.disable()
 end
 
 function M.toggle()
-   (M.enabled and M.disable or M.enable)()
+   (M.is_enabled and M.disable or M.enable)()
 end
 
 function M.setup(user_config)
@@ -162,7 +162,7 @@ function M.setup(user_config)
       last_keys = last_keys .. key
       last_key = key
 
-      if not config.hint or not M.enabled or vim.fn.reg_executing() ~= "" then
+      if not config.hint or not M.is_enabled or vim.fn.reg_executing() ~= "" then
          return
       end
 
