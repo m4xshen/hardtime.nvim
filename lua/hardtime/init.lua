@@ -155,6 +155,10 @@ function M.setup(user_config)
       end
 
       local key = vim.fn.keytrans(k)
+      if key == "<MouseMove>" then
+         return
+      end
+
       if k == "<" then
          key = "<"
       end
@@ -162,7 +166,11 @@ function M.setup(user_config)
       last_keys = last_keys .. key
       last_key = key
 
-      if not config.hint or not M.is_enabled or vim.fn.reg_executing() ~= "" then
+      if
+         not config.hint
+         or not M.is_enabled
+         or vim.fn.reg_executing() ~= ""
+      then
          return
       end
 
