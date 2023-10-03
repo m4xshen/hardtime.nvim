@@ -2,7 +2,7 @@
 
 All contributions are welcome! Just open a pull request.
 
-You can start by fixing [issues](https://github.com/m4xshen/hardtime.nvim/issues) or adding features listed on [project board](https://github.com/users/m4xshen/projects/2).
+You can start by fixing [issues](https://github.com/m4xshen/hardtime.nvim/issues) labeled with [good first issue](https://github.com/m4xshen/hardtime.nvim/contribute).
 
 ## Coding Style
 
