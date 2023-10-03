@@ -88,6 +88,7 @@ M.config = {
       "notify",
       "prompt",
       "qf",
+      "oil",
    },
    hints = {
       ["[kj][%^_]"] = {
