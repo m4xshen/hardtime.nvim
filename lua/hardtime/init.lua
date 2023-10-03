@@ -22,6 +22,7 @@ end
 
 local function handler(key)
    local disabled = vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
+      or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
       or vim.fn.reg_executing() ~= ""
       or vim.fn.reg_recording() ~= ""
 
@@ -168,6 +169,7 @@ function M.setup(user_config)
       if
          not config.hint
          or not M.is_enabled
+         or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
          or vim.fn.reg_executing() ~= ""
       then
          return
