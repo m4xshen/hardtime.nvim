@@ -12,8 +12,7 @@ local function get_return_key(key)
    for _, mapping in ipairs(mappings) do
       if mapping.lhs == key then
          if mapping.callback then
-            mapping.callback()
-            return ""
+            return mapping.callback()
          end
          return util.try_eval(mapping.rhs)
       end
