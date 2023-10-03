@@ -29,8 +29,6 @@ M.config = {
       ["P"] = { "n" },
       ["gp"] = { "n" },
       ["gP"] = { "n" },
-      ["s"] = { "n" },
-      ["S"] = { "n" },
       ["."] = { "n" },
       ["="] = { "n" },
       ["<"] = { "n" },
@@ -44,8 +42,6 @@ M.config = {
       ["gq"] = { "n" },
       ["gw"] = { "n" },
       ["g?"] = { "n" },
-      ["<C-a>"] = { "n" },
-      ["<C-x>"] = { "n" },
    },
    restriction_mode = "block", -- block or hint
    restricted_keys = {
