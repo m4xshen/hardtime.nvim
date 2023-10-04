@@ -62,7 +62,7 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 
 1. Install via your favorite package manager.
 
-```Lua
+```lua
 -- lazy.nvim
 {
    "m4xshen/hardtime.nvim",
@@ -72,7 +72,7 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 ```
 
 2. Setup the plugin in your `init.lua`. This step is not needed with lazy.nvim if `opts` is set as above.
-```Lua
+```lua
 require("hardtime").setup()
 ```
 
@@ -86,7 +86,7 @@ But if you want to see both the hint message and current mode you can setup with
    
 ## 🚀 Usage
 
-hardtime.nvim is enabled by default. You can change it's state with the following commands:
+hardtime.nvim is enabled by default. You can change its state with the following commands:
 
 - `:Hardtime enable` enable hardtime.nvim
 - `:Hardtime disable` disable hardtime.nvim
