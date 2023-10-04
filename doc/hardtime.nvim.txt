@@ -73,7 +73,7 @@ with one of the following methods:
 
 USAGE                                                    *hardtime.nvim-usage*
 
-hardtime.nvim is enabled by default. You can change it’s state with the
+hardtime.nvim is enabled by default. You can change its state with the
 following commands:
 
 - `:Hardtime enable` enable hardtime.nvim
