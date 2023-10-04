@@ -1,3 +1,5 @@
+<!-- panvimdoc-ignore-start -->
+
 <h1 align="center">
 hardtime.nvim
 </h1>
@@ -27,6 +29,8 @@ hardtime.nvim
   <img src="https://github.com/m4xshen/hardtime.nvim/assets/74842863/117a8d30-64ba-4ca9-8414-5c493cbe8a70" width="700" />
 </p>
 
+<!-- panvimdoc-ignore-end -->
+
 ## 📃 Introduction
 
 A Neovim plugin helping you establish good command workflow and habit
@@ -39,6 +43,7 @@ A Neovim plugin helping you establish good command workflow and habit
 - Get report for your most common bad habits for improvement
 
 Recommended workflow:
+
 1. Avoid using the mouse and arrow keys if they are not at the home row of your keyboard.
 2. Use relative jump (eg: `5j` `12-`) for vertical movement within the screen.
 3. Use `CTRL-U` `CTRL-D` `CTRL-B` `CTRL-F` `gg` `G` for vertical movement outside the screen.
@@ -57,7 +62,7 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 
 1. Install via your favorite package manager.
 
-```Lua
+```lua
 -- lazy.nvim
 {
    "m4xshen/hardtime.nvim",
@@ -67,20 +72,21 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 ```
 
 2. Setup the plugin in your `init.lua`. This step is not needed with lazy.nvim if `opts` is set as above.
-```Lua
+```lua
 require("hardtime").setup()
 ```
 
 If you want to see the hint messages in insert and visual mode, set the `'showmode'` to false.
 
 But if you want to see both the hint message and current mode you can setup with one of the following methods:
+
 - Display the mode on status line and set `'showmode'` to false. You can do this with some statusline plugin such as lualine.nvim.
 - Set the `'cmdheight'` to 2 so that the hint message won't be replaced by mode message.
 - Use nvim-notify to display hint messages on the right top corner instead of commandline.
    
 ## 🚀 Usage
 
-hardtime.nvim is enable by default. You can change its state through commands:
+hardtime.nvim is enabled by default. You can change its state with the following commands:
 
 - `:Hardtime enable` enable hardtime.nvim
 - `:Hardtime disable` disable hardtime.nvim
@@ -115,23 +121,25 @@ disabled_keys = {
 
 ### Options
 
-| Option Name         | Type                    | Default Valuae |  Meaning                                             |
-|---------------------|-------------------------|----------------|-----------------------------------------------------|
-| `max_time`          | number                  | `1000` | Maximum time (in milliseconds) to consider key presses as repeated. |
-| `max_count`         | number                  | `2` | Maximum count of repeated key presses allowed within the `max_time` period. |
-| `disable_mouse`     | boolean                 | `true` | Disable mouse support. |
-| `hint`              | boolean                 | `true` | Enable hint messages for better commands. |
-| `notification`      | boolean                 | `true` | Enable notification messages for restricted and disabled keys. |
-| `allow_different_key` | boolean                | `false` | Allow different keys to reset the count. |
-| `enabled`           | boolean                 | `true` | Whether the plugin is enabled by default or not. |
-| `resetting_keys`    | table of strings/table pair | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes that reset the count. |
-| `restricted_keys`   | table of strings/table pair | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes triggering the count mechanism. |
-| `restriction_mode`  | string (`"block" or "hint"`) | `"block"` | The behavior when `restricted_keys` trigger count mechanism.
-| `disabled_keys`     | table of strings/table pair | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes are disabled. |
-| `disabled_filetypes` | table of strings        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | `hardtime.nvim` is disabled under these filetypes. |
-| `hints`             | table                   | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) |`key` is a string pattern you want to match, `value` is a table of hint message and pattern length. Learn more about [Lua string pattern](https://www.lua.org/pil/20.2.html). |
+| Option Name           | Type                         | Default Valuae                                                                           | Meaning                                                                                                                                                                       |
+| --------------------- | ---------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `max_time`            | number                       | `1000`                                                                                   | Maximum time (in milliseconds) to consider key presses as repeated.                                                                                                           |
+| `max_count`           | number                       | `2`                                                                                      | Maximum count of repeated key presses allowed within the `max_time` period.                                                                                                   |
+| `disable_mouse`       | boolean                      | `true`                                                                                   | Disable mouse support.                                                                                                                                                        |
+| `hint`                | boolean                      | `true`                                                                                   | Enable hint messages for better commands.                                                                                                                                     |
+| `notification`        | boolean                      | `true`                                                                                   | Enable notification messages for restricted and disabled keys.                                                                                                                |
+| `allow_different_key` | boolean                      | `false`                                                                                  | Allow different keys to reset the count.                                                                                                                                      |
+| `enabled`             | boolean                      | `true`                                                                                   | Whether the plugin is enabled by default or not.                                                                                                                              |
+| `resetting_keys`      | table of strings/table pair  | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes that reset the count.                                                                                                                                      |
+| `restricted_keys`     | table of strings/table pair  | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes triggering the count mechanism.                                                                                                                            |
+| `restriction_mode`    | string (`"block" or "hint"`) | `"block"`                                                                                | The behavior when `restricted_keys` trigger count mechanism.                                                                                                                  |
+| `disabled_keys`       | table of strings/table pair  | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes are disabled.                                                                                                                                              |
+| `disabled_filetypes`  | table of strings             | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | `hardtime.nvim` is disabled under these filetypes.                                                                                                                            |
+| `hints`               | table                        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | `key` is a string pattern you want to match, `value` is a table of hint message and pattern length. Learn more about [Lua string pattern](https://www.lua.org/pil/20.2.html). |
 
-`hints` example (these two are default hints):
+### `hints` example 
+
+These are two default hints:
 
 ```lua
 hints = {
@@ -160,3 +168,4 @@ Check out some examples of custom hint in [discussion](https://github.com/m4xshe
 hardtime.nvim is participating in Hacktoberfest 2023! 🎉
 
 Please read [CONTRIBUTING.md](https://github.com/m4xshen/hardtime.nvim/blob/main/CONTRIBUTING.md).
+
