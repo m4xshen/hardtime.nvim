@@ -81,6 +81,7 @@ M.config = {
       "help",
       "lazy",
       "mason",
+      "neotest-summary",
       "neo-tree",
       "neo-tree-popup",
       "netrw",
