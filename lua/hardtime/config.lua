@@ -90,6 +90,7 @@ M.config = {
       "prompt",
       "qf",
       "oil",
+      "undotree",
    },
    hints = {
       ["[kj][%^_]"] = {
