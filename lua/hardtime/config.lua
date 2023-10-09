@@ -81,6 +81,7 @@ M.config = {
       "help",
       "lazy",
       "NeogitStatus",
+      "NeogitLogView",
       "mason",
       "neotest-summary",
       "neo-tree",
