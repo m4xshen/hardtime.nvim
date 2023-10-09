@@ -80,6 +80,7 @@ M.config = {
       "DressingSelect",
       "help",
       "lazy",
+      "NeogitStatus",
       "mason",
       "neotest-summary",
       "neo-tree",
