@@ -20,11 +20,16 @@ local function get_return_key(key)
    return key
 end
 
+local function is_disabled()
+  return vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
+    or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
+    or vim.fn.reg_executing() ~= ""
+    or vim.fn.reg_recording() ~= ""
+end
+
+
 local function handler(key)
-   local disabled = vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
-      or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
-      or vim.fn.reg_executing() ~= ""
-      or vim.fn.reg_recording() ~= ""
+   local disabled = is_disabled()
 
    if disabled then
       return get_return_key(key)
@@ -88,7 +93,7 @@ local function handler(key)
 end
 
 local M = {}
-M.is_enabled = false
+M.is_plugin_enabled = false
 
 local keys_groups = {
    config.resetting_keys,
@@ -97,11 +102,11 @@ local keys_groups = {
 }
 
 function M.enable()
-   if M.is_enabled then
+   if M.is_plugin_enabled then
       return
    end
 
-   M.is_enabled = true
+   M.is_plugin_enabled = true
    mappings = vim.api.nvim_get_keymap("n")
 
    if config.disable_mouse then
@@ -118,11 +123,11 @@ function M.enable()
 end
 
 function M.disable()
-   if not M.is_enabled then
+   if not M.is_plugin_enabled then
       return
    end
 
-   M.is_enabled = false
+   M.is_plugin_enabled = false
    vim.opt.mouse = "nvi"
 
    for _, keys in ipairs(keys_groups) do
@@ -133,7 +138,7 @@ function M.disable()
 end
 
 function M.toggle()
-   (M.is_enabled and M.disable or M.enable)()
+   (M.is_plugin_enabled and M.disable or M.enable)()
 end
 
 function M.setup(user_config)
@@ -168,9 +173,8 @@ function M.setup(user_config)
 
       if
          not config.hint
-         or not M.is_enabled
-         or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
-         or vim.fn.reg_executing() ~= ""
+         or not M.is_plugin_enabled
+         or is_disabled()
       then
          return
       end
