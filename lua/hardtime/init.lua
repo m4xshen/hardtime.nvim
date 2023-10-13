@@ -20,7 +20,7 @@ local function get_return_key(key)
    return key
 end
 
-local function is_disabled()
+local function should_disable()
   return vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
     or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
     or vim.fn.reg_executing() ~= ""
@@ -29,7 +29,7 @@ end
 
 
 local function handler(key)
-   local disabled = is_disabled()
+   local disabled = should_disable()
 
    if disabled then
       return get_return_key(key)
@@ -174,7 +174,7 @@ function M.setup(user_config)
       if
          not config.hint
          or not M.is_plugin_enabled
-         or is_disabled()
+         or should_disable()
       then
          return
       end
