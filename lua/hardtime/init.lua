@@ -21,12 +21,11 @@ local function get_return_key(key)
 end
 
 local function should_disable()
-  return vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
-    or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
-    or vim.fn.reg_executing() ~= ""
-    or vim.fn.reg_recording() ~= ""
+   return vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
+      or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
+      or vim.fn.reg_executing() ~= ""
+      or vim.fn.reg_recording() ~= ""
 end
-
 
 local function handler(key)
    if should_disable() then
@@ -169,11 +168,7 @@ function M.setup(user_config)
       last_keys = last_keys .. key
       last_key = key
 
-      if
-         not config.hint
-         or not M.is_plugin_enabled
-         or should_disable()
-      then
+      if not config.hint or not M.is_plugin_enabled or should_disable() then
          return
       end
 
