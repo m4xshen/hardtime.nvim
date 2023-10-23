@@ -29,9 +29,7 @@ end
 
 
 local function handler(key)
-   local disabled = should_disable()
-
-   if disabled then
+   if should_disable() then
       return get_return_key(key)
    end
 
