@@ -84,6 +84,7 @@ M.config = {
       "NeogitLogView",
       "mason",
       "neotest-summary",
+      "minifiles",
       "neo-tree",
       "neo-tree-popup",
       "netrw",
