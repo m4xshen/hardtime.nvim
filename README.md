@@ -165,7 +165,5 @@ Check out some examples of custom hint in [discussion](https://github.com/m4xshe
 
 ## 🦾 Contributing
 
-hardtime.nvim is participating in Hacktoberfest 2023! 🎉
-
 Please read [CONTRIBUTING.md](https://github.com/m4xshen/hardtime.nvim/blob/main/CONTRIBUTING.md).
 
