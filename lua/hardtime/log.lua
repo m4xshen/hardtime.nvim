@@ -83,7 +83,7 @@ log.new = function(config, standalone)
       config.outfile,
       string.format(
          "%s/%s.log",
-         vim.api.nvim_call_function("stdpath", { "cache" }),
+         vim.api.nvim_call_function("stdpath", { "log" }),
          config.plugin
       )
    )

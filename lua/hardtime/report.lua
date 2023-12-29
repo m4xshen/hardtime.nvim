@@ -1,7 +1,8 @@
 local M = {}
 
 function M.report()
-   local file_path = os.getenv("HOME") .. "/.cache/nvim/hardtime.nvim.log"
+   local file_path = vim.api.nvim_call_function("stdpath", { "log" })
+      .. "/hardtime.nvim.log"
    local file = io.open(file_path, "r")
    if file == nil then
       print("Error: Unable to open", file_path)
