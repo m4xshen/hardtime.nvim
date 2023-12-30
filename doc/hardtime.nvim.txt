@@ -1,4 +1,4 @@
-*hardtime.nvim.txt*      For Neovim >= 0.7.0     Last change: 2023 December 15
+*hardtime.nvim.txt*      For Neovim >= 0.7.0     Last change: 2023 December 30
 
 ==============================================================================
 Table of Contents                            *hardtime.nvim-table-of-contents*
@@ -82,7 +82,7 @@ following commands:
 
 You can view the most frequently seen hints with `:Hardtime report`.
 
-Your log file is at `~/.cache/nvim/hardtime.nvim.log`.
+Your log file is at `~/.local/state/nvim/hardtime.nvim.log`.
 
 
 CONFIGURATION                                    *hardtime.nvim-configuration*
