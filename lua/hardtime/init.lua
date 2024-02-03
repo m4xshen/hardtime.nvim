@@ -79,7 +79,13 @@ local function handler(key)
 
    if config.notification then
       vim.schedule(function()
-         util.notify("You pressed the " .. key .. " key too soon!")
+         local message = "You pressed the " .. key .. " key too soon!"
+         if key == "k" then
+            message = message .. " Use [count]k or CTRL-U to scroll up."
+         elseif key == "j" then
+            message = message .. " Use [count]j or CTRL-D to scroll down."
+         end
+         util.notify(message)
       end)
    end
 
