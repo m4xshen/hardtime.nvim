@@ -97,7 +97,7 @@ Example:
 
 >lua
     -- Add "oil" to the disabled_filetypes
-    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
+    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil", "Neogit*" },
 <
 
 If the option is a table with a `key = value` pair, your value will overwrite
