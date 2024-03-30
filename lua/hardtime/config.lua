@@ -81,6 +81,7 @@ M.config = {
       "DressingInput",
       "DressingSelect",
       "help",
+      "httpResult",
       "lazy",
       "NeogitStatus",
       "NeogitLogView",
