@@ -76,6 +76,8 @@ M.config = {
       "dapui_scopes",
       "dapui_stacks",
       "dapui_watches",
+      "DiffviewFileHistory",
+      "DiffviewFiles",
       "DressingInput",
       "DressingSelect",
       "help",
