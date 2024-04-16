@@ -12,7 +12,12 @@ local function get_return_key(key)
    for _, mapping in ipairs(mappings) do
       if mapping.lhs == key then
          if mapping.callback then
-            return mapping.callback()
+            local success, result = pcall(mapping.callback)
+            if success then
+               return result
+            end
+
+            return vim.schedule(mapping.callback)
          end
          return util.try_eval(mapping.rhs)
       end
