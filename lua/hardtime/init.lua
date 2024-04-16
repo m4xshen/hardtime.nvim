@@ -5,7 +5,6 @@ local key_count = 0
 local last_keys = ""
 local last_key = ""
 local mappings
-local glob = {}
 
 local config = require("hardtime.config").config
 
@@ -21,25 +20,10 @@ local function get_return_key(key)
    return key
 end
 
-local function extract_glob(filetypes)
-   local out = {}
-
-   for _, grep in pairs(filetypes) do
-      local len = string.len(grep)
-
-      if string.sub(grep, len) == "*" then
-         table.insert(out, grep)
-      end
-   end
-
-   glob = out
-end
-
-local function matches_glob(ft)
-   for _, value in pairs(glob) do
-      local start = string.sub(value, 0, string.len(value) - 1)
-
-      if string.match(ft, "^" .. start .. ".*") then
+local function match_filetype(ft)
+   for _, value in pairs(config.disabled_filetypes) do
+      local matcher = "^" .. value .. (value:sub(-1) == "*" and "" or "$")
+      if ft:match(matcher) then
          return true
       end
    end
@@ -49,7 +33,7 @@ end
 
 local function should_disable()
    return vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
-      or matches_glob(vim.bo.ft)
+      or match_filetype(vim.bo.ft)
       or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
       or vim.fn.reg_executing() ~= ""
       or vim.fn.reg_recording() ~= ""
@@ -176,8 +160,6 @@ function M.setup(user_config)
    user_config = user_config or {}
 
    require("hardtime.config").set_defaults(user_config)
-
-   extract_glob(config.disabled_filetypes)
 
    if config.enabled then
       vim.api.nvim_create_autocmd(
