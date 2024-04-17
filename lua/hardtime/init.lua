@@ -25,8 +25,20 @@ local function get_return_key(key)
    return key
 end
 
+local function match_filetype(ft)
+   for _, value in pairs(config.disabled_filetypes) do
+      local matcher = "^" .. value .. (value:sub(-1) == "*" and "" or "$")
+      if ft:match(matcher) then
+         return true
+      end
+   end
+
+   return false
+end
+
 local function should_disable()
    return vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
+      or match_filetype(vim.bo.ft)
       or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
       or vim.fn.reg_executing() ~= ""
       or vim.fn.reg_recording() ~= ""
