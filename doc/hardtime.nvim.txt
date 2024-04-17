@@ -1,4 +1,4 @@
-*hardtime.nvim.txt*       For Neovim >= 0.7.0       Last change: 2024 April 16
+*hardtime.nvim.txt*       For Neovim >= 0.7.0       Last change: 2024 April 17
 
 ==============================================================================
 Table of Contents                            *hardtime.nvim-table-of-contents*
@@ -97,7 +97,7 @@ Example:
 
 >lua
     -- Add "oil" to the disabled_filetypes
-    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil", "Neogit*" },
+    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
 <
 
 If the option is a table with a `key = value` pair, your value will overwrite
