@@ -39,4 +39,30 @@ function M.reset_notification()
    last_notification_text = nil
 end
 
+function M.is_today(timestamp)
+   local today = os.date("*t")
+   local date = os.date("*t", timestamp)
+   return today.year == date.year
+       and today.month == date.month
+       and today.day == date.day
+end
+
+function M.is_this_week(timestamp)
+   local today = os.date("*t")
+   today.day = today.day - today.wday
+   local date = os.date("*t", timestamp)
+   date.day = date.day - date.wday
+
+   return today.day == date.day
+       and today.year == date.year
+       and today.month == date.month
+end
+
+function M.is_this_month(timestamp)
+   local today = os.date("*t")
+   local date = os.date("*t", timestamp)
+
+   return today.year == date.year and today.month == date.month
+end
+
 return M
