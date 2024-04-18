@@ -19,7 +19,7 @@ end
 
 function M.report()
    local file_path = vim.api.nvim_call_function("stdpath", { "log" })
-       .. "/hardtime.nvim.log"
+      .. "/hardtime.nvim.log"
 
    local file = io.open(file_path, "r")
 
@@ -37,29 +37,33 @@ function M.report()
       local time_info = string.match(line, "%[(.-)%]")
       time_info = string.gsub(time_info, "INFO", "")
 
-      local day, month, year =
-          string.match(time_info, "(%d+).(%d+).(%d+). (%d+):(%d+):(%d+)")
-
-      local date = os.time({
-         year = year,
-         month = month,
-         day = day,
-      })
-
       local hint = string.gsub(line, "%[.-%] ", "")
       all_hints[hint] = all_hints[hint] and all_hints[hint] + 1 or 1
 
-      if util.is_today(date) then
-         daily_hints[hint] = daily_hints[hint] and daily_hints[hint] + 1 or 1
-      end
+      local day, month, year =
+         string.match(time_info, "(%d+).(%d+).(%d+). (%d+):(%d+):(%d+)")
 
-      if util.is_this_week(date) then
-         weekly_hints[hint] = weekly_hints[hint] and weekly_hints[hint] + 1 or 1
-      end
+      if day ~= nil and month ~= nil and year ~= nil then
+         local date = os.time({
+            year = year,
+            month = month,
+            day = day,
+         })
 
-      if util.is_this_month(date) then
-         monthly_hints[hint] = monthly_hints[hint] and monthly_hints[hint] + 1
-             or 1
+         if util.is_today(date) then
+            daily_hints[hint] = daily_hints[hint] and daily_hints[hint] + 1 or 1
+         end
+
+         if util.is_this_week(date) then
+            weekly_hints[hint] = weekly_hints[hint] and weekly_hints[hint] + 1
+               or 1
+         end
+
+         if util.is_this_month(date) then
+            monthly_hints[hint] = monthly_hints[hint]
+                  and monthly_hints[hint] + 1
+               or 1
+         end
       end
    end
 

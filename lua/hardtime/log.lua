@@ -66,7 +66,12 @@ local default_config = {
             msg
          )
       else
-         return string.format("[%-6s%s] %s\n", nameupper, os.date(), msg)
+         return string.format(
+            "[%-6s%s] %s\n",
+            nameupper,
+            os.date("%d.%m.%Y %H:%M:%S"),
+            msg
+         )
       end
    end,
 }
