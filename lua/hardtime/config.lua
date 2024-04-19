@@ -76,6 +76,7 @@ M.config = {
       "help",
       "httpResult",
       "lazy",
+      "lspinfo",
       "Neogit*",
       "mason",
       "neotest-summary",
