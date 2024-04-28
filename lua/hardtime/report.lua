@@ -41,7 +41,7 @@ function M.report()
       all_hints[hint] = all_hints[hint] and all_hints[hint] + 1 or 1
 
       local day, month, year =
-         string.match(time_info, "(%d+).(%d+).(%d+). (%d+):(%d+):(%d+)")
+         string.match(time_info, "(%d+).(%d+).(%d+) (%d+):(%d+):(%d+)")
 
       if day ~= nil and month ~= nil and year ~= nil then
          local date = os.time({
