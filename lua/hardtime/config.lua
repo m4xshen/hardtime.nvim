@@ -89,6 +89,7 @@ M.config = {
       "oil",
       "undotree",
       "Trouble",
+      "fugitive",
    },
    hints = {
       ["[kj][%^_]"] = {
