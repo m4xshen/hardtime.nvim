@@ -87,6 +87,7 @@ M.config = {
       "notify",
       "prompt",
       "qf",
+      "query",
       "oil",
       "undotree",
       "Trouble",
