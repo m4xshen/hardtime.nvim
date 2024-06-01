@@ -119,7 +119,7 @@ Example:
 OPTIONS ~
 
   --------------------------------------------------------------------------------------------------------
-  Option Name           Type                  Default Valuae       Meaning
+  Option Name           Type                  Default Value        Meaning
   --------------------- --------------------- -------------------- ---------------------------------------
   max_time              number                1000                 Maximum time (in milliseconds) to
                                                                    consider key presses as repeated.
