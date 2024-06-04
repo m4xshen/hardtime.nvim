@@ -56,7 +56,7 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 
 ## ⚡ Requirements
 
-- Neovim >= [v0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0)
+- Neovim >= [v0.10.0](https://github.com/neovim/neovim/releases/tag/v0.10.0)
 
 ## 📦 Installation
 
