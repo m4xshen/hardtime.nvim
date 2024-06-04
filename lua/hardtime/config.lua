@@ -109,6 +109,24 @@ M.config = {
          end,
          length = 2,
       },
+      ["d%$"] = {
+         message = function()
+            return "Use D instead of d$"
+         end,
+         length = 2,
+      },
+      ["y%$"] = {
+         message = function()
+            return "Use Y instead of y$"
+         end,
+         length = 2,
+      },
+      ["c%$"] = {
+         message = function()
+            return "Use C instead of c$"
+         end,
+         length = 2,
+      },
       ["%^i"] = {
          message = function()
             return "Use I instead of ^i"
