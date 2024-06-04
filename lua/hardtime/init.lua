@@ -173,9 +173,9 @@ function M.setup(user_config)
       )
    end
 
-   vim.on_key(function(k)
+   vim.on_key(function(_, k)
       local mode = vim.fn.mode()
-      if mode == "i" or mode == "c" or mode == "R" then
+      if k == "" or mode == "i" or mode == "c" or mode == "R" then
          return
       end
 
