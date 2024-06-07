@@ -4,38 +4,15 @@
 hardtime.nvim
 </h1>
 
-<p align="center">
-<a href="https://github.com/m4xshen/hardtime.nvim/stargazers">
-    <img
-      alt="Stargazers"
-      src="https://img.shields.io/github/stars/m4xshen/hardtime.nvim?style=for-the-badge&logo=starship&color=fae3b0&logoColor=d9e0ee&labelColor=282a36"
-    />
-  </a>
-  <a href="https://github.com/m4xshen/hardtime.nvim/issues">
-    <img
-      alt="Issues"
-      src="https://img.shields.io/github/issues/m4xshen/hardtime.nvim?style=for-the-badge&logo=gitbook&color=ddb6f2&logoColor=d9e0ee&labelColor=282a36"
-    />
-  </a>
-  <a href="https://github.com/m4xshen/hardtime.nvim/contributors">
-    <img
-      alt="Contributors"
-      src="https://img.shields.io/github/contributors/m4xshen/hardtime.nvim?style=for-the-badge&logo=opensourceinitiative&color=abe9b3&logoColor=d9e0ee&labelColor=282a36"
-    />
-  </a>
-</p>
 
-<p align="center">
+<div align="center">
+  <div>Establish good command workflow and quit bad habit.</div><br />
   <img src="https://github.com/m4xshen/hardtime.nvim/assets/74842863/117a8d30-64ba-4ca9-8414-5c493cbe8a70" width="700" />
-</p>
+</div>
 
 <!-- panvimdoc-ignore-end -->
 
-## 📃 Introduction
-
-A Neovim plugin helping you establish good command workflow and habit
-
-## ⚙️  Features
+## ✨ Features
 
 - Block repeated keys within a period of time
 - Print hints about better commands eg: Use `ci"` instead of `di"i`
