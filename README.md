@@ -147,5 +147,5 @@ Please read [CONTRIBUTING.md](https://github.com/m4xshen/hardtime.nvim/blob/main
 ## 👥 Contributors
 
 <a href="https://github.com/m4xshen/hardtime.nvim/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=m4xshen/hardtime.nvim" />
+  <img src="https://contrib.rocks/image?repo=m4xshen/hardtime.nvim&columns=20" />
 </a>
