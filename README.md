@@ -144,3 +144,8 @@ Check out some examples of custom hint in [discussion](https://github.com/m4xshe
 
 Please read [CONTRIBUTING.md](https://github.com/m4xshen/hardtime.nvim/blob/main/CONTRIBUTING.md).
 
+## 👥 Contributors
+
+<a href="https://github.com/m4xshen/hardtime.nvim/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=m4xshen/hardtime.nvim" />
+</a>
