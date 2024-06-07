@@ -1,20 +1,14 @@
-*hardtime.nvim.txt*        For Neovim >= 0.7.0       Last change: 2024 June 04
+*hardtime.nvim.txt*        For Neovim >= 0.7.0       Last change: 2024 June 07
 
 ==============================================================================
 Table of Contents                            *hardtime.nvim-table-of-contents*
 
-  - Introduction                                  |hardtime.nvim-introduction|
   - Features                                          |hardtime.nvim-features|
   - Requirements                                  |hardtime.nvim-requirements|
   - Installation                                  |hardtime.nvim-installation|
   - Usage                                                |hardtime.nvim-usage|
   - Configuration                                |hardtime.nvim-configuration|
   - Contributing                                  |hardtime.nvim-contributing|
-
-INTRODUCTION                                      *hardtime.nvim-introduction*
-
-A Neovim plugin helping you establish good command workflow and habit
-
 
 FEATURES                                              *hardtime.nvim-features*
 
