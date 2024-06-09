@@ -90,6 +90,7 @@ M.config = {
       "query",
       "oil",
       "undotree",
+      "trouble",
       "Trouble",
       "fugitive",
    },
