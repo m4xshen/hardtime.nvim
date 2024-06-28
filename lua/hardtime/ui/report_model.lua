@@ -1,21 +1,18 @@
----@class ReportModel
----@field tab string
----@field content table<string , string>
----@field keybind string
+--- @class ReportModel
+--- @field tab string
+--- @field report table<string , string>
+--- @field keybind string
 local ReportModel = {
    tab = "",
-   content = {},
+   report = {},
    keybind = "",
 }
 
---- @param tab string?
---- @param content table<string, string>
---- @param keybind string
-function ReportModel.new(tab, content, keybind)
+function ReportModel.new(tab, report, keybind)
    local self = setmetatable({}, ReportModel)
 
    self.tab = tab
-   self.content = content
+   self.report = report
    self.keybind = keybind
 
    return self

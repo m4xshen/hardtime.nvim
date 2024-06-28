@@ -1,41 +1,33 @@
 local _ = require("hardtime.ui.report_model")
-local tabs_renderer = require("hardtime.ui.tabs_renderer")
-local content_renderer = require("hardtime.ui.content_renderer")
+local renderer = require("hardtime.ui.renderer")
 
 local M = {}
 
---- @param content table<ReportModel>
---- @param picked_tab integer
-local function render_content(content, picked_tab, bufnr)
+local function render_content(reports, picked_tab, bufnr)
    vim.api.nvim_buf_set_option(bufnr, "modifiable", true)
    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {})
 
    local tabs = {}
 
-   for _, tab in ipairs(content) do
-      table.insert(tabs, tab.tab)
+   for _, report in ipairs(reports) do
+      table.insert(tabs, report.tab)
    end
 
-   content_renderer.render_title("Hardtime Report", bufnr)
-   tabs_renderer.render_tabs(tabs, picked_tab, bufnr)
-   content_renderer.spacer(bufnr)
-   content_renderer.render_hints(content[picked_tab].content, bufnr)
+   renderer.render_title(" Hardtime Report ", bufnr)
+
+   renderer.render_tabs(tabs, picked_tab, bufnr)
+
+   vim.api.nvim_buf_set_lines(bufnr, 5, 5, false, { "" })
+
+   renderer.render_report(reports[picked_tab].report, bufnr)
+
    vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
 end
 
----@param content table<ReportModel>
-local function add_keybinds(content, bufnr)
-   vim.keymap.set("n", "q", function()
-      vim.api.nvim_buf_delete(bufnr, { force = true })
-   end, {
-      buffer = bufnr,
-      nowait = true,
-      silent = true,
-   })
-
-   for i, con in ipairs(content) do
-      vim.keymap.set("n", con.keybind, function()
-         render_content(content, i, bufnr)
+local function add_keybinds(reports, bufnr)
+   for index, report in ipairs(reports) do
+      vim.keymap.set("n", report.keybind, function()
+         render_content(reports, index, bufnr)
       end, {
          buffer = bufnr,
          nowait = true,
@@ -46,16 +38,12 @@ end
 
 local is_open = false
 
---- @param content table<ReportModel>
---- @param initial_tab integer
-function M.open(content, initial_tab)
+function M.open(reports, initial_tab)
    if is_open then
-      print("Report window is already open")
       return
    end
 
    local Popup = require("nui.popup")
-   local event = require("nui.utils.autocmd").event
 
    local popup = Popup({
       enter = true,
@@ -65,21 +53,35 @@ function M.open(content, initial_tab)
          width = "60%",
          height = "70%",
       },
+      border = {
+         padding = {
+            left = 2,
+            right = 2,
+         },
+      },
       relative = "editor",
    })
 
    popup:mount()
    is_open = true
 
-   add_keybinds(content, popup.bufnr)
-   render_content(content, initial_tab, popup.bufnr)
-
-   vim.api.nvim_buf_set_option(popup.bufnr, "modifiable", false)
-
-   popup:on(event.BufLeave, function()
+   vim.keymap.set("n", "q", function()
+      is_open = false
       popup:unmount()
+   end, {
+      buffer = popup.bufnr,
+      nowait = true,
+      silent = true,
+   })
+
+   add_keybinds(reports, popup.bufnr)
+
+   popup:on("BufWinLeave", function()
       is_open = false
    end)
+
+   render_content(reports, initial_tab, popup.bufnr)
+   vim.api.nvim_buf_set_option(popup.bufnr, "modifiable", false)
 end
 
 return M
