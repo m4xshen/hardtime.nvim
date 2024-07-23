@@ -2,25 +2,24 @@ name: panvimdoc
 
 on:
   push:
-  pull_request:
+    branches: [main]
+    paths:
+      - README.md
+      - .github/workflows/panvimdoc.yml
+
+permissions:
+  contents: write
 
 jobs:
   docs:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
+    name: pandoc to vimdoc
     steps:
-      - uses: actions/checkout@v3
-      - name: panvimdoc
-        uses: kdheepak/panvimdoc@main
+      - uses: actions/checkout@v4
+      - uses: kdheepak/panvimdoc@main
         with:
-          vimdoc: hardtime.nvim
-          version: "Neovim >= 0.7.0"
-          demojify: true
-          treesitter: true
-      - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+          vimdoc: ${{ github.event.repository.name }}
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "chore(build): auto-generate vimdoc"
-          commit_user_name: "github-actions[bot]"
-          commit_user_email: "github-actions[bot]@users.noreply.github.com"
-          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          commit_message: "docs: auto-generate vimdoc"
+          branch: ${{ github.head_ref }}
