@@ -19,6 +19,7 @@ jobs:
       - uses: kdheepak/panvimdoc@main
         with:
           vimdoc: ${{ github.event.repository.name }}
+          version: "NVIM v0.10.0"
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "docs: auto-generate vimdoc"
