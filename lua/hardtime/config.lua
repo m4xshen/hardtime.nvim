@@ -134,12 +134,6 @@ M.config = {
          end,
          length = 2,
       },
-      ["%D[k-]o"] = {
-         message = function(keys)
-            return "Use O instead of " .. keys:sub(2)
-         end,
-         length = 3,
-      },
       ["%D[j+]O"] = {
          message = function(keys)
             return "Use o instead of " .. keys:sub(2)
@@ -276,7 +270,7 @@ M.config = {
          end,
          length = 7,
       },
-      ["[vV][bBwWeE%^%$][dcy=<>]"] = {
+      ["[vV][eE][dcy=<>]"] = {
          message = function(keys)
             return "Use "
                .. keys:sub(3, 3)
@@ -286,7 +280,7 @@ M.config = {
          end,
          length = 3,
       },
-      ['[vV][bBwWeE%^%$]".[dy]'] = {
+      ['[vV][eE]".[dy]'] = {
          message = function(keys)
             return "Use "
                .. keys:sub(3, 5)
