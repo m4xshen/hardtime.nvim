@@ -1,4 +1,4 @@
-*hardtime.nvim.txt*        For Neovim >= 0.7.0       Last change: 2024 June 10
+*hardtime.nvim.txt*        For Neovim >= 0.7.0       Last change: 2024 July 23
 
 ==============================================================================
 Table of Contents                            *hardtime.nvim-table-of-contents*
