@@ -1,4 +1,4 @@
-*hardtime.nvim.txt*         For NVIM v0.10.0         Last change: 2024 July 23
+*hardtime.nvim.txt*         For NVIM v0.10.0         Last change: 2024 July 24
 
 ==============================================================================
 Table of Contents                            *hardtime.nvim-table-of-contents*
@@ -119,7 +119,7 @@ OPTIONS ~
   max_time              number                1000                 Maximum time (in milliseconds) to
                                                                    consider key presses as repeated.
 
-  max_count             number                2                    Maximum count of repeated key presses
+  max_count             number                3                    Maximum count of repeated key presses
                                                                    allowed within the max_time period.
 
   disable_mouse         boolean               true                 Disable mouse support.
@@ -130,7 +130,7 @@ OPTIONS ~
   notification          boolean               true                 Enable notification messages for
                                                                    restricted and disabled keys.
 
-  allow_different_key   boolean               false                Allow different keys to reset the
+  allow_different_key   boolean               true                 Allow different keys to reset the
                                                                    count.
 
   enabled               boolean               true                 Whether the plugin is enabled by
