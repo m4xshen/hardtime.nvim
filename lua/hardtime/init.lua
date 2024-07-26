@@ -162,6 +162,10 @@ function M.toggle()
 end
 
 function M.setup(user_config)
+   if vim.fn.has("nvim-0.10.0") == 0 then
+      return vim.notify("hardtime.nvim requires Neovim >= v0.10.0")
+   end
+
    user_config = user_config or {}
 
    require("hardtime.config").set_defaults(user_config)
