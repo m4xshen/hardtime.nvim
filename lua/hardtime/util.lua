@@ -21,13 +21,18 @@ end
 local last_notification_text
 local last_notification_time = M.get_time()
 
-function M.notify(text)
+function M.notify(text, callback)
    if text ~= last_notification_text then
       logger.info(text)
       vim.notify(text, vim.log.levels.WARN, { title = "hardtime" })
    end
    last_notification_text = text
    last_notification_time = M.get_time()
+   if callback then
+      pcall(function()
+         callback(require("hardtime.config").config, text)
+      end)
+   end
 end
 
 function M.should_reset()

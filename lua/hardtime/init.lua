@@ -60,7 +60,7 @@ local function handler(key)
    if config.disabled_keys[key] then
       if config.notification and should_reset_notification then
          vim.schedule(function()
-            util.notify("The " .. key .. " key is disabled!")
+            util.notify("The " .. key .. " key is disabled!", config.callback)
          end)
       end
       return ""
@@ -102,7 +102,7 @@ local function handler(key)
          elseif key == "j" then
             message = message .. " Use [count]j or CTRL-D to scroll down."
          end
-         util.notify(message)
+         util.notify(message, config.callback)
       end)
    end
 
@@ -205,7 +205,7 @@ function M.setup(user_config)
          if found then
             local keys = string.sub(last_keys, found, #last_keys)
             local text = hint.message(keys)
-            util.notify(text)
+            util.notify(text, config.callback)
          end
       end
    end)

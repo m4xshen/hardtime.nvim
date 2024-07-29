@@ -113,6 +113,8 @@ disabled_keys = {
 | `disabled_keys`       | table of strings/table pair  | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes are disabled.                                                                                                                                              |
 | `disabled_filetypes`  | table of strings             | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | `hardtime.nvim` is disabled under these filetypes.                                                                                                                            |
 | `hints`               | table                        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | `key` is a string pattern you want to match, `value` is a table of hint message and pattern length. Learn more about [Lua string pattern](https://www.lua.org/pil/20.2.html). |
+| `callback`          | function(config, text) | nil   | The callback function can be used to trigger custom events on a notification, it recieves a config object, and the notification text) |
+
 
 ### `hints` example 
 
