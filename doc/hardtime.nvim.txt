@@ -127,6 +127,9 @@ OPTIONS ~
   hint                  boolean               true                 Enable hint messages for better
                                                                    commands.
 
+  hint_timeout          number                5000                 Time (in milliseconds) before the hint
+                                                                   message disappear (0 to disable).
+
   notification          boolean               true                 Enable notification messages for
                                                                    restricted and disabled keys.
 
