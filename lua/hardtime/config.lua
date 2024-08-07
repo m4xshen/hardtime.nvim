@@ -5,6 +5,7 @@ M.config = {
    max_count = 3,
    disable_mouse = true,
    hint = true,
+   hint_timeout = 5000,
    notification = true,
    allow_different_key = true,
    enabled = true,

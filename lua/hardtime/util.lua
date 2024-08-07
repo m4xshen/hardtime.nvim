@@ -20,12 +20,35 @@ end
 
 local last_notification_text
 local last_notification_time = M.get_time()
+local defer_timer
 
 function M.notify(text)
+   local hint_timeout = require("hardtime.config").config.hint_timeout
+
    if text ~= last_notification_text then
       logger.info(text)
       vim.notify(text, vim.log.levels.WARN, { title = "hardtime" })
+
+      if defer_timer and hint_timeout > 0 then
+         defer_timer:stop()
+         defer_timer:close()
+         defer_timer = nil
+      end
+
+      if hint_timeout > 0 then
+         defer_timer = vim.loop.new_timer()
+         defer_timer:start(
+            hint_timeout,
+            0,
+            vim.schedule_wrap(function()
+               vim.notify("", vim.log.levels.INFO, { title = "hardtime" })
+               defer_timer:close()
+               defer_timer = nil
+            end)
+         )
+      end
    end
+
    last_notification_text = text
    last_notification_time = M.get_time()
 end
