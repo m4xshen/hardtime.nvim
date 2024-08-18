@@ -351,6 +351,8 @@ M.config = {
          length = 6,
       },
    },
+   ---@type function | nil
+   callback = nil,
 }
 
 function M.set_defaults(user_config)
