@@ -351,8 +351,10 @@ M.config = {
          length = 6,
       },
    },
-   ---@type function | nil
-   callback = nil,
+   ---@type function
+   callback = function(text)
+      vim.notify(text, vim.log.levels.WARN, { title = "hardtime" })
+   end,
 }
 
 function M.set_defaults(user_config)

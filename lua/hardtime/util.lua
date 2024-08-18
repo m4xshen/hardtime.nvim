@@ -24,13 +24,9 @@ local last_notification_text
 local last_notification_time = M.get_time()
 
 function M.notify(text)
-   if config.callback then
+   if text ~= last_notification_text then
+      logger.info(text)
       config.callback(text)
-   else
-      if text ~= last_notification_text then
-         logger.info(text)
-         vim.notify(text, vim.log.levels.WARN, { title = "hardtime" })
-      end
    end
    last_notification_text = text
    last_notification_time = M.get_time()
@@ -38,7 +34,7 @@ end
 
 function M.should_reset()
    return M.get_time() - last_notification_time
-      > require("hardtime.config").config.max_time
+       > require("hardtime.config").config.max_time
 end
 
 function M.reset_notification()
