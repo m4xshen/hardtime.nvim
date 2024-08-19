@@ -1,5 +1,7 @@
 local M = {}
 
+local config = require("hardtime.config").config
+
 local logger = require("hardtime.log").new({
    plugin = "hardtime.nvim",
    level = "info",
@@ -24,7 +26,7 @@ local last_notification_time = M.get_time()
 function M.notify(text)
    if text ~= last_notification_text then
       logger.info(text)
-      vim.notify(text, vim.log.levels.WARN, { title = "hardtime" })
+      config.callback(text)
    end
    last_notification_text = text
    last_notification_time = M.get_time()
