@@ -34,7 +34,7 @@ end
 
 function M.should_reset()
    return M.get_time() - last_notification_time
-       > require("hardtime.config").config.max_time
+      > require("hardtime.config").config.max_time
 end
 
 function M.reset_notification()
