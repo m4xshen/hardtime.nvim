@@ -141,6 +141,8 @@ Check out some examples of custom hint in [discussion](https://github.com/m4xshe
 
 ### [Default config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua)
 
+<!-- panvimdoc-ignore-start -->
+
 ## 🦾 Contributing
 
 Please read [CONTRIBUTING.md](https://github.com/m4xshen/hardtime.nvim/blob/main/CONTRIBUTING.md).
@@ -148,5 +150,7 @@ Please read [CONTRIBUTING.md](https://github.com/m4xshen/hardtime.nvim/blob/main
 ## 👥 Contributors
 
 <a href="https://github.com/m4xshen/hardtime.nvim/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=m4xshen/hardtime.nvim&columns=20" />
+  <img src="https://contrib.rocks/image?repo=m4xshen/hardtime.nvim" />
 </a>
+
+<!-- panvimdoc-ignore-end -->
