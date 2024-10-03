@@ -4,7 +4,6 @@
 hardtime.nvim
 </h1>
 
-
 <div align="center">
   <div>Establish good command workflow and quit bad habit.</div><br />
   <img src="https://github.com/m4xshen/hardtime.nvim/assets/74842863/117a8d30-64ba-4ca9-8414-5c493cbe8a70" width="700" />
@@ -49,6 +48,7 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 ```
 
 2. Setup the plugin in your `init.lua`. This step is not needed with lazy.nvim if `opts` is set as above.
+
 ```lua
 require("hardtime").setup()
 ```
@@ -60,7 +60,7 @@ But if you want to see both the hint message and current mode you can setup with
 - Display the mode on status line and set `'showmode'` to false. You can do this with some statusline plugin such as lualine.nvim.
 - Set the `'cmdheight'` to 2 so that the hint message won't be replaced by mode message.
 - Use nvim-notify to display hint messages on the right top corner instead of commandline.
-   
+
 ## 🚀 Usage
 
 hardtime.nvim is enabled by default. You can change its state with the following commands:
@@ -80,6 +80,7 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 If the option is a boolean, number, or array, your value will overwrite the default configuration.
 
 Example:
+
 ```lua
 -- Add "oil" to the disabled_filetypes
 disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
@@ -88,6 +89,7 @@ disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
 If the option is a table with a `key = value` pair, your value will overwrite the default if the key exists, and the pair will be appended to the default configuration if the key doesn't exist. You can set `key = {}` to remove the default key-value pair.
 
 Example:
+
 ```lua
 -- Remove <Up> keys and append <Space> to the disabled_keys
 disabled_keys = {
@@ -103,6 +105,8 @@ disabled_keys = {
 | `max_time`            | number                       | `1000`                                                                                   | Maximum time (in milliseconds) to consider key presses as repeated.                                                                                                           |
 | `max_count`           | number                       | `3`                                                                                      | Maximum count of repeated key presses allowed within the `max_time` period.                                                                                                   |
 | `disable_mouse`       | boolean                      | `true`                                                                                   | Disable mouse support.                                                                                                                                                        |
+| `force_exit_insert_mode` | boolean                     | `false`                                          |                                        | Enable forcing exit Insert mode if user is inactive in Insert mode.
+| `max_insert_idle_ms`     | number                      | `5000`                                           |                                        | Maximum amount of idle time, in milliseconds, allowed in Insert mode.
 | `hint`                | boolean                      | `true`                                                                                   | Enable hint messages for better commands.                                                                                                                                     |
 | `notification`        | boolean                      | `true`                                                                                   | Enable notification messages for restricted and disabled keys.                                                                                                                |
 | `allow_different_key` | boolean                      | `true`                                                                                   | Allow different keys to reset the count.                                                                                                                                      |
@@ -115,7 +119,7 @@ disabled_keys = {
 | `hints`               | table                        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | `key` is a string pattern you want to match, `value` is a table of hint message and pattern length. Learn more about [Lua string pattern](https://www.lua.org/pil/20.2.html). |
 | `callback`            | function(text)               | `vim.notify`                                                                             | `callback` function can be used to override the default notification behavior.                                                                                                |
 
-### `hints` example 
+### `hints` example
 
 These are two default hints:
 
