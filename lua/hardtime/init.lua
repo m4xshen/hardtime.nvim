@@ -5,7 +5,7 @@ local key_count = 0
 local last_keys = ""
 local last_key = ""
 local mappings
-local timer
+local timer = nil
 
 local config = require("hardtime.config").config
 
@@ -113,6 +113,16 @@ local function handler(key)
    return ""
 end
 
+local function reset_timer()
+   if timer then
+      timer:stop()
+   end
+
+   if not should_disable() and config.force_exit_insert_mode then
+      timer = vim.defer_fn(util.stopinsert, config.max_insert_idle_ms)
+   end
+end
+
 local M = {}
 M.is_plugin_enabled = false
 
@@ -178,10 +188,9 @@ function M.setup(user_config)
       )
 
       vim.api.nvim_create_autocmd("InsertEnter", {
+         group = vim.api.nvim_create_augroup("HardtimeGroup", {}),
          callback = function()
-            if not should_disable() and config.force_exit_insert_mode then
-               timer = vim.defer_fn(util.stopinsert, config.max_insert_idle_ms)
-            end
+            reset_timer()
          end,
       })
    end
@@ -193,12 +202,7 @@ function M.setup(user_config)
       end
 
       if mode == "i" then
-         if config.force_exit_insert_mode then
-            if timer then
-               timer:stop()
-            end
-            timer = vim.defer_fn(util.stopinsert, config.max_insert_idle_ms)
-         end
+         reset_timer()
          return
       end
 
