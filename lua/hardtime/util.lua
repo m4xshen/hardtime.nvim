@@ -8,6 +8,10 @@ local logger = require("hardtime.log").new({
    use_console = false,
 })
 
+function M.stopinsert()
+   vim.cmd("stopinsert")
+end
+
 function M.get_time()
    return vim.fn.reltimefloat(vim.fn.reltime()) * 1000
 end
