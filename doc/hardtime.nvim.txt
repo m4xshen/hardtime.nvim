@@ -1,4 +1,4 @@
-*hardtime.nvim.txt*        For NVIM v0.10.0        Last change: 2024 August 20
+*hardtime.nvim.txt*        For NVIM v0.10.0       Last change: 2024 October 12
 
 ==============================================================================
 Table of Contents                            *hardtime.nvim-table-of-contents*
@@ -111,53 +111,59 @@ Example:
 
 OPTIONS ~
 
-  --------------------------------------------------------------------------------------------------------
-  Option Name           Type                  Default Valuae       Meaning
-  --------------------- --------------------- -------------------- ---------------------------------------
-  max_time              number                1000                 Maximum time (in milliseconds) to
-                                                                   consider key presses as repeated.
+  ----------------------------------------------------------------------------------------------------------
+  Option Name              Type                  Default Valuae      Meaning
+  ------------------------ --------------------- ------------------- ---------------------------------------
+  max_time                 number                1000                Maximum time (in milliseconds) to
+                                                                     consider key presses as repeated.
 
-  max_count             number                3                    Maximum count of repeated key presses
-                                                                   allowed within the max_time period.
+  max_count                number                3                   Maximum count of repeated key presses
+                                                                     allowed within the max_time period.
 
-  disable_mouse         boolean               true                 Disable mouse support.
+  disable_mouse            boolean               true                Disable mouse support.
 
-  hint                  boolean               true                 Enable hint messages for better
-                                                                   commands.
+  hint                     boolean               true                Enable hint messages for better
+                                                                     commands.
 
-  notification          boolean               true                 Enable notification messages for
-                                                                   restricted and disabled keys.
+  notification             boolean               true                Enable notification messages for
+                                                                     restricted and disabled keys.
 
-  allow_different_key   boolean               true                 Allow different keys to reset the
-                                                                   count.
+  allow_different_key      boolean               true                Allow different keys to reset the
+                                                                     count.
 
-  enabled               boolean               true                 Whether the plugin is enabled by
-                                                                   default or not.
+  enabled                  boolean               true                Whether the plugin is enabled by
+                                                                     default or not.
 
-  resetting_keys        table of              See Config           Keys in what modes that reset the
-                        strings/table pair                         count.
+  resetting_keys           table of              See Config          Keys in what modes that reset the
+                           strings/table pair                        count.
 
-  restricted_keys       table of              See Config           Keys in what modes triggering the count
-                        strings/table pair                         mechanism.
+  restricted_keys          table of              See Config          Keys in what modes triggering the count
+                           strings/table pair                        mechanism.
 
-  restriction_mode      string                "block"              The behavior when restricted_keys
-                        ("block" or "hint")                        trigger count mechanism.
+  restriction_mode         string                "block"             The behavior when restricted_keys
+                           ("block" or "hint")                       trigger count mechanism.
 
-  disabled_keys         table of              See Config           Keys in what modes are disabled.
-                        strings/table pair                         
+  disabled_keys            table of              See Config          Keys in what modes are disabled.
+                           strings/table pair                        
 
-  disabled_filetypes    table of strings      See Config           hardtime.nvim is disabled under these
-                                                                   filetypes.
+  disabled_filetypes       table of strings      See Config          hardtime.nvim is disabled under these
+                                                                     filetypes.
 
-  hints                 table                 See Config           key is a string pattern you want to
-                                                                   match, value is a table of hint message
-                                                                   and pattern length. Learn more about
-                                                                   Lua string pattern.
+  hints                    table                 See Config          key is a string pattern you want to
+                                                                     match, value is a table of hint message
+                                                                     and pattern length. Learn more about
+                                                                     Lua string pattern.
 
-  callback              function(text)        vim.notify           callback function can be used to
-                                                                   override the default notification
-                                                                   behavior.
-  --------------------------------------------------------------------------------------------------------
+  callback                 function(text)        vim.notify          callback function can be used to
+                                                                     override the default notification
+                                                                     behavior.
+
+  force_exit_insert_mode   boolean               false               Enable forcing exit Insert mode if user
+                                                                     is inactive in Insert mode.
+
+  max_insert_idle_ms       number                5000                Maximum amount of idle time, in
+                                                                     milliseconds, allowed in Insert mode.
+  ----------------------------------------------------------------------------------------------------------
 
 HINTS EXAMPLE ~
 
