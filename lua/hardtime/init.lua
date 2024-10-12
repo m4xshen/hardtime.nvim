@@ -5,6 +5,7 @@ local key_count = 0
 local last_keys = ""
 local last_key = ""
 local mappings
+local timer = nil
 
 local config = require("hardtime.config").config
 
@@ -112,6 +113,16 @@ local function handler(key)
    return ""
 end
 
+local function reset_timer()
+   if timer then
+      timer:stop()
+   end
+
+   if not should_disable() and config.force_exit_insert_mode then
+      timer = vim.defer_fn(util.stopinsert, config.max_insert_idle_ms)
+   end
+end
+
 local M = {}
 M.is_plugin_enabled = false
 
@@ -175,11 +186,23 @@ function M.setup(user_config)
          "BufEnter",
          { once = true, callback = M.enable }
       )
+
+      vim.api.nvim_create_autocmd("InsertEnter", {
+         group = vim.api.nvim_create_augroup("HardtimeGroup", {}),
+         callback = function()
+            reset_timer()
+         end,
+      })
    end
 
    vim.on_key(function(_, k)
       local mode = vim.fn.mode()
-      if k == "" or mode == "i" or mode == "c" or mode == "R" then
+      if k == "" or mode == "c" or mode == "R" then
+         return
+      end
+
+      if mode == "i" then
+         reset_timer()
          return
       end
 
