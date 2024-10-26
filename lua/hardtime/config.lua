@@ -95,6 +95,7 @@ M.config = {
       "trouble",
       "Trouble",
       "fugitive",
+      "VoltWindow"
    },
    hints = {
       ["[kj][%^_]"] = {
