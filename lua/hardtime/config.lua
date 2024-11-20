@@ -77,6 +77,7 @@ M.config = {
       "alpha",
       "checkhealth",
       "dapui*",
+      "db*",
       "fugitive",
       "help",
       "httpResult",
