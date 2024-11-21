@@ -40,13 +40,16 @@ end
 local function should_disable()
    return vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
       or match_filetype(vim.bo.ft)
-      or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
+      or vim.api.nvim_buf_get_option_value(0, "buftype") == "terminal"
       or vim.fn.reg_executing() ~= ""
       or vim.fn.reg_recording() ~= ""
 end
 
 local function handler(key)
    if should_disable() then
+      if vim.opt.mouse ~= "nvi" then
+         vim.opt.mouse = "nvi"
+      end
       return get_return_key(key)
    end
 
