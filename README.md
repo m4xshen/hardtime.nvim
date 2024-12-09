@@ -100,7 +100,7 @@ disabled_keys = {
 
 ### Options
 
-| Option Name              | Type                         | Default Valuae                                                                           | Meaning                                                                                                                                                                       |
+| Option Name              | Type                         | Default Value                                                                           | Meaning                                                                                                                                                                       |
 | ------------------------ | ---------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `max_time`               | number                       | `1000`                                                                                   | Maximum time (in milliseconds) to consider key presses as repeated.                                                                                                           |
 | `max_count`              | number                       | `3`                                                                                      | Maximum count of repeated key presses allowed within the `max_time` period.                                                                                                   |
