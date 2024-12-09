@@ -142,6 +142,12 @@ M.config = {
          end,
          length = 3,
       },
+      ["%D[k+]o"] = {
+         message = function(keys)
+            return "Use O instead of " .. keys:sub(2)
+         end,
+         length = 3,
+      },
       ["[^fFtT]li"] = {
          message = function()
             return "Use a instead of li"
