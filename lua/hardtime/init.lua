@@ -123,17 +123,6 @@ local function reset_timer()
    end
 end
 
-local function get_max_keys_size()
-   local max_len = 0
-   for pattern, hint in pairs(config.hints) do
-      local len = hint.length or #pattern
-      if len > max_len then
-         max_len = len
-      end
-   end
-   return max_len
-end
-
 local M = {}
 M.is_plugin_enabled = false
 
@@ -206,7 +195,7 @@ function M.setup(user_config)
       })
    end
 
-   local max_keys_size = get_max_keys_size()
+   local max_keys_size = util.get_max_keys_size()
 
    vim.on_key(function(_, k)
       local mode = vim.fn.mode()
