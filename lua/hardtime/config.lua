@@ -95,6 +95,9 @@ M.config = {
       "qf",
       "query",
       "trouble",
+      "Trouble",
+      "fugitive",
+      "VoltWindow",
       "undotree",
    },
    hints = {
