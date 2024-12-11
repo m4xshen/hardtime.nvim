@@ -195,6 +195,8 @@ function M.setup(user_config)
       })
    end
 
+   local max_keys_size = util.get_max_keys_size()
+
    vim.on_key(function(_, k)
       local mode = vim.fn.mode()
       if k == "" or mode == "c" or mode == "R" then
@@ -217,6 +219,10 @@ function M.setup(user_config)
 
       last_keys = last_keys .. key
       last_key = key
+
+      if #last_keys > max_keys_size then
+         last_keys = last_keys:sub(-max_keys_size)
+      end
 
       if not config.hint or not M.is_plugin_enabled or should_disable() then
          return
