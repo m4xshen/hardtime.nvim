@@ -1,4 +1,4 @@
-*hardtime.nvim.txt*        For NVIM v0.10.0       Last change: 2024 October 12
+*hardtime.nvim.txt*       For NVIM v0.10.0       Last change: 2024 December 11
 
 ==============================================================================
 Table of Contents                            *hardtime.nvim-table-of-contents*
@@ -112,7 +112,7 @@ Example:
 OPTIONS ~
 
   ----------------------------------------------------------------------------------------------------------
-  Option Name              Type                  Default Valuae      Meaning
+  Option Name              Type                  Default Value       Meaning
   ------------------------ --------------------- ------------------- ---------------------------------------
   max_time                 number                1000                Maximum time (in milliseconds) to
                                                                      consider key presses as repeated.
