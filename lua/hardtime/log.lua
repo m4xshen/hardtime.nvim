@@ -168,11 +168,8 @@ log.new = function(config, standalone)
 
       -- Output to log file
       if config.use_file then
-         local outfile_parent_path =
-            require("plenary.path"):new(outfile):parent()
-         if not outfile_parent_path:exists() then
-            outfile_parent_path:mkdir({ parents = true })
-         end
+         local outfile_parent_path = vim.fs.dirname(outfile)
+         vim.fn.mkdir(outfile_parent_path, "p")
          local fp = assert(io.open(outfile, "a"))
          local str = config.fmt_msg(false, level_config.name, msg)
          fp:write(str)

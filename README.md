@@ -42,7 +42,7 @@ Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 -- lazy.nvim
 {
    "m4xshen/hardtime.nvim",
-   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+   dependencies = { "MunifTanjim/nui.nvim" },
    opts = {}
 },
 ```
