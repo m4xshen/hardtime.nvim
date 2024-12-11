@@ -276,7 +276,7 @@ M.config = {
          end,
          length = 7,
       },
-      ["[vV][eE][dcy=<>]"] = {
+      ["[vV][eE][dcy]"] = {
          message = function(keys)
             return "Use "
                .. keys:sub(3, 3)
@@ -296,7 +296,7 @@ M.config = {
          end,
          length = 5,
       },
-      ["[vV]g[eE][dcy=<>]"] = {
+      ["[vV]g[eE][dcy]"] = {
          message = function(keys)
             return "Use "
                .. keys:sub(4, 4)
@@ -316,7 +316,7 @@ M.config = {
          end,
          length = 6,
       },
-      ["[vV][tTfF].[dcy=<>]"] = {
+      ["[vV][tTfF].[dcy]"] = {
          message = function(keys)
             return "Use "
                .. keys:sub(4, 4)
