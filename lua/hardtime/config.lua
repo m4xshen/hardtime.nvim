@@ -99,6 +99,7 @@ M.config = {
       "fugitive",
       "VoltWindow",
       "undotree",
+      "Avante",
    },
    hints = {
       ["[kj][%^_]"] = {
