@@ -40,7 +40,7 @@ end
 local function should_disable()
    return vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
       or match_filetype(vim.bo.ft)
-      or vim.api.nvim_buf_get_option(0, "buftype") == "terminal"
+      or vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "terminal"
       or vim.fn.reg_executing() ~= ""
       or vim.fn.reg_recording() ~= ""
 end
@@ -187,10 +187,23 @@ function M.setup(user_config)
          { once = true, callback = M.enable }
       )
 
+      local hardtime_group = vim.api.nvim_create_augroup("HardtimeGroup", {})
+
       vim.api.nvim_create_autocmd("InsertEnter", {
-         group = vim.api.nvim_create_augroup("HardtimeGroup", {}),
+         group = hardtime_group,
          callback = function()
             reset_timer()
+         end,
+      })
+
+      vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
+         group = hardtime_group,
+         callback = function()
+            if should_disable() then
+               vim.opt.mouse = "nvi"
+            elseif config.disable_mouse then
+               vim.opt.mouse = ""
+            end
          end,
       })
    end
