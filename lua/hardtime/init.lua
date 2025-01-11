@@ -1,13 +1,23 @@
 local util = require("hardtime.util")
 
-local last_time = util.get_time()
 local key_count = 0
-local last_keys = ""
 local last_key = ""
+local last_keys = ""
+local last_time = util.get_time()
 local mappings
+local old_mouse_state = ""
 local timer = nil
 
 local config = require("hardtime.config").config
+
+local function disable_mouse()
+   old_mouse_state = vim.opt.mouse
+   vim.opt.mouse = ""
+end
+
+local function restore_mouse()
+   vim.opt.mouse = old_mouse_state
+end
 
 local function get_return_key(key)
    for _, mapping in ipairs(mappings) do
@@ -141,7 +151,7 @@ function M.enable()
    mappings = vim.api.nvim_get_keymap("n")
 
    if config.disable_mouse then
-      vim.opt.mouse = ""
+      disable_mouse()
    end
 
    for _, keys in ipairs(keys_groups) do
@@ -159,7 +169,7 @@ function M.disable()
    end
 
    M.is_plugin_enabled = false
-   vim.opt.mouse = "nvi"
+   restore_mouse()
 
    for _, keys in ipairs(keys_groups) do
       for key, mode in pairs(keys) do
@@ -200,9 +210,9 @@ function M.setup(user_config)
          group = hardtime_group,
          callback = function()
             if should_disable() then
-               vim.opt.mouse = "nvi"
+               restore_mouse()
             elseif config.disable_mouse then
-               vim.opt.mouse = ""
+               disable_mouse()
             end
          end,
       })
