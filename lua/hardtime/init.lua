@@ -5,7 +5,7 @@ local last_key = ""
 local last_keys = ""
 local last_time = util.get_time()
 local mappings
-local old_mouse_state = ""
+local old_mouse_state = vim.opt.mouse
 local timer = nil
 
 local config = require("hardtime.config").config
