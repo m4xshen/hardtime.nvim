@@ -1,4 +1,3 @@
--- test
 local util = require("hardtime.util")
 
 local key_count = 0
