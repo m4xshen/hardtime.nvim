@@ -5,7 +5,7 @@ local last_key = ""
 local last_keys = ""
 local last_time = util.get_time()
 local mappings
-local old_mouse_state = ""
+local old_mouse_state = vim.opt.mouse
 local timer = nil
 
 local config = require("hardtime.config").config
@@ -206,16 +206,18 @@ function M.setup(user_config)
          end,
       })
 
-      vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
-         group = hardtime_group,
-         callback = function()
-            if should_disable() then
-               restore_mouse()
-            elseif config.disable_mouse then
+      if config.disable_mouse then
+         vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
+            group = hardtime_group,
+            callback = function()
+               if should_disable() then
+                  restore_mouse()
+                  return
+               end
                disable_mouse()
-            end
-         end,
-      })
+            end,
+         })
+      end
    end
 
    local max_keys_size = util.get_max_keys_size()
