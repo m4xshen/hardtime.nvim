@@ -206,16 +206,18 @@ function M.setup(user_config)
          end,
       })
 
-      vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
-         group = hardtime_group,
-         callback = function()
-            if should_disable() then
-               restore_mouse()
-            elseif config.disable_mouse then
+      if config.disable_mouse then
+         vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
+            group = hardtime_group,
+            callback = function()
+               if should_disable() then
+                  restore_mouse()
+                  return
+               end
                disable_mouse()
-            end
-         end,
-      })
+            end,
+         })
+      end
    end
 
    local max_keys_size = util.get_max_keys_size()
