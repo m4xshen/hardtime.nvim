@@ -5,18 +5,18 @@ local last_key = ""
 local last_keys = ""
 local last_time = util.get_time()
 local mappings
-local old_mouse_state = vim.opt.mouse
+local old_mouse_state = vim.o.mouse
 local timer = nil
 
 local config = require("hardtime.config").config
 
 local function disable_mouse()
-   old_mouse_state = vim.opt.mouse
-   vim.opt.mouse = ""
+   old_mouse_state = vim.o.mouse ~= "" and vim.o.mouse or old_mouse_state
+   vim.o.mouse = ""
 end
 
 local function restore_mouse()
-   vim.opt.mouse = old_mouse_state
+   vim.o.mouse = old_mouse_state
 end
 
 local function get_return_key(key)
@@ -47,7 +47,7 @@ local function match_filetype(ft)
    return false
 end
 
-local function should_disable()
+local function should_disable_hardtime()
    return vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
       or match_filetype(vim.bo.ft)
       or vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "terminal"
@@ -56,7 +56,7 @@ local function should_disable()
 end
 
 local function handler(key)
-   if should_disable() then
+   if should_disable_hardtime() then
       return get_return_key(key)
    end
 
@@ -128,7 +128,7 @@ local function reset_timer()
       timer:stop()
    end
 
-   if not should_disable() and config.force_exit_insert_mode then
+   if not should_disable_hardtime() and config.force_exit_insert_mode then
       timer = vim.defer_fn(util.stopinsert, config.max_insert_idle_ms)
    end
 end
@@ -210,7 +210,7 @@ function M.setup(user_config)
          vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
             group = hardtime_group,
             callback = function()
-               if should_disable() then
+               if should_disable_hardtime() then
                   restore_mouse()
                   return
                end
@@ -249,7 +249,11 @@ function M.setup(user_config)
          last_keys = last_keys:sub(-max_keys_size)
       end
 
-      if not config.hint or not M.is_plugin_enabled or should_disable() then
+      if
+         not config.hint
+         or not M.is_plugin_enabled
+         or should_disable_hardtime()
+      then
          return
       end
 
