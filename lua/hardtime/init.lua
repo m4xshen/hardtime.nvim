@@ -166,7 +166,7 @@ local function setup_autocmds()
 end
 
 local clear_autocmds = function()
-   vim.api.nvim_clear_autocmds({group = hardtime_group})
+   vim.api.nvim_clear_autocmds({ group = hardtime_group })
 end
 
 function M.enable()
