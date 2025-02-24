@@ -7,6 +7,7 @@ local last_time = util.get_time()
 local mappings
 local old_mouse_state = vim.o.mouse
 local timer = nil
+local hardtime_group = vim.api.nvim_create_augroup("HardtimeGroup", {})
 
 local config = require("hardtime.config").config
 
@@ -142,6 +143,32 @@ local keys_groups = {
    config.disabled_keys,
 }
 
+local function setup_autocmds()
+   vim.api.nvim_create_autocmd("InsertEnter", {
+      group = hardtime_group,
+      callback = function()
+         reset_timer()
+      end,
+   })
+
+   if config.disable_mouse then
+      vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
+         group = hardtime_group,
+         callback = function()
+            if should_disable_hardtime() then
+               restore_mouse()
+               return
+            end
+            disable_mouse()
+         end,
+      })
+   end
+end
+
+local clear_autocmds = function()
+   vim.api.nvim_clear_autocmds({ group = hardtime_group })
+end
+
 function M.enable()
    if M.is_plugin_enabled then
       return
@@ -149,6 +176,8 @@ function M.enable()
 
    M.is_plugin_enabled = true
    mappings = vim.api.nvim_get_keymap("n")
+
+   setup_autocmds()
 
    if config.disable_mouse then
       disable_mouse()
@@ -170,6 +199,7 @@ function M.disable()
 
    M.is_plugin_enabled = false
    restore_mouse()
+   clear_autocmds()
 
    for _, keys in ipairs(keys_groups) do
       for key, mode in pairs(keys) do
@@ -196,28 +226,6 @@ function M.setup(user_config)
          "BufEnter",
          { once = true, callback = M.enable }
       )
-
-      local hardtime_group = vim.api.nvim_create_augroup("HardtimeGroup", {})
-
-      vim.api.nvim_create_autocmd("InsertEnter", {
-         group = hardtime_group,
-         callback = function()
-            reset_timer()
-         end,
-      })
-
-      if config.disable_mouse then
-         vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
-            group = hardtime_group,
-            callback = function()
-               if should_disable_hardtime() then
-                  restore_mouse()
-                  return
-               end
-               disable_mouse()
-            end,
-         })
-      end
    end
 
    local max_keys_size = util.get_max_keys_size()
