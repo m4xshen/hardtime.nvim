@@ -27,23 +27,9 @@ function M.report()
 
    local Popup = require("nui.popup")
    local event = require("nui.utils.autocmd").event
+   local config = require("hardtime.config").config
 
-   local popup = Popup({
-      enter = true,
-      focusable = true,
-      border = {
-         style = "rounded",
-         text = {
-            top = "Hardtime Report",
-            top_align = "center",
-         },
-      },
-      position = "50%",
-      size = {
-         width = "40%",
-         height = "60%",
-      },
-   })
+   local popup = Popup(config.ui)
 
    popup:mount()
    popup:on(event.BufLeave, function()
