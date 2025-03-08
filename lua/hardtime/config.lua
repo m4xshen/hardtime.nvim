@@ -97,6 +97,22 @@ M.config = {
       "VoltWindow",
       "undotree",
    },
+   ui = {
+      enter = true,
+      focusable = true,
+      border = {
+         style = "rounded",
+         text = {
+            top = "Hardtime Report",
+            top_align = "center",
+         },
+      },
+      position = "50%",
+      size = {
+         width = "40%",
+         height = "60%",
+      },
+   },
    hints = {
       ["[kj][%^_]"] = {
          message = function(key)
