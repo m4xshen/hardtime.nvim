@@ -118,6 +118,7 @@ disabled_keys = {
 | `callback`               | function(text)               | `vim.notify`                                                                             | `callback` function can be used to override the default notification behavior.                                                                                                |
 | `force_exit_insert_mode` | boolean                      | `false`                                                                                  | Enable forcing exit Insert mode if user is inactive in Insert mode.                                                                                                           |
 | `max_insert_idle_ms`     | number                       | `5000`                                                                                   | Maximum amount of idle time, in milliseconds, allowed in Insert mode.                                                                                                         |
+| `ui`                     | table of strings/table pair  | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | An option to customize the popup for the `Hardtime report`.
 
 ### `hints` example
 
