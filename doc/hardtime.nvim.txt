@@ -128,18 +128,6 @@ OPTIONS ~
   notification             boolean               true                Enable notification messages for
                                                                      restricted and disabled keys.
 
-
-  timeout                  number                5000                Time (in milliseconds) to display the 
-                                                                     static part of the notification. 
-                                                                     The total display time depends on 
-                                                                     `nvim-notify`'s `stages` setting:
-                                                                     - `fade_in_slide_out` and `fade`: 
-                                                                       Add ~2.4s to the duration.
-                                                                     - `slide`: Adds ~1.3s to the duration.
-								     - `static`: Matches `timeout`.
-								     Note: Only applies if `nvim-notify`
-                                                                     is installed and enabled.
-
   allow_different_key      boolean               true                Allow different keys to reset the
                                                                      count.
 
