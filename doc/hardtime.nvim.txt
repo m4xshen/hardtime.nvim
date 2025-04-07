@@ -1,4 +1,4 @@
-*hardtime.nvim.txt*         For NVIM v0.10.0        Last change: 2025 March 08
+*hardtime.nvim.txt*         For NVIM v0.10.0        Last change: 2025 April 07
 
 ==============================================================================
 Table of Contents                            *hardtime.nvim-table-of-contents*
@@ -127,6 +127,10 @@ OPTIONS ~
 
   notification             boolean               true                Enable notification messages for
                                                                      restricted and disabled keys.
+
+  timeout                  number or boolean     3000                Time to show notification in
+                                                                     milliseconds, set to false to disable
+                                                                     timeout.
 
   allow_different_key      boolean               true                Allow different keys to reset the
                                                                      count.
