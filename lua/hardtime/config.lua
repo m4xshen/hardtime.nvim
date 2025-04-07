@@ -382,19 +382,8 @@ M.config = {
 }
 
 function M.set_defaults(user_config)
-   for option, value in pairs(user_config) do
-      if type(value) == "table" and #value == 0 then
-         for k, v in pairs(value) do
-            if next(v) == nil then
-               M.config[option][k] = nil
-            else
-               M.config[option][k] = v
-            end
-         end
-      else
-         M.config[option] = value
-      end
-   end
+   user_config = user_config or {}
+   return vim.tbl_deep_extend("force", M.config, user_config)
 end
 
 return M

@@ -219,7 +219,7 @@ function M.setup(user_config)
 
    user_config = user_config or {}
 
-   require("hardtime.config").set_defaults(user_config)
+   config = require("hardtime.config").set_defaults(user_config)
 
    if config.enabled then
       vim.api.nvim_create_autocmd(
