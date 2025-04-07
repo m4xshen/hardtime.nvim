@@ -5,6 +5,7 @@ M.config = {
    max_count = 3,
    disable_mouse = true,
    hint = true,
+   timeout = 3000,
    notification = true,
    allow_different_key = true,
    enabled = true,
@@ -372,7 +373,11 @@ M.config = {
    },
    ---@type function
    callback = function(text)
-      vim.notify(text, vim.log.levels.WARN, { title = "hardtime" })
+      vim.notify(
+         text,
+         vim.log.levels.WARN,
+         { title = "hardtime", timeout = M.config.timeout }
+      )
    end,
 }
 
