@@ -66,37 +66,37 @@ M.config = {
       ["<Right>"] = { "", "i" },
    },
    disabled_filetypes = {
-      "aerial",
-      "alpha",
-      "Avante",
-      "checkhealth",
-      "dapui*",
-      "db*",
-      "Diffview*",
-      "Dressing*",
-      "fugitive",
-      "help",
-      "httpResult",
-      "lazy",
-      "lspinfo",
-      "mason",
-      "minifiles",
-      "Neogit*",
-      "neo%-tree*",
-      "neotest%-summary",
-      "netrw",
-      "noice",
-      "notify",
-      "NvimTree",
-      "oil",
-      "prompt",
-      "qf",
-      "query",
-      "TelescopePrompt",
-      "Trouble",
-      "trouble",
-      "VoltWindow",
-      "undotree",
+      ["aerial"] = true,
+      ["alpha"] = true,
+      ["Avante"] = true,
+      ["checkhealth"] = true,
+      ["dapui*"] = true,
+      ["db*"] = true,
+      ["Diffview*"] = true,
+      ["Dressing*"] = true,
+      ["fugitive"] = true,
+      ["help"] = true,
+      ["httpResult"] = true,
+      ["lazy"] = true,
+      ["lspinfo"] = true,
+      ["mason"] = true,
+      ["minifiles"] = true,
+      ["Neogit*"] = true,
+      ["neo%-tree*"] = true,
+      ["neotest%-summary"] = true,
+      ["netrw"] = true,
+      ["noice"] = true,
+      ["notify"] = true,
+      ["NvimTree"] = true,
+      ["oil"] = true,
+      ["prompt"] = true,
+      ["qf"] = true,
+      ["query"] = true,
+      ["TelescopePrompt"] = true,
+      ["Trouble"] = true,
+      ["trouble"] = true,
+      ["VoltWindow"] = true,
+      ["undotree"] = true,
    },
    ui = {
       enter = true,
@@ -381,9 +381,24 @@ M.config = {
    end,
 }
 
+local function apply_user_disabled_filetypes(setting)
+   local tb = {}
+   for filetype, disabled in pairs(setting) do
+      if type(disabled) == "boolean" then
+         tb[filetype] = disabled
+      elseif type(filetype) == "number" then
+         tb[disabled] = true
+      end
+   end
+   M.config.disabled_filetypes =
+      vim.tbl_extend("force", M.config.disabled_filetypes, tb)
+end
+
 function M.set_defaults(user_config)
    for option, value in pairs(user_config) do
-      if type(value) == "table" and #value == 0 then
+      if option == "disabled_filetypes" then
+         apply_user_disabled_filetypes(value)
+      elseif type(value) == "table" and #value == 0 then
          for k, v in pairs(value) do
             if next(v) == nil then
                M.config[option][k] = nil
