@@ -92,6 +92,7 @@ M.config = {
       ["prompt"] = true,
       ["qf"] = true,
       ["query"] = true,
+      ["snacks_dashboard"] = true,
       ["TelescopePrompt"] = true,
       ["Trouble"] = true,
       ["trouble"] = true,
