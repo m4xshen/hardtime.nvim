@@ -92,6 +92,7 @@ M.config = {
       "prompt",
       "qf",
       "query",
+      "snacks_dashboard",
       "TelescopePrompt",
       "Trouble",
       "trouble",
