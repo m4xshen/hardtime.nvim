@@ -103,7 +103,7 @@ local function handler(key)
    then
       if is_different_key and forbidden_technique then
          if key == "h" or key == "j" or key == "k" or key == "l" then
-            util.notify("1" .. key .. " is frowned upon! Try just " .. key ..)
+            util.notify("1" .. key .. " is frowned upon! Try just " .. key)
          end
       forbidden_technique = false
       if should_reset_key_count or is_different_key then
