@@ -81,7 +81,7 @@ local function handler(key)
 
    -- reset
    if config.resetting_keys[key] then
-      if !forbidden_technique and key == 1 then
+      if not forbidden_technique and key == 1 then
          forbidden_technique = true
       else
          forbidden_technique = false
