@@ -7,6 +7,7 @@ local last_time = util.get_time()
 local mappings
 local old_mouse_state = vim.o.mouse
 local timer = nil
+local forbidden_technique = false -- check if the user is doing something like 1k 1h 1l 1j etc.
 local hardtime_group = vim.api.nvim_create_augroup("HardtimeGroup", {})
 
 local config = require("hardtime.config").config
@@ -80,6 +81,11 @@ local function handler(key)
 
    -- reset
    if config.resetting_keys[key] then
+      if !forbidden_technique and key == 1 then
+         forbidden_technique = true
+      else
+         forbidden_technique = false
+      end
       key_count = 0
    end
 
@@ -95,6 +101,11 @@ local function handler(key)
       or should_reset_key_count
       or is_different_key
    then
+      if is_different_key and forbidden_technique then
+         if key == "h" or key == "j" or key == "k" or key == "l" then
+            util.notify("1" .. key .. " is frowned upon! Try just " .. key ..)
+         end
+      forbidden_technique = false
       if should_reset_key_count or is_different_key then
          key_count = 1
          util.reset_notification()
