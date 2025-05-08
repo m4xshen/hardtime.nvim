@@ -105,7 +105,8 @@ local function handler(key)
          if key == "h" or key == "j" or key == "k" or key == "l" then
             util.notify("1" .. key .. " is frowned upon! Try just " .. key)
          end
-      forbidden_technique = false
+         forbidden_technique = false
+      end
       if should_reset_key_count or is_different_key then
          key_count = 1
          util.reset_notification()
