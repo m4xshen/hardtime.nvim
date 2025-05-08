@@ -81,7 +81,8 @@ local function handler(key)
 
    -- reset
    if config.resetting_keys[key] then
-      if not forbidden_technique and key == 1 then
+
+      if not forbidden_technique and key == "1" then
          forbidden_technique = true
       else
          forbidden_technique = false
@@ -102,8 +103,13 @@ local function handler(key)
       or is_different_key
    then
       if is_different_key and forbidden_technique then
+
          if key == "h" or key == "j" or key == "k" or key == "l" then
             util.notify("1" .. key .. " is frowned upon! Try just " .. key)
+			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+			forbidden_technique = false
+
+			return ""
          end
          forbidden_technique = false
       end
