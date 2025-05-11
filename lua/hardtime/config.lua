@@ -75,6 +75,7 @@ M.config = {
       ["Diffview*"] = true,
       ["Dressing*"] = true,
       ["fugitive"] = true,
+      ["fzf"] = true,
       ["help"] = true,
       ["httpResult"] = true,
       ["lazy"] = true,
