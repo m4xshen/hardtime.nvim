@@ -66,12 +66,12 @@ with one of the following methods:
 
 🚀 USAGE                                          *hardtime.nvim-🚀-usage*
 
-hardtime.nvim is enabled by default. You can change its state with the
-following commands:
+Hardtime is enabled by default. You can change its state with the following
+commands:
 
-- `:Hardtime enable` enable hardtime.nvim
-- `:Hardtime disable` disable hardtime.nvim
-- `:Hardtime toggle` toggle hardtime.nvim
+- `:Hardtime enable` enable Hardtime
+- `:Hardtime disable` disable Hardtime
+- `:Hardtime toggle` toggle Hardtime
 
 You can view the most frequently seen hints with `:Hardtime report`.
 
@@ -83,25 +83,22 @@ Your log file is at `~/.local/state/nvim/hardtime.nvim.log`.
 You can pass your config table into the `setup()` function or `opts` if you use
 lazy.nvim.
 
-If the option is a table (`key = value` pair), your `value` will overwrite the
-default if the `key` exists, and the pair will be appended to the default
-configuration if the `key` doesn’t exist.
+If the option is a table (`key = value` pair), you can set `value` to `false`
+to disable the default value.
 
 Examples:
 
 >lua
-    -- Remove <Up> keys and append <Space> to the disabled_keys
     disabled_keys = {
-       ["<Up>"] = {},
-       ["<Space>"] = { "n", "x" },
+       ["<Up>"] = false, -- Allow <Up> key
+       ["<Space>"] = { "n", "x" }, -- Disable <Space> key in normal and visual mode
     },
 <
 
 >lua
-    -- Enable hardtime in "lazy" and "dapui" filetypes
     disabled_filetypes = { 
-       lazy = false,
-       ["dapui*"] = false,
+       lazy = false, -- Enable Hardtime in lazy filetype
+       ["dapui*"] = false, -- Enable Hardtime in filetype starting with dapui
     },
 <
 
@@ -135,20 +132,19 @@ OPTIONS ~
   enabled                  boolean               true                Whether the plugin is enabled by
                                                                      default or not.
 
-  resetting_keys           table of              See Config          Keys in what modes that reset the
-                           strings/table pair                        count.
+  resetting_keys           table                 See Config          Keys in what modes that reset the
+                                                                     count.
 
-  restricted_keys          table of              See Config          Keys in what modes triggering the count
-                           strings/table pair                        mechanism.
+  restricted_keys          table                 See Config          Keys in what modes triggering the count
+                                                                     mechanism.
 
   restriction_mode         string                "block"             The behavior when restricted_keys
                            ("block" or "hint")                       trigger count mechanism.
 
-  disabled_keys            table of              See Config          Keys in what modes are disabled.
-                           strings/table pair                        
+  disabled_keys            table                 See Config          Keys in what modes are disabled.
 
-  disabled_filetypes       table of              See Config          hardtime.nvim is disabled under these
-                           strings/boolean pair                      filetypes.
+  disabled_filetypes       table                 See Config          Hardtime is disabled under these
+                                                                     filetypes.
 
   hints                    table                 See Config          key is a string pattern you want to
                                                                      match, value is a table of hint message
