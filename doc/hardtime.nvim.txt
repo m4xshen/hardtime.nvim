@@ -1,4 +1,4 @@
-*hardtime.nvim.txt*         For NVIM v0.10.0        Last change: 2025 April 07
+*hardtime.nvim.txt*          For NVIM v0.10.0         Last change: 2025 May 12
 
 ==============================================================================
 Table of Contents                            *hardtime.nvim-table-of-contents*
@@ -83,28 +83,25 @@ Your log file is at `~/.local/state/nvim/hardtime.nvim.log`.
 You can pass your config table into the `setup()` function or `opts` if you use
 lazy.nvim.
 
-If the option is a boolean, number, or array, your value will overwrite the
-default configuration.
+If the option is a table (`key = value` pair), your `value` will overwrite the
+default if the `key` exists, and the pair will be appended to the default
+configuration if the `key` doesn’t exist.
 
-Example:
-
->lua
-    -- Add "oil" to the disabled_filetypes
-    disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
-<
-
-If the option is a table with a `key = value` pair, your value will overwrite
-the default if the key exists, and the pair will be appended to the default
-configuration if the key doesn’t exist. You can set `key = {}` to remove the
-default key-value pair.
-
-Example:
+Examples:
 
 >lua
     -- Remove <Up> keys and append <Space> to the disabled_keys
     disabled_keys = {
        ["<Up>"] = {},
        ["<Space>"] = { "n", "x" },
+    },
+<
+
+>lua
+    -- Enable hardtime in "lazy" and "dapui" filetypes
+    disabled_filetypes = { 
+       lazy = false,
+       ["dapui*"] = false,
     },
 <
 
@@ -150,8 +147,8 @@ OPTIONS ~
   disabled_keys            table of              See Config          Keys in what modes are disabled.
                            strings/table pair                        
 
-  disabled_filetypes       table of strings      See Config          hardtime.nvim is disabled under these
-                                                                     filetypes.
+  disabled_filetypes       table of              See Config          hardtime.nvim is disabled under these
+                           strings/boolean pair                      filetypes.
 
   hints                    table                 See Config          key is a string pattern you want to
                                                                      match, value is a table of hint message
