@@ -63,11 +63,11 @@ But if you want to see both the hint message and current mode you can setup with
 
 ## 🚀 Usage
 
-hardtime.nvim is enabled by default. You can change its state with the following commands:
+Hardtime is enabled by default. You can change its state with the following commands:
 
-- `:Hardtime enable` enable hardtime.nvim
-- `:Hardtime disable` disable hardtime.nvim
-- `:Hardtime toggle` toggle hardtime.nvim
+- `:Hardtime enable` enable Hardtime
+- `:Hardtime disable` disable Hardtime
+- `:Hardtime toggle` toggle Hardtime
 
 You can view the most frequently seen hints with `:Hardtime report`.
 
@@ -77,29 +77,27 @@ Your log file is at `~/.local/state/nvim/hardtime.nvim.log`.
 
 You can pass your config table into the `setup()` function or `opts` if you use lazy.nvim.
 
-If the option is a table (`key = value` pair), your `value` will overwrite the default if the `key` exists, and the pair will be appended to the default configuration if the `key` doesn't exist.
+If the option is a table (`key = value` pair), you can set `value` to `false` to disable the default value.
 
 Examples:
 
 ```lua
--- Remove <Up> keys and append <Space> to the disabled_keys
 disabled_keys = {
-   ["<Up>"] = {},
-   ["<Space>"] = { "n", "x" },
+   ["<Up>"] = false, -- Allow <Up> key
+   ["<Space>"] = { "n", "x" }, -- Disable <Space> key in normal and visual mode
 },
 ```
 
 ```lua
--- Enable hardtime in "lazy" and "dapui" filetypes
 disabled_filetypes = { 
-   lazy = false,
-   ["dapui*"] = false,
+   lazy = false, -- Enable Hardtime in lazy filetype
+   ["dapui*"] = false, -- Enable Hardtime in filetype starting with dapui
 },
 ```
 
 ### Options
 
-| Option Name              | Type                         | Default Value                                                                           | Meaning                                                                                                                                                                       |
+| Option Name              | Type                         | Default Value                                                                            | Meaning                                                                                                                                                                       |
 | ------------------------ | ---------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `max_time`               | number                       | `1000`                                                                                   | Maximum time (in milliseconds) to consider key presses as repeated.                                                                                                           |
 | `max_count`              | number                       | `3`                                                                                      | Maximum count of repeated key presses allowed within the `max_time` period.                                                                                                   |
@@ -109,11 +107,11 @@ disabled_filetypes = {
 | `timeout`                | number or boolean            | `3000`                                                                                   | Time to show notification in milliseconds, set to `false` to disable timeout.                                                                                                 |
 | `allow_different_key`    | boolean                      | `true`                                                                                   | Allow different keys to reset the count.                                                                                                                                      |
 | `enabled`                | boolean                      | `true`                                                                                   | Whether the plugin is enabled by default or not.                                                                                                                              |
-| `resetting_keys`         | table of strings/table pair  | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes that reset the count.                                                                                                                                      |
-| `restricted_keys`        | table of strings/table pair  | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes triggering the count mechanism.                                                                                                                            |
+| `resetting_keys`         | table                        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes that reset the count.                                                                                                                                      |
+| `restricted_keys`        | table                        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes triggering the count mechanism.                                                                                                                            |
 | `restriction_mode`       | string (`"block" or "hint"`) | `"block"`                                                                                | The behavior when `restricted_keys` trigger count mechanism.                                                                                                                  |
-| `disabled_keys`          | table of strings/table pair  | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes are disabled.                                                                                                                                              |
-| `disabled_filetypes`     | table of strings/boolean pair  | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | `hardtime.nvim` is disabled under these filetypes.                                                                                                                            |
+| `disabled_keys`          | table                        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Keys in what modes are disabled.                                                                                                                                              |
+| `disabled_filetypes`     | table                        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | Hardtime is disabled under these filetypes.                                                                                                                                   |
 | `hints`                  | table                        | [See Config](https://github.com/m4xshen/hardtime.nvim/blob/main/lua/hardtime/config.lua) | `key` is a string pattern you want to match, `value` is a table of hint message and pattern length. Learn more about [Lua string pattern](https://www.lua.org/pil/20.2.html). |
 | `callback`               | function(text)               | `vim.notify`                                                                             | `callback` function can be used to override the default notification behavior.                                                                                                |
 | `force_exit_insert_mode` | boolean                      | `false`                                                                                  | Enable forcing exit Insert mode if user is inactive in Insert mode.                                                                                                           |

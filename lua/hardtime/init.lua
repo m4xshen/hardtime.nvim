@@ -9,7 +9,7 @@ local old_mouse_state = vim.o.mouse
 local timer = nil
 local hardtime_group = vim.api.nvim_create_augroup("HardtimeGroup", {})
 
-local config = require("hardtime.config").config
+local config = require("hardtime.config")
 
 local function disable_mouse()
    old_mouse_state = vim.o.mouse ~= "" and vim.o.mouse or old_mouse_state
@@ -38,7 +38,7 @@ local function get_return_key(key)
 end
 
 local function match_filetype(ft)
-   for filetype, is_disabled in pairs(config.disabled_filetypes) do
+   for filetype, is_disabled in pairs(config.config.disabled_filetypes) do
       if filetype == ft and is_disabled then
          return true
       end
@@ -71,8 +71,8 @@ local function handler(key)
    end
 
    -- key disabled
-   if config.disabled_keys[key] then
-      if config.notification and should_reset_notification then
+   if config.config.disabled_keys[key] then
+      if config.config.notification and should_reset_notification then
          vim.schedule(function()
             util.notify("The " .. key .. " key is disabled!")
          end)
@@ -81,19 +81,20 @@ local function handler(key)
    end
 
    -- reset
-   if config.resetting_keys[key] then
+   if config.config.resetting_keys[key] then
       key_count = 0
    end
 
-   if config.restricted_keys[key] == nil then
+   if config.config.restricted_keys[key] == nil then
       return get_return_key(key)
    end
 
    -- restrict
-   local should_reset_key_count = curr_time - last_time > config.max_time
-   local is_different_key = config.allow_different_key and key ~= last_key
+   local should_reset_key_count = curr_time - last_time > config.config.max_time
+   local is_different_key = config.config.allow_different_key
+      and key ~= last_key
    if
-      key_count < config.max_count
+      key_count < config.config.max_count
       or should_reset_key_count
       or is_different_key
    then
@@ -108,7 +109,7 @@ local function handler(key)
       return get_return_key(key)
    end
 
-   if config.notification then
+   if config.config.notification then
       vim.schedule(function()
          local message = "You pressed the " .. key .. " key too soon!"
          if key == "k" then
@@ -124,7 +125,7 @@ local function handler(key)
       end)
    end
 
-   if config.restriction_mode == "hint" then
+   if config.config.restriction_mode == "hint" then
       return get_return_key(key)
    end
    return ""
@@ -135,19 +136,15 @@ local function reset_timer()
       timer:stop()
    end
 
-   if not should_disable_hardtime() and config.force_exit_insert_mode then
-      timer = vim.defer_fn(util.stopinsert, config.max_insert_idle_ms)
+   if
+      not should_disable_hardtime() and config.config.force_exit_insert_mode
+   then
+      timer = vim.defer_fn(util.stopinsert, config.config.max_insert_idle_ms)
    end
 end
 
 local M = {}
 M.is_plugin_enabled = false
-
-local keys_groups = {
-   config.resetting_keys,
-   config.restricted_keys,
-   config.disabled_keys,
-}
 
 local function setup_autocmds()
    vim.api.nvim_create_autocmd("InsertEnter", {
@@ -157,7 +154,7 @@ local function setup_autocmds()
       end,
    })
 
-   if config.disable_mouse then
+   if config.config.disable_mouse then
       vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
          group = hardtime_group,
          callback = function()
@@ -185,15 +182,23 @@ function M.enable()
 
    setup_autocmds()
 
-   if config.disable_mouse then
+   if config.config.disable_mouse then
       disable_mouse()
    end
 
+   local keys_groups = {
+      config.config.resetting_keys,
+      config.config.restricted_keys,
+      config.config.disabled_keys,
+   }
+
    for _, keys in ipairs(keys_groups) do
       for key, mode in pairs(keys) do
-         vim.keymap.set(mode, key, function()
-            return handler(key)
-         end, { noremap = true, expr = true })
+         if mode then
+            vim.keymap.set(mode, key, function()
+               return handler(key)
+            end, { noremap = true, expr = true })
+         end
       end
    end
 end
@@ -206,6 +211,12 @@ function M.disable()
    M.is_plugin_enabled = false
    restore_mouse()
    clear_autocmds()
+
+   local keys_groups = {
+      config.config.resetting_keys,
+      config.config.restricted_keys,
+      config.config.disabled_keys,
+   }
 
    for _, keys in ipairs(keys_groups) do
       for key, mode in pairs(keys) do
@@ -223,11 +234,10 @@ function M.setup(user_config)
       return vim.notify("hardtime.nvim requires Neovim >= v0.10.0")
    end
 
-   user_config = user_config or {}
+   config.migrate_old_config(user_config or {})
+   config.config = vim.tbl_deep_extend("force", config.config, user_config)
 
-   require("hardtime.config").set_defaults(user_config)
-
-   if config.enabled then
+   if config.config.enabled then
       vim.api.nvim_create_autocmd(
          "BufEnter",
          { once = true, callback = M.enable }
@@ -264,20 +274,22 @@ function M.setup(user_config)
       end
 
       if
-         not config.hint
+         not config.config.hint
          or not M.is_plugin_enabled
          or should_disable_hardtime()
       then
          return
       end
 
-      for pattern, hint in pairs(config.hints) do
-         local len = hint.length or #pattern
-         local found = string.find(last_keys, pattern, -len)
-         if found then
-            local keys = string.sub(last_keys, found, #last_keys)
-            local text = hint.message(keys)
-            util.notify(text)
+      for pattern, hint in pairs(config.config.hints) do
+         if hint then
+            local len = hint.length or #pattern
+            local found = string.find(last_keys, pattern, -len)
+            if found then
+               local keys = string.sub(last_keys, found, #last_keys)
+               local text = hint.message(keys)
+               util.notify(text)
+            end
          end
       end
    end)
