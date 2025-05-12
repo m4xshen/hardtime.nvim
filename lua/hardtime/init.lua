@@ -38,9 +38,12 @@ local function get_return_key(key)
 end
 
 local function match_filetype(ft)
-   for _, value in pairs(config.disabled_filetypes) do
-      local matcher = "^" .. value .. (value:sub(-1) == "*" and "" or "$")
-      if ft:match(matcher) then
+   for filetype, is_disabled in pairs(config.disabled_filetypes) do
+      if filetype == ft and is_disabled then
+         return true
+      end
+      local matcher = "^" .. filetype .. (filetype:sub(-1) == "*" and "" or "$")
+      if ft:match(matcher) and is_disabled then
          return true
       end
    end
@@ -49,8 +52,7 @@ local function match_filetype(ft)
 end
 
 local function should_disable_hardtime()
-   return vim.tbl_contains(config.disabled_filetypes, vim.bo.ft)
-      or match_filetype(vim.bo.ft)
+   return match_filetype(vim.bo.ft)
       or vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "terminal"
       or vim.fn.reg_executing() ~= ""
       or vim.fn.reg_recording() ~= ""
