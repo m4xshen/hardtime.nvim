@@ -77,23 +77,21 @@ Your log file is at `~/.local/state/nvim/hardtime.nvim.log`.
 
 You can pass your config table into the `setup()` function or `opts` if you use lazy.nvim.
 
-If the option is a table (`key = value` pair), your `value` will overwrite the default if the `key` exists, and the pair will be appended to the default configuration if the `key` doesn't exist.
+If the option is a table (`key = value` pair), you can set `value` to `false` to disable the default value.
 
 Examples:
 
 ```lua
--- Remove <Up> keys and append <Space> to the disabled_keys
 disabled_keys = {
-   ["<Up>"] = {},
-   ["<Space>"] = { "n", "x" },
+   ["<Up>"] = false, -- Allow <Up> key
+   ["<Space>"] = { "n", "x" }, -- Disable <Space> key in normal and visual mode
 },
 ```
 
 ```lua
--- Enable hardtime in "lazy" and "dapui" filetypes
 disabled_filetypes = { 
-   lazy = false,
-   ["dapui*"] = false,
+   lazy = false, -- Enable Hardtime in lazy filetype
+   ["dapui*"] = false, -- Enable Hardtime in filetype starting with dapui
 },
 ```
 

@@ -382,33 +382,42 @@ M.config = {
    end,
 }
 
-local function apply_user_disabled_filetypes(setting)
-   local tb = {}
-   for filetype, disabled in pairs(setting) do
-      if type(disabled) == "boolean" then
-         tb[filetype] = disabled
-      elseif type(filetype) == "number" then
-         tb[disabled] = true
+function M.migrate_old_config(config)
+   -- Convert array elements in disabled_filetypes to key-value pairs
+   if
+      config.disabled_filetypes
+      and type(config.disabled_filetypes) == "table"
+   then
+      local new_filetypes = {}
+      for k, v in pairs(config.disabled_filetypes) do
+         if
+            type(k) == "number"
+            and math.floor(k) == k
+            and k >= 1
+            and type(v) == "string"
+         then
+            new_filetypes[v] = true
+         else
+            new_filetypes[k] = v
+         end
+      end
+      config.disabled_filetypes = new_filetypes
+   end
+
+   -- Replace empty tables with false for specific options
+   local function replace_empty_with_false(t)
+      for k, v in pairs(t) do
+         if type(v) == "table" and next(v) == nil then
+            t[k] = false
+         end
       end
    end
-   M.config.disabled_filetypes =
-      vim.tbl_extend("force", M.config.disabled_filetypes, tb)
-end
 
-function M.set_defaults(user_config)
-   for option, value in pairs(user_config) do
-      if option == "disabled_filetypes" then
-         apply_user_disabled_filetypes(value)
-      elseif type(value) == "table" and #value == 0 then
-         for k, v in pairs(value) do
-            if next(v) == nil then
-               M.config[option][k] = nil
-            else
-               M.config[option][k] = v
-            end
-         end
-      else
-         M.config[option] = value
+   local options_to_process =
+      { "resetting_keys", "restricted_keys", "disabled_keys", "hints" }
+   for _, option in ipairs(options_to_process) do
+      if config[option] and type(config[option]) == "table" then
+         replace_empty_with_false(config[option])
       end
    end
 end
