@@ -115,6 +115,10 @@ local function handler(key)
             message = message .. " Use [count]k or CTRL-U to scroll up."
          elseif key == "j" then
             message = message .. " Use [count]j or CTRL-D to scroll down."
+         elseif key == "h" then
+            message = message .. " Use b/B/ge/gE/F/T/0 to move left."
+         elseif key == "l" then
+            message = message .. " Use w/W/e/E/f/t/$ to move right."
          end
          util.notify(message)
       end)
