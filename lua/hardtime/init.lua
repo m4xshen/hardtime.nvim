@@ -197,7 +197,11 @@ function M.enable()
          if mode then
             vim.keymap.set(mode, key, function()
                return handler(key)
-            end, { noremap = true, expr = true })
+            end, {
+               noremap = true,
+               expr = true,
+               desc = "which_key_ignore",
+            })
          end
       end
    end
