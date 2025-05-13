@@ -1,32 +1,30 @@
 <!-- panvimdoc-ignore-start -->
 
-<h1 align="center">
-hardtime.nvim
-</h1>
+# hardtime.nvim
 
-<div align="center">
-  <div>Establish good command workflow and quit bad habit.</div><br />
-  <img src="https://github.com/m4xshen/hardtime.nvim/assets/74842863/117a8d30-64ba-4ca9-8414-5c493cbe8a70" width="700" />
-</div>
+Break your bad habits
 
-<!-- panvimdoc-ignore-end -->
+https://github.com/user-attachments/assets/18ede5ab-16ca-4013-aa9c-43206dfb87a2
+
+https://github.com/user-attachments/assets/07ee3fac-5d03-4319-8fa3-9892e73e780a
 
 ## ✨ Features
 
-- Block repeated keys within a period of time
-- Print hints about better commands eg: Use `ci"` instead of `di"i`
-- Customizable options for restricted keys, disabled keys, etc.
-- Get report for your most common bad habits for improvement
+- Block repeated keys within a short period of time
+- Provide hints for faster Vim motion
+- Get report of your most common bad habits
 
-Recommended workflow:
+<!-- panvimdoc-ignore-end -->
 
-1. Avoid using the mouse and arrow keys if they are not at the home row of your keyboard.
-2. Use relative jump (eg: `5j` `12-`) for vertical movement within the screen.
-3. Use `CTRL-U` `CTRL-D` `CTRL-B` `CTRL-F` `gg` `G` for vertical movement outside the screen.
-4. Use word-motion (`w` `W` `b` `B` `e` `E` `ge` `gE`) for short-distance horizontal movement.
-5. Use `f` `F` `t` `T` `,` `;` `0` `^` `$` for medium to long-distance horizontal movement.
-6. Use operator + motion/text-object (eg: `ci{` `y5j` `dap`) whenever possible.
-7. Use `%` and square bracket commands (see `:h [`) to jump between brackets.
+## 👍🏻 Recommended workflow
+
+Instead of only relying on `hjkl`, arrow keys and mouse, you should:
+1. Use relative jump (eg: `5j` `12-`) for vertical movement within the screen.
+2. Use `CTRL-U` `CTRL-D` `CTRL-B` `CTRL-F` `gg` `G` for vertical movement outside the screen.
+3. Use word-motion (`w` `W` `b` `B` `e` `E` `ge` `gE`) for short-distance horizontal movement.
+4. Use `f` `F` `t` `T` `,` `;` `0` `^` `$` for medium to long-distance horizontal movement.
+5. Use operator + motion/text-object (eg: `ci{` `y5j` `dap`) whenever possible.
+6. Use `%` and square bracket commands (see `:h [`) to jump between brackets.
 
 Learn more in this [blog post](https://m4xshen.dev/posts/vim-command-workflow/)
 
