@@ -8,7 +8,7 @@ Break your bad habits
 
 [![Busted](https://img.shields.io/github/actions/workflow/status/m4xshen/hardtime.nvim/tests.yml?label=Busted&logo=Lua)](https://github.com/m4xshen/hardtime.nvim/actions/workflows/tests.yml) ![Neovim version](https://img.shields.io/badge/Neovim-0.10-57A143?logo=neovim)
 
-[Features](/#features) • [Installation](/#installation) • [Usage](/#usage) • [Configuration](/#configuration)
+[Features](#features) • [Installation](#installation) • [Usage](#usage) • [Configuration](#configuration)
 
 https://github.com/user-attachments/assets/18ede5ab-16ca-4013-aa9c-43206dfb87a2
 
