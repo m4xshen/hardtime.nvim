@@ -377,7 +377,7 @@ M.config = {
       vim.notify(
          text,
          vim.log.levels.WARN,
-         { title = "hardtime", timeout = M.config.timeout }
+         { title = "Hardtime", timeout = M.config.timeout }
       )
    end,
 }
