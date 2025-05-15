@@ -233,7 +233,7 @@ function M.toggle()
    (M.is_plugin_enabled and M.disable or M.enable)()
 end
 
-function M.setup(user_config)
+local function setup(user_config)
    if vim.fn.has("nvim-0.10.0") == 0 then
       return vim.notify("hardtime.nvim requires Neovim >= v0.10.0")
    end
@@ -241,12 +241,7 @@ function M.setup(user_config)
    config.migrate_old_config(user_config or {})
    config.config = vim.tbl_deep_extend("force", config.config, user_config)
 
-   if config.config.enabled then
-      vim.api.nvim_create_autocmd(
-         "BufEnter",
-         { once = true, callback = M.enable }
-      )
-   end
+   M.enable()
 
    local max_keys_size = util.get_max_keys_size()
 
@@ -299,6 +294,17 @@ function M.setup(user_config)
    end)
 
    require("hardtime.command").setup()
+end
+
+function M.setup(user_config)
+   local setup_timer = (vim.uv or vim.loop).new_timer()
+   setup_timer:start(
+      500,
+      0,
+      vim.schedule_wrap(function()
+         setup(user_config)
+      end)
+   )
 end
 
 return M
