@@ -33,9 +33,9 @@ Learn more in this blog post <https://m4xshen.dev/posts/vim-command-workflow/>
 1. Install via your favorite package manager.
 
 >lua
-    -- lazy.nvim
     {
        "m4xshen/hardtime.nvim",
+       lazy = false,
        dependencies = { "MunifTanjim/nui.nvim" },
        opts = {},
     },
