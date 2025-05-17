@@ -256,6 +256,12 @@ local function setup(user_config)
          return
       end
 
+      -- ignore key if it is triggering which-key.nvim
+      local has_wk, wk = pcall(require, "which-key.state")
+      if has_wk and wk.state ~= nil then
+         return
+      end
+
       local key = vim.fn.keytrans(k)
       if key == "<MouseMove>" then
          return
