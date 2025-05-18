@@ -4,7 +4,7 @@
 
 # hardtime.nvim
 
-Break your bad habits
+Break bad habits, master Vim motions
 
 [![Busted](https://img.shields.io/github/actions/workflow/status/m4xshen/hardtime.nvim/tests.yml?label=Busted&logo=Lua)](https://github.com/m4xshen/hardtime.nvim/actions/workflows/tests.yml) ![Neovim version](https://img.shields.io/badge/Neovim-0.10-57A143?logo=neovim)
 
