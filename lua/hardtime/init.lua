@@ -241,7 +241,9 @@ local function setup(user_config)
    config.migrate_old_config(user_config or {})
    config.config = vim.tbl_deep_extend("force", config.config, user_config)
 
-   M.enable()
+   if config.config.enabled then
+      M.enable()
+   end
 
    local max_keys_size = util.get_max_keys_size()
 
