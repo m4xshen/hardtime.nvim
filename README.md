@@ -10,9 +10,9 @@ Break your bad habits
 
 [Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Configuration](#-configuration)
 
-https://github.com/user-attachments/assets/0de781c1-606d-4ffb-bace-9e83c684ec92
+https://github.com/user-attachments/assets/3cc1bcdd-1ace-40f0-b295-f84a78051d6a
 
-https://github.com/user-attachments/assets/6fc1d9a0-e750-4bd8-b51f-381729ef2008
+https://github.com/user-attachments/assets/1c120fe5-c57d-4cb3-8313-25f2395e95fa
 
 </div>
 
