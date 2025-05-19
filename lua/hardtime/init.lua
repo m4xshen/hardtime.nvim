@@ -238,7 +238,8 @@ local function setup(user_config)
       return vim.notify("hardtime.nvim requires Neovim >= v0.10.0")
    end
 
-   config.migrate_old_config(user_config or {})
+   user_config = user_config or {}
+   config.migrate_old_config(user_config)
    config.config = vim.tbl_deep_extend("force", config.config, user_config)
 
    if config.config.enabled then
