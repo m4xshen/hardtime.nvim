@@ -116,6 +116,12 @@ M.config = {
       },
    },
    hints = {
+      ["%D1[hjkl]"] = {
+         message = function(keys)
+            return "Use " .. keys:sub(3, 3) .. " instead of " .. keys:sub(2, 3)
+         end,
+         length = 3,
+      },
       ["[kj][%^_]"] = {
          message = function(key)
             return "Use "
