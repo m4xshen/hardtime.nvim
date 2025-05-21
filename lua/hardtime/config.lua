@@ -229,6 +229,17 @@ M.config = {
          end,
          length = 6,
       },
+      ["[^dcy]f[}%])'\"`][dcy]T[{%[('\"]"] = {
+         message = function(keys)
+            return "Use "
+               .. keys:sub(4, 4)
+               .. "i"
+               .. keys:sub(6, 6)
+               .. " instead of "
+               .. keys:sub(2)
+         end,
+         length = 6,
+      },
 
       -- hints for delete + insert
       ["d[bBwWeE%^%$]i"] = {
