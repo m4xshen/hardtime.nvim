@@ -206,6 +206,30 @@ M.config = {
          length = 4,
       },
 
+      -- iquote and aquote
+      ["[^dcy]F[{%[(][dcy]f[}%])]"] = {
+         message = function(keys)
+            return "Use "
+               .. keys:sub(4, 4)
+               .. "a"
+               .. keys:sub(3, 3)
+               .. " instead of "
+               .. keys:sub(2)
+         end,
+         length = 6,
+      },
+      ["[^dcy]T[{%[('\"`][dcy]t[}%])'\"]"] = {
+         message = function(keys)
+            return "Use "
+               .. keys:sub(4, 4)
+               .. "i"
+               .. keys:sub(3, 3)
+               .. " instead of "
+               .. keys:sub(2)
+         end,
+         length = 6,
+      },
+
       -- hints for delete + insert
       ["d[bBwWeE%^%$]i"] = {
          message = function(keys)
