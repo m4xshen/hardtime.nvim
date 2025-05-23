@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/m4xshen/hardtime.nvim/compare/v1.1.0...v1.2.0) (2025-05-23)
+
+
+### Features
+
+* add hints for iquote and aquote ([7c74340](https://github.com/m4xshen/hardtime.nvim/commit/7c7434003ab527918c2b1c072befa23978c7c49d))
+* add more hints for iquote and aquote ([b44e11d](https://github.com/m4xshen/hardtime.nvim/commit/b44e11d7a176f184db8b9666a1b41d5890aa5a5b))
+
+
+### Reverts
+
+* use default token ([f6d3bb5](https://github.com/m4xshen/hardtime.nvim/commit/f6d3bb5693010153e3a4981c59cab91430b67711))
+
 ## [1.1.0](https://github.com/m4xshen/hardtime.nvim/compare/v1.0.0...v1.1.0) (2025-05-21)
 
 
