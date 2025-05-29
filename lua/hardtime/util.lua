@@ -1,6 +1,6 @@
 local M = {}
 
-local config = require("hardtime.config").config
+local config = require("hardtime.config")
 
 local logger = require("hardtime.log").new({
    plugin = "hardtime.nvim",
@@ -30,15 +30,14 @@ local last_notification_time = M.get_time()
 function M.notify(text)
    if text ~= last_notification_text then
       logger.info(text)
-      config.callback(text)
+      config.config.callback(text)
    end
    last_notification_text = text
    last_notification_time = M.get_time()
 end
 
 function M.should_reset()
-   return M.get_time() - last_notification_time
-      > require("hardtime.config").config.max_time
+   return M.get_time() - last_notification_time > config.config.max_time
 end
 
 function M.reset_notification()
@@ -47,7 +46,7 @@ end
 
 function M.get_max_keys_size()
    local max_len = 0
-   for pattern, hint in pairs(config.hints) do
+   for pattern, hint in pairs(config.config.hints) do
       max_len = math.max(max_len, hint.length or #pattern)
    end
    return max_len
