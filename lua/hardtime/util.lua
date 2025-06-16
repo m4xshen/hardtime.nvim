@@ -47,7 +47,9 @@ end
 function M.get_max_keys_size()
    local max_len = 0
    for pattern, hint in pairs(config.config.hints) do
-      max_len = math.max(max_len, hint.length or #pattern)
+      if hint then
+         max_len = math.max(max_len, hint.length or #pattern)
+      end
    end
    return max_len
 end
