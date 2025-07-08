@@ -1,4 +1,4 @@
-*hardtime.nvim.txt*          For NVIM v0.10.0         Last change: 2025 May 18
+*hardtime.nvim.txt*         For NVIM v0.10.0         Last change: 2025 July 08
 
 ==============================================================================
 Table of Contents                            *hardtime.nvim-table-of-contents*
