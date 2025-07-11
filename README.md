@@ -154,7 +154,7 @@ Check out some examples of custom hint in [discussion](https://github.com/m4xshe
 
 ## ⭐ Star History
 
-[![Star History Chart](https://app.repohistory.com/api/svg?repo=m4xshen/hardtime.nvim&type=Date&theme=dark&transparent=false&color=FCE2C6)](https://repohistory.com)
+[![Star History Chart](https://app.repohistory.com/api/svg?repo=m4xshen/hardtime.nvim&type=Date&theme=dark&transparent=false&color=FCE2C6)](https://app.repohistory.com/star-history)
 
 ## 🦾 Contributing
 
