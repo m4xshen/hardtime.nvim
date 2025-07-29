@@ -36,6 +36,12 @@ function M.report()
       popup:unmount()
    end)
 
+   vim.api.nvim_set_option_value(
+      "filetype",
+      "hardtime_report",
+      { buf = popup.bufnr }
+   )
+
    for i, pair in ipairs(sorted_hints) do
       local content = string.format("%d. %s (%d times)", i, pair[1], pair[2])
 
