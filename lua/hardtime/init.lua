@@ -260,9 +260,12 @@ local function setup(user_config)
       end
 
       -- ignore key if it is triggering which-key.nvim
-      local has_wk, wk = pcall(require, "which-key.state")
-      if has_wk and wk.state ~= nil then
-         return
+      local has_wk = package.loaded["which-key.state"] ~= nil
+      if has_wk then
+         local wk = require("which-key.state")
+         if wk.state ~= nil then
+            return
+         end
       end
 
       local key = vim.fn.keytrans(k)
