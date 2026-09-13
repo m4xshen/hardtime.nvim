@@ -152,6 +152,10 @@ Check out some examples of custom hint in [discussion](https://github.com/m4xshe
 
 <!-- panvimdoc-ignore-start -->
 
+## ⭐ Star History
+
+[![Star History Chart](https://app.repohistory.com/api/svg?repo=m4xshen/hardtime.nvim&type=Date&background=0D1117&color=FCE2C6)](https://app.repohistory.com/star-history)
+
 ## 🦾 Contributing
 
 Please read [CONTRIBUTING.md](https://github.com/m4xshen/hardtime.nvim/blob/main/CONTRIBUTING.md).
