@@ -139,11 +139,11 @@ M.config = {
          end,
          length = 2,
       },
-      ["d%$"] = {
+      ["[^d]d%$"] = {
          message = function()
             return "Use D instead of d$"
          end,
-         length = 2,
+         length = 3,
       },
       ["y%$"] = {
          message = function()
