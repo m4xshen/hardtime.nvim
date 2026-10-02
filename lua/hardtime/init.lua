@@ -19,22 +19,20 @@ end
 local function restore_mouse()
    vim.o.mouse = old_mouse_state
 end
-
-local function get_return_key(key)
-   for _, mapping in ipairs(mappings) do
-      if mapping.lhs == key then
-         if mapping.callback then
-            local success, result = pcall(mapping.callback)
-            if success then
-               return result
-            end
-
-            return vim.schedule(mapping.callback)
-         end
-         return util.try_eval(mapping.rhs)
-      end
+local function get_return_key(key, mode)
+   local mapping = mappings[mode][key]
+   if not mapping then
+      return key
    end
-   return key
+   if mapping.callback then
+      local success, result = pcall(mapping.callback)
+      if success then
+         return result
+      end
+
+      return vim.schedule(mapping.callback)
+   end
+   return util.try_eval(mapping.rhs)
 end
 
 local function match_filetype(ft)
@@ -58,9 +56,9 @@ local function should_disable_hardtime()
       or vim.fn.reg_recording() ~= ""
 end
 
-local function handler(key)
+local function handler(key, mode)
    if should_disable_hardtime() then
-      return get_return_key(key)
+      return get_return_key(key, mode)
    end
 
    local curr_time = util.get_time()
@@ -86,7 +84,7 @@ local function handler(key)
    end
 
    if config.config.restricted_keys[key] == nil then
-      return get_return_key(key)
+      return get_return_key(key, mode)
    end
 
    -- restrict
@@ -106,7 +104,7 @@ local function handler(key)
       end
 
       last_time = util.get_time()
-      return get_return_key(key)
+      return get_return_key(key, mode)
    end
 
    if config.config.notification then
@@ -126,7 +124,7 @@ local function handler(key)
    end
 
    if config.config.restriction_mode == "hint" then
-      return get_return_key(key)
+      return get_return_key(key, mode)
    end
    return ""
 end
@@ -178,7 +176,7 @@ function M.enable()
    end
 
    M.is_plugin_enabled = true
-   mappings = vim.api.nvim_get_keymap("n")
+   mappings = {}
 
    setup_autocmds()
 
@@ -195,13 +193,25 @@ function M.enable()
    for _, keys in ipairs(keys_groups) do
       for key, mode in pairs(keys) do
          if mode then
-            vim.keymap.set(mode, key, function()
-               return handler(key)
-            end, {
-               noremap = true,
-               expr = true,
-               desc = "which_key_ignore",
-            })
+            --- @type string[]
+            local mode_table = type(mode) == "table" and mode or { mode }
+            for _, s_mode in ipairs(mode_table) do
+               -- lazy insert proper mappings into mappings for get_return_key
+               if mappings[s_mode] == nil then
+                  local mappings_tbl = vim.api.nvim_get_keymap(s_mode)
+                  mappings[s_mode] = {}
+                  for _, mapping in ipairs(mappings_tbl) do
+                     mappings[s_mode][mapping.lhs] = mapping
+                  end
+               end
+               vim.keymap.set(s_mode, key, function()
+                  return handler(key, s_mode)
+               end, {
+                  noremap = true,
+                  expr = true,
+                  desc = "which_key_ignore",
+               })
+            end
          end
       end
    end
@@ -222,9 +232,52 @@ function M.disable()
       config.config.disabled_keys,
    }
 
+   -- delete or restore keymaps
    for _, keys in ipairs(keys_groups) do
       for key, mode in pairs(keys) do
-         pcall(vim.keymap.del, mode, key)
+         if mode then
+            --- @type string[]
+            local mode_table = type(mode) == "table" and mode or { mode }
+            for _, s_mode in ipairs(mode_table) do
+               local mapping = mappings[s_mode][key]
+               if not mapping then
+                  vim.keymap.del(s_mode, key)
+               else
+                  local keymap_opts = {}
+                  for _, opt_key in ipairs({
+                     "callback",
+                     "expr",
+                     "desc",
+                     "noremap",
+                     "replace_keycodes",
+                     "silent",
+                     "script",
+                     "nowait",
+                     "unique",
+                  }) do
+                     if mapping[opt_key] then
+                        keymap_opts[opt_key] = mapping[opt_key]
+                     end
+                  end
+                  if mapping.bufnr then
+                     vim.api.nvim_buf_set_keymap(
+                        mapping.bufnr,
+                        s_mode,
+                        key,
+                        mapping.rhs,
+                        keymap_opts
+                     )
+                  else
+                     vim.api.nvim_set_keymap(
+                        s_mode,
+                        key,
+                        mapping.rhs,
+                        keymap_opts
+                     )
+                  end
+               end
+            end
+         end
       end
    end
 end
