@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.3.0](https://github.com/m4xshen/hardtime.nvim/compare/v1.2.0...v1.3.0) (2026-10-02)
+
+
+### Features
+
+* add hint to use C instead of Da ([b4e4319](https://github.com/m4xshen/hardtime.nvim/commit/b4e431934af1fe224a3a801f632c008278cb7628))
+* **report:** add hardtime specific filetype to report ([#185](https://github.com/m4xshen/hardtime.nvim/issues/185)) ([c04a9ac](https://github.com/m4xshen/hardtime.nvim/commit/c04a9ac7ea3b6c82a4644725e2c9da1f7ae80e58))
+
+
+### Bug Fixes
+
+* prevent premature lazy-loading of which-key.nvim ([#198](https://github.com/m4xshen/hardtime.nvim/issues/198)) ([986a217](https://github.com/m4xshen/hardtime.nvim/commit/986a2175fd239f449a15e83b3d7904cc96381048))
+* resolve [#201](https://github.com/m4xshen/hardtime.nvim/issues/201) ([5165840](https://github.com/m4xshen/hardtime.nvim/commit/5165840fe680eab46de1fc6dbff48f148fdcf018))
+
+
+### Reverts
+
+* remove star chart ([ba25ad0](https://github.com/m4xshen/hardtime.nvim/commit/ba25ad0f60db25e18351f54c59e74284cf7674a6))
+
 ## [1.2.0](https://github.com/m4xshen/hardtime.nvim/compare/v1.1.0...v1.2.0) (2025-06-16)
 
 
